@@ -4,16 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>KinoManiak</title>
     <link rel="stylesheet" href="./src/css/style.css">
 </head>
 <body>
-    <div class="container">
-        <button class="open-youtube">Открыть ютуб</button>
-        <button class="volume-up">Прибавить громкость</button>
-        <button class="volume-down">Убавить громкость</button>
-    </div>
-    <script src="scripts/clickToServer.js"></script>
+    <main>
+        <nav class="navbar">
+            <div src="src/img/youtube-logo.png" class="navbar__youtube-main"></div>
+            <button class="navbar__main">В ГЛАВНОЕ МЕНЮ</button>
+        </nav>
+        <input class="find-video" placeholder="Искать другое видео">
+        <div class="play-control">
+            <img class="play-control__left" src="src/img/peremotka.png">
+            <img class="play-control__play" src="src/img/player-play.png">
+            <img class="play-control__right" src="src/img/peremotka.png">
+        </div>
+        <div class="volume-container">
+            <div class="volume-control">
+                <div class="volume-control__scale"></div>
+                <img src="src/img/player-play.png" class="volume-control__turn"></img>
+            </div>
+        </div>
+    </main>
+
+    <script src="src/scripts/clickToServer.js"></script>
     <script src="index.js"></script>
     <script src="draft/draft.js"></script>
 </body>
