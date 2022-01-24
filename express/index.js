@@ -26,10 +26,5 @@ app.get('/commandbase', async (req, res) => {
     await findAndResetDB(res);
 })
 
-app.get('/status', async (req, res) => {
-    console.log(req.query);
-    await refreshStatus(req.query);
-})
-
 http.createServer(app).listen(PORT_HTTP, ()=>console.log(`listen ${PORT_HTTP}`));
 https.createServer(options, app).listen(PORT_HTTPS, ()=>console.log(`listen ${PORT_HTTPS}`));

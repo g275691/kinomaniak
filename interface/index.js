@@ -10,6 +10,11 @@ const clickToServer = (query, command, value=true) => {
         fetch(`http://192.168.0.103:80/commandbase/command?${command}=${value}`);
     })
 }
+
+document.querySelector(".play-control__play").addEventListener("click", function() { 
+    this.src = "src/img/player-pause.png"
+})
+
 clickToServer(".play-control__play", "youtubePlay");
 clickToServer(".volume-control__turn:nth-child(4)", "youtubeVolumeUp");
 clickToServer(".volume-control__turn:nth-child(2)", "youtubeVolumeDown");
