@@ -6,10 +6,10 @@ const client = new MongoClient(url);
 
 const dbName = DB_NAME;
 
-const getMongoDB = async () => {
+const getMongoDB = async (collection) => {
     await client.connect();
     const db = client.db(dbName);
-    return db.collection('commands');
+    return db.collection(collection);
 }
 
 module.exports.getMongoDB = getMongoDB;

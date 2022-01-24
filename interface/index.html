@@ -13,7 +13,11 @@
             <div src="src/img/youtube-logo.png" class="navbar__youtube-main"></div>
             <button class="navbar__main">В ГЛАВНОЕ МЕНЮ</button>
         </nav>
-        <input class="find-video" placeholder="Искать другое видео">
+        <div class="find-video">
+            <input class="find-video__input" placeholder="Искать другое видео">
+            <div class="find-video__lupa"></div>
+        </div>
+        
         <div class="play-control">
             <img class="play-control__left" src="src/img/peremotka.png">
             <img class="play-control__play" src="src/img/player-play.png">
@@ -22,12 +26,13 @@
         <div class="volume-container">
             <div class="volume-control">
                 <div class="volume-control__scale"></div>
-                <img src="src/img/player-play.png" class="volume-control__turn"></img>
+                <img src="src/img/zvuk-.png" class="volume-control__turn"></img>
+                <img src="src/img/full_screen.png" class="volume-control__full-screen"></img>
+                <img src="src/img/zvuk+.png" class="volume-control__turn"></img>
             </div>
         </div>
     </main>
 
-    <script src="src/scripts/clickToServer.js"></script>
     <script src="index.js"></script>
     <script src="draft/draft.js"></script>
 </body>

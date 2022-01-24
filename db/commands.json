@@ -3,8 +3,9 @@
     "$oid": "61eceb08ada42bc8cc3ce102"
   },
   "base": "kinomaniak",
-  "isYoutubeOpen": true,
-  "youtubeVolumeUp": true,
-  "youtubeVolumeDown": true,
-  "isCompUnlock": false
+  "isYoutubeOpen": false,
+  "youtubeVolumeUp": false,
+  "youtubeVolumeDown": false,
+  "isCompUnlock": false,
+  "youtubePlay": false
 }]

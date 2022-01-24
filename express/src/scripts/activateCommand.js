@@ -1,14 +1,10 @@
 const { DB_NAME } = require("../../constants/DB");
 const { getMongoDB } = require("./getMongoDB");
-const { newDBwithCommand } = require("./newDBwithCommand");
 
 const activateCommand = async (req, res) => {
-    const newCommand = req.params.command;
-    const collection = await getMongoDB();
+    const collection = await getMongoDB('commands');
     const db = await collection.find({}).toArray();
-    const newDB = await newDBwithCommand(db, newCommand);
-    console.log(newDB);
-    await collection.updateOne({base: DB_NAME}, {$set: newDB})
+    await collection.updateOne({base: DB_NAME}, {$set: req})
     await res.send(db)
 }
 
