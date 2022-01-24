@@ -3,6 +3,7 @@ const PORT = 'https://192.168.0.103:3000'
 const getCommandBase = async () => {
     const data = await fetch(`${PORT}/commandbase`)
     .catch(err=>console.log(err));
+    console.log(data)
     if(!data) return;
     const json = await data.json();
     return json;
@@ -65,8 +66,6 @@ setInterval(async () => {
             document.querySelector("#movie_player").querySelector("video").dispatchEvent(clickEvent);
         }
     })
-    
-    
 }, 100);
 
 // setInterval(() => {

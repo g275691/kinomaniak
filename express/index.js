@@ -5,8 +5,8 @@ const https = require('https');
 const http = require('http');
 const fs = require('fs');
 const options = {
-    key: fs.readFileSync("../interface/server-ssl/domain.key", "utf-8"),
-    cert: fs.readFileSync("../interface/server-ssl/domain.crt", "utf-8")
+    key: fs.readFileSync("../../server-ssl/domain.key", "utf-8"),
+    cert: fs.readFileSync("../../server-ssl/domain.crt", "utf-8")
   };
 const { PORT_HTTP, PORT_HTTPS } = require('./constants/ports');
 
