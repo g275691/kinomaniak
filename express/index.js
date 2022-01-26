@@ -12,10 +12,14 @@ const { PORT_HTTP, PORT_HTTPS } = require('./constants/ports');
 
 const { findAndResetDB } = require('./src/scripts/findAndResetDB');
 const { activateCommand } = require('./src/scripts/activateCommand');
-const { refreshStatus } = require('./src/scripts/refreshStatus');
+const { getBaseArray } = require('./src/scripts/getBaseArray');
 
 app.get('/', async() => {
     console.log("user-enter")
+})
+
+app.get('/getbase', async (req, res) => {
+    await getBaseArray(res)
 })
 
 app.get('/commandbase/command', async (req, res) => {

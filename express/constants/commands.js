@@ -12,7 +12,6 @@ const commands = [
         youtubeOpenVideo: false,
         youtubeTimeLeft: false,
         youtubeTimeRight: false,
-        youtubeFullScreen: false,
         
         /**VK-commands*/
 

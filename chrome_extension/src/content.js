@@ -8,14 +8,6 @@ const getCommandBase = async () => {
     return json;
 }
 
-const getStatusVideoYoutube = async () => {
-    // if(!/^https:..www.youtube.com/.test(window.location.href)
-    // || !document.querySelector("video")) return;
-
-    let isVideoPaused = document.querySelector("video").paused;
-    fetch(`https://192.168.0.103:3000/status?youtubePaused=${isVideoPaused}`);
-}
-
 const getIdVideo = (text) => {
     return text.match(/{"videoId":"(.{1,15})",/)[1]
 }
@@ -38,26 +30,28 @@ setInterval(async () => {
             /**Commands with open player */
             if(document.querySelector("#movie_player")) {
                 const video = document.querySelector("#movie_player").querySelector("video");
+                
                 /**Youtube-play-video */
                 const playYoutubeVideo = json[0].youtubePlay;
+                fetch(`${PORT}/commandbase/command?youtubeStatusPaused=${video.paused}`)
                 playYoutubeVideo && (video.paused ? video.play() : video.pause());
 
                 /**Youtube-volume-video */
                 const videoVolumeUp = json[0].youtubeVolumeUp;
-                videoVolumeUp && (video.volume+=0.2);
+                videoVolumeUp && (video.volume+=0.1);
                 const videoVolumeDown = json[0].youtubeVolumeDown;
-                videoVolumeDown && (video.volume-=0.2);
+                videoVolumeDown && (video.volume-=0.1);
 
                 /**Youtube-video-timing */
                 const videoSkipRight = json[0].youtubeTimeRight;
                 videoSkipRight && (video.currentTime+=50);
                 const videoSkipLeft = json[0].youtubeTimeLeft;
                 videoSkipLeft && (video.currentTime-=50);
+
             }
-            /** Universl Commands on youtube*/
+            /** Universal Commands on youtube*/
             const openNewVideo = json[0].youtubeOpenVideo;
             openNewVideo && (getFirstVideo(openNewVideo))
         } 
-
     })
 }, 100);
