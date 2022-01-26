@@ -1,6 +1,5 @@
 from pymongo import MongoClient
-import time, json
-import pyautogui
+import time, pyautogui, os
 client = MongoClient('mongodb://localhost:27017/')
 
 db = client['kinomaniak']
@@ -9,13 +8,16 @@ collection = db['commands']
 count = 0
 while count > -1:
     count = count + 1
-    time.sleep(0.3)
+    time.sleep(0.1)
     findbase = collection.find_one({"base":"kinomaniak"})
     fullScreen = findbase['youtubeFullScreen']
     browserZoomPlus = findbase["browserZoomPlus"]
     browserZoomMinus = findbase["browserZoomMinus"]
     browserTabLeft = findbase["browserTabLeft"]
     browserTabRight = findbase["browserTabRight"]
+
+    computerDisable = findbase["computerDisable"] 
+
     print(count)
     if fullScreen:
         print("full_screen")
@@ -47,3 +49,6 @@ while count > -1:
                 pyautogui.press(['tab'])
         pyautogui.keyUp('ctrl')
         pyautogui.keyUp('shift')
+    if computerDisable:
+        collection.update_one({"base":"kinomaniak"}, {"$set": {"computerDisable": False}})
+        os.system('shutdown -s')

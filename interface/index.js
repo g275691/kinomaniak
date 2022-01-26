@@ -116,3 +116,4 @@ clickToServer(".tab-control__scroll-up", "scrollDown");
 clickToServer(".tab-control__right", "browserTabRight");
 clickToServer(".tab-control__left", "browserTabLeft");
 clickToServer(".volume-control__full-screen", "youtubeFullScreen");
+clickToServer(".general-control__turn-off", "computerDisable");
