@@ -242,15 +242,15 @@ main {
                 flex-wrap: wrap;
                 align-items: center;
                 justify-content: space-between;
+                margin-top: 3%;
                 &__item {
                     text-align: center;
-                    line-height: 300%;
                     font-size: 200%;
-                    flex-basis: 30%;
-                    padding: 1% 0%;
+                    flex-basis: 19%;
+                    padding: 3% 0%;
                     background: black;
                     color: white;
-                    margin-top: 5%;
+                    margin-top: 2%;
                     &:active {
                         background: rgb(48, 48, 48);
                     }
@@ -295,16 +295,24 @@ main {
             display: flex;
             justify-content: center;
             
-            margin-top: 5%;
+            margin-top: 0%;
             font-size: 500%;
             &__close {
-                padding: 0% 10%;
+                padding: 0% 2%;
                 font-weight: bold;
                 padding-top: 5%;
             }
             & * {
                 cursor: pointer;
-
+            }
+            &__scroll-up {
+                margin-left: auto;
+                transform: rotateX(180deg);
+                color: rgb(189, 21, 21);
+            }
+            &__scroll-down {
+                margin-right: auto;
+                color: rgb(189, 21, 21);
             }
         }
     }

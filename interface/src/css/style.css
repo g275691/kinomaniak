@@ -341,18 +341,18 @@ main .youtube-query-container .youtube-query-control .video-container {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  margin-top: 3%;
 }
 
 main .youtube-query-container .youtube-query-control .video-container__item {
   text-align: center;
-  line-height: 300%;
   font-size: 200%;
-  -ms-flex-preferred-size: 30%;
-      flex-basis: 30%;
-  padding: 1% 0%;
+  -ms-flex-preferred-size: 19%;
+      flex-basis: 19%;
+  padding: 3% 0%;
   background: black;
   color: white;
-  margin-top: 5%;
+  margin-top: 2%;
 }
 
 main .youtube-query-container .youtube-query-control .video-container__item:active {
@@ -408,17 +408,29 @@ main .youtube-query-container .tab-control {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  margin-top: 5%;
+  margin-top: 0%;
   font-size: 500%;
 }
 
 main .youtube-query-container .tab-control__close {
-  padding: 0% 10%;
+  padding: 0% 2%;
   font-weight: bold;
   padding-top: 5%;
 }
 
 main .youtube-query-container .tab-control * {
   cursor: pointer;
+}
+
+main .youtube-query-container .tab-control__scroll-up {
+  margin-left: auto;
+  -webkit-transform: rotateX(180deg);
+          transform: rotateX(180deg);
+  color: #bd1515;
+}
+
+main .youtube-query-container .tab-control__scroll-down {
+  margin-right: auto;
+  color: #bd1515;
 }
 /*# sourceMappingURL=style.css.map */

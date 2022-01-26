@@ -80,6 +80,22 @@ timingButtons.forEach((button, index)=>{
     })
 })
 
+const inputNumberVideo = document.querySelector(".youtube-query-control").querySelector("input");
+const videoRect = document.querySelectorAll(".video-container__item");
+videoRect.forEach(rect=>{
+    rect.addEventListener("click", function() { 
+        const videoNumber = this.innerText;
+        fetch(`http://192.168.0.103:80/commandbase/command?youtubeNumberVideo=${videoNumber}`);
+        console.log(videoNumber);
+        inputNumberVideo.value = videoNumber;
+    })
+});
+const findLupa = document.querySelector(".youtube-query-control").querySelector(".find-video__lupa");
+findLupa.addEventListener("click", function() { 
+    const videoNumber = inputNumberVideo.value;
+    fetch(`http://192.168.0.103:80/commandbase/command?youtubeOpenVideoByNumber=${videoNumber}`);
+})
+
 clickToServer(".play-control__play", "youtubePlay");
 clickToServer(".volume-control__turn:nth-child(4)", "youtubeVolumeUp");
 clickToServer(".volume-control__turn:nth-child(2)", "youtubeVolumeDown");
@@ -92,6 +108,9 @@ clickToServer(".zoom-minus", "browserZoomMinus");
 
 clickToServer(".tab-control__close", "browserTabClose");
 clickToServer(".subscriptions", "youtubeSubcriptions");
+
+clickToServer(".tab-control__scroll-down", "scrollUp");
+clickToServer(".tab-control__scroll-up", "scrollDown");
 
 /**python */
 clickToServer(".tab-control__right", "browserTabRight");

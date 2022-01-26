@@ -53,8 +53,43 @@ setInterval(async () => {
             }
             /** Universal Commands on youtube*/
             const openNewVideo = json[0].youtubeOpenVideo;
-            openNewVideo && (getFirstVideo(openNewVideo))
+            openNewVideo && (window.open(`https://www.youtube.com/results?search_query=${openNewVideo}`))
+            /**Open video by number */
+            const isSubscription = document.querySelector(".style-scope ytd-grid-renderer");
+            const isSearchPage = /https:..www.youtube.com.result/i.test(window.location.href);
+            let youtubeNumberVideo = Number(json[0].youtubeNumberVideo);
+            let youtubeOpenVideoByNumber = Number(json[0].youtubeOpenVideoByNumber);
+            if(isSubscription) {
+                if(youtubeNumberVideo) {
+                    isSubscription.querySelectorAll("img").forEach(el=>el.style.filter="brightness(1)");
+                    isSubscription.querySelectorAll("img")[youtubeNumberVideo - 1].style.filter="brightness(1.9)";
+                }
+                if(youtubeOpenVideoByNumber) {
+                    isSubscription.querySelectorAll("img")[youtubeOpenVideoByNumber - 1].click();
+                }
+            } 
+            if(isSearchPage) {
+                const findQuery = document.querySelector(".style-scope ytd-section-list-renderer").querySelectorAll(".style-scope ytd-thumbnail");
+                if(youtubeNumberVideo) {
+                    findQuery.forEach(el=>el.style.filter="brightness(1)");
+                    findQuery[youtubeNumberVideo - 1].style.filter="brightness(1.9)";
+                }
+                if(youtubeOpenVideoByNumber) {
+                    findQuery[youtubeOpenVideoByNumber - 1].querySelector("a").click();
+                }
+            }
         } 
+        /**Commands for entire browser */
+        const scrollUp = json[0].scrollUp;
+        const scrollDown = json[0].scrollDown;
+        if(scrollUp) {
+            const newY = window.pageYOffset + 200;
+            window.scrollTo(0, newY);
+        }
+        if(scrollDown) {
+            const newY = window.pageYOffset - 200;
+            window.scrollTo(0, newY);
+        }
         const closeBrowserTab = json[0].browserTabClose;
         closeBrowserTab && (window.close())
 

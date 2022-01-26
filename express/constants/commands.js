@@ -13,10 +13,15 @@ const commands = [
         youtubeTimeLeft: false,
         youtubeTimeRight: false,
         youtubeSubcriptions: false,
+        youtubeNumberVideo: false,
+        youtubeOpenVideoByNumber: false,
+    
         /**VK-commands*/
 
         /**Browser-commands */
         browserTabClose: false,
+        scrollUp: false,
+        scrollDown: false,
         /**Computer-commands*/
         isCompUnlock: false
     }
