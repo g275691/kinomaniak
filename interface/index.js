@@ -25,15 +25,19 @@ playController.addEventListener("click", async function() {
     : this.src = "src/img/player-play.png"
 })
 
+const closeThreshold = () => {
+    timingThreshold.classList.remove('active');
+    timingThreshold.querySelectorAll(".list-value__time, .list-value__item").forEach(el => {
+        el.classList.remove('active');
+    });
+    timingHint.innerText="тайминг"
+}
+
 const timingThreshold = document.querySelector(".timing-threshold");
 const timingHint = document.querySelector(".list-value__hint");
 timingHint.addEventListener("click", function() { 
     if(timingThreshold.classList.contains('active')) {
-        timingThreshold.classList.remove('active');
-        timingThreshold.querySelectorAll(".list-value__time, .list-value__item").forEach(el => {
-            el.classList.remove('active');
-        });
-        this.innerText="тайминг"
+        closeThreshold();
     } else {
         timingThreshold.classList.add("active")
         timingThreshold.querySelectorAll(".list-value__time, .list-value__item").forEach(el => {
@@ -66,15 +70,30 @@ openYoutubeQuery.addEventListener("click", function() {
     }
 })
 
+const timingButtons = document.querySelectorAll(".list-value__item");
+const timingValues = document.querySelectorAll(".list-value__time");
+timingButtons.forEach((button, index)=>{
+    button.addEventListener("click", function() { 
+        let timingValue = Number(timingValues[index].innerText.replace(/[см]/, "")) * 60;
+        closeThreshold();
+        fetch(`http://192.168.0.103:80/commandbase/command?youtubeScrollTiming=${timingValue}`);
+    })
+})
+
 clickToServer(".play-control__play", "youtubePlay");
 clickToServer(".volume-control__turn:nth-child(4)", "youtubeVolumeUp");
 clickToServer(".volume-control__turn:nth-child(2)", "youtubeVolumeDown");
 
 clickToServer(".play-control__left", "youtubeTimeLeft");
 clickToServer(".play-control__right", "youtubeTimeRight");
-clickToServer(".volume-control__full-screen", "youtubeFullScreen");
+
 clickToServer(".zoom-plus", "browserZoomPlus");
 clickToServer(".zoom-minus", "browserZoomMinus");
+
 clickToServer(".tab-control__close", "browserTabClose");
+clickToServer(".subscriptions", "youtubeSubcriptions");
+
+/**python */
 clickToServer(".tab-control__right", "browserTabRight");
 clickToServer(".tab-control__left", "browserTabLeft");
+clickToServer(".volume-control__full-screen", "youtubeFullScreen");

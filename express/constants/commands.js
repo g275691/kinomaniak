@@ -12,7 +12,7 @@ const commands = [
         youtubeOpenVideo: false,
         youtubeTimeLeft: false,
         youtubeTimeRight: false,
-        
+        youtubeSubcriptions: false,
         /**VK-commands*/
 
         /**Browser-commands */

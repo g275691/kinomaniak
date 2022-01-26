@@ -43,10 +43,12 @@ setInterval(async () => {
                 videoVolumeDown && (video.volume-=0.1);
 
                 /**Youtube-video-timing */
+                const youtubeScrollTiming = Number(json[0].youtubeScrollTiming);
+
                 const videoSkipRight = json[0].youtubeTimeRight;
-                videoSkipRight && (video.currentTime+=50);
+                videoSkipRight && (video.currentTime+=youtubeScrollTiming);
                 const videoSkipLeft = json[0].youtubeTimeLeft;
-                videoSkipLeft && (video.currentTime-=50);
+                videoSkipLeft && (video.currentTime-=youtubeScrollTiming);
 
             }
             /** Universal Commands on youtube*/
@@ -55,5 +57,8 @@ setInterval(async () => {
         } 
         const closeBrowserTab = json[0].browserTabClose;
         closeBrowserTab && (window.close())
+
+        const youtubeSubcriptions = json[0].youtubeSubcriptions
+        youtubeSubcriptions && (window.open('https://www.youtube.com/feed/subscriptions'))
     })
 }, 100);
