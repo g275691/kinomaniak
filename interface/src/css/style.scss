@@ -175,9 +175,9 @@ main {
     .general-container {
         position: fixed;
         background: white;
-        width: 65%;
-        height: 100%;
-        top: 4%;
+        width: 375px;
+        height: calc(667px - 4%);
+        top: 6%;
         opacity: 0;
         pointer-events: none;
         transition: all 0.3s ease-in-out;
@@ -185,13 +185,19 @@ main {
             opacity: 1;
             pointer-events: all;
         }
-        .main-control {
+        .general-control {
             display: flex;
             flex-direction: column;
             align-items: center;
             
             font-size: 200%;
             margin-top: 20%;
+            pointer-events: none;
+            transition: all 0.3s ease-in-out;
+            &.active {
+                opacity: 1;
+                pointer-events: all;
+            }
             &__zoom {
                 display: flex;
                 align-items: center;
@@ -207,15 +213,77 @@ main {
 
                 }
             }
-            .hr {
-                height: 5px;
-                width: 80%;
-                background: rgb(189, 21, 21);
-                margin-top: 20%;
-            }
+
             &__turn-off {
                 width: 80%;
                 margin-top: 20%;
+            }
+        }
+    }
+    .hr {
+        height: 5px;
+        width: 80%;
+        background: rgb(189, 21, 21);
+        margin-top: 20%;
+    }
+    .youtube-query-container {
+        position: fixed;
+        background: white;
+        width: 360px;
+        height: calc(667px - 4%);
+        top: 6%;
+        opacity: 1;
+        transition: all 0.3s ease-in-out;
+        .youtube-query-control {
+            display: flex;
+            flex-direction: column;
+            margin-top: 10%;
+            .video-container {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: space-between;
+                &__item {
+                    text-align: center;
+                    line-height: 300%;
+                    font-size: 200%;
+                    flex-basis: 30%;
+                    padding: 1% 0%;
+                    background: black;
+                    color: white;
+                    margin-top: 5%;
+                    &:active {
+                        background: rgb(48, 48, 48);
+                    }
+                }
+            }
+            input {
+                margin-top: 5%;
+                font-size: large;
+            }
+
+        }
+        .hr {
+            margin-top: 5%;
+            width: 100%;
+        }
+        h3 {
+            margin-top: 5%;
+            
+        }
+        .tab-control {
+            display: flex;
+            justify-content: center;
+            
+            margin-top: 5%;
+            font-size: 500%;
+            &__close {
+                padding: 0% 10%;
+                font-weight: bold;
+            }
+            & * {
+                cursor: pointer;
+
             }
         }
     }

@@ -48,9 +48,9 @@ const generalCommand = document.querySelector(".general-container");
 openGeneral.addEventListener("click", function() { 
     console.log("test")
     if(generalCommand.classList.contains('active')) {
-        generalCommand.classList.remove('active')
+        generalCommand.classList.remove('active');
     } else {
-        generalCommand.classList.add('active')
+        generalCommand.classList.add('active');
     }
 })
 
