@@ -38,10 +38,6 @@ main .navbar__main {
   width: 70%;
 }
 
-main .navbar__main:active {
-  background: red;
-}
-
 main .button-style {
   font-size: 100%;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -50,7 +46,11 @@ main .button-style {
   border-radius: 15%;
 }
 
-main .find-video {
+main .button-style:active {
+  background: red;
+}
+
+main .youtube-player-container .find-video {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -63,14 +63,14 @@ main .find-video {
   margin-top: 15%;
 }
 
-main .find-video__input {
+main .youtube-player-container .find-video__input {
   width: 100%;
   padding: 3% 2%;
   border-radius: 5%;
   font-size: 130%;
 }
 
-main .find-video__lupa {
+main .youtube-player-container .find-video__lupa {
   margin-top: 1%;
   margin-left: 5%;
   background-image: url("../img/lupa.png");
@@ -79,28 +79,28 @@ main .find-video__lupa {
   width: 10%;
 }
 
-main .find-video__lupa:active {
+main .youtube-player-container .find-video__lupa:active {
   margin-top: 10px;
 }
 
-main .timing-threshold {
+main .youtube-player-container .timing-threshold {
   background: black;
   margin-top: 8%;
   margin-left: 2%;
   padding-left: 2%;
   border-top-left-radius: 10%;
   border-bottom-left-radius: 10%;
-  width: 28%;
+  width: 23%;
   margin-left: auto;
-  -webkit-animation: all 2s ease-in-out;
-          animation: all 2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
-main .timing-threshold.active {
+main .youtube-player-container .timing-threshold.active {
   width: 100%;
 }
 
-main .timing-threshold .list-value {
+main .youtube-player-container .timing-threshold .list-value {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -117,37 +117,37 @@ main .timing-threshold .list-value {
   margin-left: auto;
   color: white;
   font-size: 170%;
+}
+
+main .youtube-player-container .timing-threshold .list-value__hint {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 80%;
+  opacity: 1;
+  padding-right: 5%;
   padding-bottom: 2%;
 }
 
-main .timing-threshold .list-value__hint {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: 80%;
-  -webkit-animation: all 2s ease-in-out;
-          animation: all 2s ease-in-out;
-  opacity: 1;
-  padding-right: 5%;
+main .youtube-player-container .timing-threshold .list-value__hint:active {
+  color: #e4e2e2;
 }
 
-main .timing-threshold .list-value__item {
+main .youtube-player-container .timing-threshold .list-value__item {
   -webkit-transform: scale(1.3);
           transform: scale(1.3);
   margin-right: 8%;
   margin-left: 2%;
   margin-top: 2%;
-  -webkit-animation: all 5s ease-in;
-          animation: all 5s ease-in;
 }
 
-main .timing-threshold .list-value__item, main .timing-threshold .list-value__time {
+main .youtube-player-container .timing-threshold .list-value__item, main .youtube-player-container .timing-threshold .list-value__time {
   opacity: 0;
 }
 
-main .timing-threshold .list-value__item.active, main .timing-threshold .list-value__time.active {
+main .youtube-player-container .timing-threshold .list-value__item.active, main .youtube-player-container .timing-threshold .list-value__time.active {
   opacity: 1;
 }
 
-main .play-control {
+main .youtube-player-container .play-control {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -162,7 +162,7 @@ main .play-control {
   zoom: 0.6;
 }
 
-main .play-control__left, main .play-control__right {
+main .youtube-player-container .play-control__left, main .youtube-player-container .play-control__right {
   background-image: url("../img/peremotka.png");
   background-size: contain;
   background-repeat: no-repeat;
@@ -170,36 +170,36 @@ main .play-control__left, main .play-control__right {
   width: 25%;
 }
 
-main .play-control__left:active, main .play-control__right:active {
+main .youtube-player-container .play-control__left:active, main .youtube-player-container .play-control__right:active {
   -webkit-filter: opacity(0.7);
           filter: opacity(0.7);
 }
 
-main .play-control__left {
+main .youtube-player-container .play-control__left {
   -webkit-transform: rotateZ(180deg);
           transform: rotateZ(180deg);
 }
 
-main .play-control__play {
+main .youtube-player-container .play-control__play {
   padding: 0% 0%;
 }
 
-main .play-control__play:active {
+main .youtube-player-container .play-control__play:active {
   -webkit-filter: brightness(0.8);
           filter: brightness(0.8);
 }
 
-main .subscriptions {
+main .youtube-player-container .subscriptions {
   padding: 3%;
   margin-top: 20%;
 }
 
-main .volume-container {
+main .youtube-player-container .volume-container {
   margin-top: 20%;
   zoom: 0.5;
 }
 
-main .volume-container .volume-control {
+main .youtube-player-container .volume-container .volume-control {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -211,31 +211,93 @@ main .volume-container .volume-control {
   border-radius: 15%;
 }
 
-main .volume-container .volume-control__turn {
+main .youtube-player-container .volume-container .volume-control__turn {
   width: 160px;
   height: 160px;
 }
 
-main .volume-container .volume-control__turn:active {
+main .youtube-player-container .volume-container .volume-control__turn:active {
   -webkit-filter: brightness(0.8);
           filter: brightness(0.8);
 }
 
-main .volume-container .volume-control__turn:nth-child(2) {
+main .youtube-player-container .volume-container .volume-control__turn:nth-child(2) {
   margin-right: auto;
 }
 
-main .volume-container .volume-control__full-screen {
+main .youtube-player-container .volume-container .volume-control__full-screen {
   zoom: 0.7;
   background: white;
 }
 
-main .volume-container .volume-control__full-screen:active {
+main .youtube-player-container .volume-container .volume-control__full-screen:active {
   -webkit-filter: brightness(0.8);
           filter: brightness(0.8);
 }
 
-main .volume-container .volume-control__turn:nth-child(4) {
+main .youtube-player-container .volume-container .volume-control__turn:nth-child(4) {
   margin-left: auto;
+}
+
+main .general-container {
+  position: fixed;
+  background: white;
+  width: 65%;
+  height: 100%;
+  top: 4%;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+main .general-container.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+main .general-container .main-control {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 200%;
+  margin-top: 20%;
+}
+
+main .general-container .main-control__zoom {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  width: 100%;
+}
+
+main .general-container .main-control__zoom button {
+  padding-top: 4%;
+  padding-bottom: 5%;
+  font-size: 120%;
+}
+
+main .general-container .main-control .hr {
+  height: 5px;
+  width: 80%;
+  background: #bd1515;
+  margin-top: 20%;
+}
+
+main .general-container .main-control__turn-off {
+  width: 80%;
+  margin-top: 20%;
 }
 /*# sourceMappingURL=style.css.map */
