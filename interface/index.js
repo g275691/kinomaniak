@@ -46,11 +46,23 @@ timingHint.addEventListener("click", function() {
 const openGeneral = document.querySelector(".navbar__main");
 const generalCommand = document.querySelector(".general-container");
 openGeneral.addEventListener("click", function() { 
-    console.log("test")
     if(generalCommand.classList.contains('active')) {
         generalCommand.classList.remove('active');
     } else {
         generalCommand.classList.add('active');
+        youtubeQuery.classList.remove('active');
+    }
+})
+
+const openYoutubeQuery = document.querySelector(".navbar__youtube-main");
+const youtubeQuery = document.querySelector(".youtube-query-container");
+
+openYoutubeQuery.addEventListener("click", function() { 
+    if(youtubeQuery.classList.contains('active')) {
+        youtubeQuery.classList.remove('active');
+    } else {
+        youtubeQuery.classList.add('active');
+        generalCommand.classList.remove('active');
     }
 })
 
@@ -61,3 +73,5 @@ clickToServer(".volume-control__turn:nth-child(2)", "youtubeVolumeDown");
 clickToServer(".play-control__left", "youtubeTimeLeft");
 clickToServer(".play-control__right", "youtubeTimeRight");
 clickToServer(".volume-control__full-screen", "youtubeFullScreen");
+clickToServer(".zoom-plus", "browserZoomPlus");
+clickToServer(".zoom-minus", "browserZoomMinus");

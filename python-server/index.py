@@ -12,8 +12,22 @@ while count > -1:
     time.sleep(0.3)
     findbase = collection.find_one({"base":"kinomaniak"})
     fullScreen = findbase['youtubeFullScreen']
+    browserZoomPlus = findbase["browserZoomPlus"]
+    browserZoomMinus = findbase["browserZoomMinus"]
     print(count)
     if fullScreen:
         print("full_screen")
         collection.update_one({"base":"kinomaniak"}, {"$set": {"youtubeFullScreen": False}})
         pyautogui.doubleClick(600, 257)
+    if browserZoomPlus:
+        print("zoom+")
+        collection.update_one({"base":"kinomaniak"}, {"$set": {"browserZoomPlus": False}})
+        with pyautogui.hold('ctrl'):
+            pyautogui.press(['+'])
+        pyautogui.keyDown('ctrl')
+    if browserZoomMinus:
+        print("zoom-")
+        collection.update_one({"base":"kinomaniak"}, {"$set": {"browserZoomMinus": False}})
+        with pyautogui.hold('ctrl'):
+            pyautogui.press(['-'])
+        pyautogui.keyDown('ctrl')
