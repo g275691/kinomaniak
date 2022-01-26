@@ -53,5 +53,7 @@ setInterval(async () => {
             const openNewVideo = json[0].youtubeOpenVideo;
             openNewVideo && (getFirstVideo(openNewVideo))
         } 
+        const closeBrowserTab = json[0].browserTabClose;
+        closeBrowserTab && (window.close())
     })
 }, 100);

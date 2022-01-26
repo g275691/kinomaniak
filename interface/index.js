@@ -75,3 +75,6 @@ clickToServer(".play-control__right", "youtubeTimeRight");
 clickToServer(".volume-control__full-screen", "youtubeFullScreen");
 clickToServer(".zoom-plus", "browserZoomPlus");
 clickToServer(".zoom-minus", "browserZoomMinus");
+clickToServer(".tab-control__close", "browserTabClose");
+clickToServer(".tab-control__right", "browserTabRight");
+clickToServer(".tab-control__left", "browserTabLeft");

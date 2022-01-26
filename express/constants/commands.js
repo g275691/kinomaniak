@@ -15,6 +15,8 @@ const commands = [
         
         /**VK-commands*/
 
+        /**Browser-commands */
+        browserTabClose: false,
         /**Computer-commands*/
         isCompUnlock: false
     }

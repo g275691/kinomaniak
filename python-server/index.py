@@ -14,6 +14,8 @@ while count > -1:
     fullScreen = findbase['youtubeFullScreen']
     browserZoomPlus = findbase["browserZoomPlus"]
     browserZoomMinus = findbase["browserZoomMinus"]
+    browserTabLeft = findbase["browserTabLeft"]
+    browserTabRight = findbase["browserTabRight"]
     print(count)
     if fullScreen:
         print("full_screen")
@@ -31,3 +33,17 @@ while count > -1:
         with pyautogui.hold('ctrl'):
             pyautogui.press(['-'])
         pyautogui.keyDown('ctrl')
+    if browserTabRight:
+        print("tabRight")
+        collection.update_one({"base":"kinomaniak"}, {"$set": {"browserTabRight": False}})
+        with pyautogui.hold('ctrl'):
+            pyautogui.press(['tab'])
+        pyautogui.keyUp('ctrl')
+    if browserTabLeft:
+        print("tabLeft")
+        collection.update_one({"base":"kinomaniak"}, {"$set": {"browserTabLeft": False}})
+        with pyautogui.hold('ctrl'):
+            with pyautogui.hold('shift'):
+                pyautogui.press(['tab'])
+        pyautogui.keyUp('ctrl')
+        pyautogui.keyUp('shift')
