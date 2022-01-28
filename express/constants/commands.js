@@ -8,7 +8,6 @@ const commands = [
         isYoutubeOpen: false,
         youtubeVolumeUp: false,
         youtubeVolumeDown: false,
-        youtubePlay: false,
         youtubeOpenVideo: false,
         youtubeTimeLeft: false,
         youtubeTimeRight: false,
@@ -19,7 +18,6 @@ const commands = [
         /**VK-commands*/
 
         /**Browser-commands */
-        browserTabClose: false,
         scrollUp: false,
         scrollDown: false,
         /**Computer-commands*/

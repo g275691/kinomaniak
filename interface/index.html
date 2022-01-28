@@ -10,7 +10,7 @@
 <body>
     <main>
         <nav class="navbar">
-            <div src="src/img/youtube-logo.png" class="navbar__youtube-main"></div>
+            <div class="navbar__youtube-main"></div>
             <button class="navbar__main button-style">General COMMANDS</button>
         </nav>
         <div class="youtube-player-container">
@@ -18,26 +18,23 @@
                 <input class="find-video__input" placeholder="Искать другое видео">
                 <div class="find-video__lupa"></div>
             </div>
-            <div class="timing-threshold">
-                <div class="list-value">
-                    <span class="list-value__hint">тайминг</span>
-                    <label class="list-value__time">0.5м</label>
-                    <input type="radio" class="list-value__item" name="timing"></input>
-                    <label class="list-value__time">1м</label>
-                    <input type="radio" class="list-value__item" name="timing"></input>
-                    <label class="list-value__time">5м</label>
-                    <input type="radio" class="list-value__item" name="timing"></input>
-                    <label class="list-value__time">10м</label>
-                    <input type="radio" class="list-value__item" name="timing"></input>
-                </div>
-            </div>
+            <button class="button-style zoom-plus">⠀+⠀</button>
+            <div class="zoom-hint">приближение</div>
+            <div class="scroll-hint">скроллинг</div>
+            <button class="button-style scroll-up">↓</button>
             <div class="play-control">
                 <div class="play-control__left"></div>
                 <img class="play-control__play" src="src/img/player-play.png">
                 <div class="play-control__right"></div>
             </div>
-            <button class="subscriptions button-style">В ПОДПИСКИ</button>
-
+            <div class="popular-query">
+                <button data-url="feed/subscriptions" class="popular-query__item button-style">ПОДПИСКИ</button>
+                <button data-url="c/tvrain/videos" class="popular-query__item button-style">ДОЖДЬ</button>
+                <button data-url="c/StopGameRuGames/videos" class="popular-query__item button-style">STOPGAME</button>
+            </div>
+            <button class="button-style zoom-minus">⠀–⠀</button>
+            
+            <button class="button-style scroll-down">↓</button>
             <div class="volume-container">
                 <div class="volume-control">
                     <div class="volume-control__scale"></div>
@@ -47,53 +44,58 @@
                 </div>
             </div>
         </div>
-        <div class="youtube-query-container">
-            <div class="youtube-query-control">
-                <div class="find-video">
-                    <input type="text" placeholder="ввести номер видео">
-                    <div class="find-video__lupa"></div>
+        <div class="youtube-options-container">
+            <div class="youtube-options-control">
+                <h2>YOUTUBE ОПЦИИ</h2>
+                <h3 class="list-value__hint">Шаг перемотки видео</h3>
+                <div class="list-value">
+                    <label class="list-value__time">0.5м</label>
+                    <input type="radio" class="list-value__item" name="timing"></input>
+                    <label class="list-value__time">1м</label>
+                    <input type="radio" class="list-value__item" name="timing"></input>
+                    <label class="list-value__time">5м</label>
+                    <input type="radio" class="list-value__item" name="timing"></input>
+                    <label class="list-value__time">10м</label>
+                    <input type="radio" class="list-value__item" name="timing"></input>
                 </div>
-                
-                <div class="video-container">
-                    <button class="video-container__item">1</button>
-                    <button class="video-container__item">2</button>
-                    <button class="video-container__item">3</button>
-                    <button class="video-container__item">4</button>
-                    <button class="video-container__item">5</button>
-                    <button class="video-container__item">6</button>
-                    <button class="video-container__item">7</button>
-                    <button class="video-container__item">8</button>
-                    <button class="video-container__item">9</button>
-                    <button class="video-container__item">10</button>
-                    <button class="video-container__item">11</button>
-                    <button class="video-container__item">12</button>
-                    <button class="video-container__item">13</button>
-                    <button class="video-container__item">14</button>
-                    <button class="video-container__item">15</button>
-                    
-                </div>
-                
+                <div class="hr"></div>
             </div>
-            <div class="hr"></div>
-            <h3>Управление вкладками</h3>
-            <div class="tab-control">
-                <div class="tab-control__scroll-down">↓</div>
-                <div class="tab-control__left">◀</div>
-                <div class="tab-control__close">×</div>
-                <div class="tab-control__right">▶</div>
-                <div class="tab-control__scroll-up">↓</div>
-            </div>
+
         </div>
         <div class="general-container">
             <div class="general-control">
-                <div class="general-control__zoom">
-                    <button class="button-style zoom-minus">⠀-⠀</button>
-                    <div class="hint">zoom</div>
-                    <button class="button-style zoom-plus">⠀+⠀</button>
+                <h2>БРАУЗЕР</h2>
+                <h3>Управление вкладками</h3>
+                <div class="tab-control">
+                    <div class="tab-control__left">◀</div>
+                    <div class="tab-control__close">×</div>
+                    <div class="tab-control__right">▶</div>
                 </div>
                 <div class="hr"></div>
-                <button class="general-control__turn-off button-style">Выключить компьютер</button>
+                <h2>КОМПЬЮТЕР</h2>
+                <h3>Выкл</h3>
+                <div class="general-control__turn-off button-style"></div>
             </div>
+        </div>
+        <div class="video-by-time-container">
+            <div class="video-container">
+                <button class="video-container__item">1</button>
+                <button class="video-container__item">2</button>
+                <button class="video-container__item">3</button>
+                <button class="video-container__item">4</button>
+                <button class="video-container__item">5</button>
+                <button class="video-container__item">6</button>
+                <button class="video-container__item">7</button>
+                <button class="video-container__item">8</button>
+                <button class="video-container__item">9</button>
+                <button class="video-container__item">10</button>
+                <button class="video-container__item">11</button>
+                <button class="video-container__item">12</button>
+                <button class="video-container__item">13</button>
+                <button class="video-container__item">14</button>
+                <button class="video-container__item">15</button>
+            </div>
+            <button class="close">ВИДЕО ПО НОМЕРАМ</button>
         </div>
 
     </main>

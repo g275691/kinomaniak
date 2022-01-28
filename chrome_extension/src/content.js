@@ -20,7 +20,21 @@ const getFirstVideo = async (req) => {
     await window.open(`https://www.youtube.com/watch?v=${videoID}`)
 }
 
-setInterval(async () => {
+let isActive = true;
+function onBlur() { // окно теряет фокус
+	isActive = false;
+}
+
+function onFocus() {
+	isActive = true;
+}
+
+window.onfocus = onFocus;
+window.onblur = onBlur;
+
+onFocus();
+onBlur()
+setInterval(async () => { 
     getCommandBase()
     .then(json=>{
         if(!json) return;
@@ -32,9 +46,9 @@ setInterval(async () => {
                 const video = document.querySelector("#movie_player").querySelector("video");
                 
                 /**Youtube-play-video */
-                const playYoutubeVideo = json[0].youtubePlay;
-                fetch(`${PORT}/commandbase/command?youtubeStatusPaused=${video.paused}`)
-                playYoutubeVideo && (video.paused ? video.play() : video.pause());
+                // const playYoutubeVideo = json[0].youtubePlay;
+                // fetch(`${PORT}/commandbase/command?youtubeStatusPaused=${video.paused}`)
+                // playYoutubeVideo && (video.paused ? video.play() : video.pause());
 
                 /**Youtube-volume-video */
                 const videoVolumeUp = json[0].youtubeVolumeUp;
@@ -53,7 +67,7 @@ setInterval(async () => {
             }
             /** Universal Commands on youtube*/
             const openNewVideo = json[0].youtubeOpenVideo;
-            openNewVideo && (window.open(`https://www.youtube.com/results?search_query=${openNewVideo}`))
+            openNewVideo && (window.open(`https://www.youtube.com/${openNewVideo}`))
             /**Open video by number */
             const isSubscription = document.querySelector(".style-scope ytd-grid-renderer");
             const isSearchPage = /https:..www.youtube.com.result/i.test(window.location.href);
@@ -61,8 +75,8 @@ setInterval(async () => {
             let youtubeOpenVideoByNumber = Number(json[0].youtubeOpenVideoByNumber);
             if(isSubscription) {
                 if(youtubeNumberVideo) {
-                    isSubscription.querySelectorAll("img").forEach(el=>el.style.filter="brightness(1)");
-                    isSubscription.querySelectorAll("img")[youtubeNumberVideo - 1].style.filter="brightness(1.9)";
+                    isSubscription.querySelectorAll("img").forEach(el=>el.style.marginTop="0px");
+                    isSubscription.querySelectorAll("img")[youtubeNumberVideo - 1].style.marginTop="30px";
                 }
                 if(youtubeOpenVideoByNumber) {
                     isSubscription.querySelectorAll("img")[youtubeOpenVideoByNumber - 1].click();
@@ -71,8 +85,8 @@ setInterval(async () => {
             if(isSearchPage) {
                 const findQuery = document.querySelector(".style-scope ytd-section-list-renderer").querySelectorAll(".style-scope ytd-thumbnail");
                 if(youtubeNumberVideo) {
-                    findQuery.forEach(el=>el.style.filter="brightness(1)");
-                    findQuery[youtubeNumberVideo - 1].style.filter="brightness(1.9)";
+                    findQuery.forEach(el=>el.style.marginTop="0px");
+                    findQuery[youtubeNumberVideo - 1].style.marginTop="30px";
                 }
                 if(youtubeOpenVideoByNumber) {
                     findQuery[youtubeOpenVideoByNumber - 1].querySelector("a").click();
@@ -90,8 +104,6 @@ setInterval(async () => {
             const newY = window.pageYOffset - 200;
             window.scrollTo(0, newY);
         }
-        const closeBrowserTab = json[0].browserTabClose;
-        closeBrowserTab && (window.close())
 
         const youtubeSubcriptions = json[0].youtubeSubcriptions
         youtubeSubcriptions && (window.open('https://www.youtube.com/feed/subscriptions'))

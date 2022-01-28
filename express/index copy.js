@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 
 const https = require('https');
 const http = require('http');
@@ -17,29 +18,28 @@ const { fullResetDB } = require('./src/scripts/fullResetDb');
 const { getMongoDB } = require('./src/scripts/getMongoDB');
 const { DB_NAME } = require('./constants/DB');
 
-app.get('/', async() => {
-    console.log("user-enter")
-})
-
 app.get('/getbase', async (req, res) => {
     await getBaseArray(res)
 })
 
-app.get('/commandbase/command', async (req, res) => {
-    await activateCommand(req.query, res)
-    
+app
+.use(bodyParser.urlencoded({ extended: false }))
+.use(bodyParser.json())
+.put('/commandbase/command', async (req, res) => {
+    console.log(req.body)
+    await activateCommand(req.body, res)
 })
 
 app.get('/commandbase', async (req, res) => {
     await findAndResetDB(res);
 })
 
-app.use('/', async (req, res, next) => {
-    const collection = await getMongoDB('commands');
-    await collection.updateOne({base: DB_NAME}, {$set: {"focusClick":true}})
-    next()
-});
+// app.use('/', async (req, res, next) => {
+//     const collection = await getMongoDB('commands');
+//     await collection.updateOne({base: DB_NAME}, {$set: {"focusClick":true}})
+//     next()
+// });
 
-fullResetDB()
+fullResetDB();
 http.createServer(app).listen(PORT_HTTP, ()=>console.log(`listen ${PORT_HTTP}`));
 https.createServer(options, app).listen(PORT_HTTPS, ()=>console.log(`listen ${PORT_HTTPS}`));

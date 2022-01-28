@@ -4,7 +4,7 @@ client = MongoClient('mongodb://localhost:27017/')
 
 db = client['kinomaniak']
 collection = db['commands']
-
+collection.update_one({"base":"kinomaniak"}, {"$set":{"isYoutubeOpen":False,"youtubeVolumeUp":False,"youtubeVolumeDown":False,"isCompUnlock":False,"youtubePlay":False,"openVideo":False,"youtubeOpenVideo":False,"youtubeTimeLeft":False,"youtubeTimeRight":False,"youtubeFullScreen":False,"youtubeStatusPaused":"true","fullScreen":False,"browserZoomPlus":False,"browserZoomMinus":False,"browserTabClose":False,"browserTabLeft":False,"browserTabRight":False,"youtubeSubcriptions":False,"youtubeNumberVideo":False,"youtubeOpenVideoByNumber":False,"scrollDown":False,"scrollUp":False,"computerDisable":False}})
 count = 0
 while count > -1:
     count = count + 1
@@ -15,26 +15,31 @@ while count > -1:
     browserZoomMinus = findbase["browserZoomMinus"]
     browserTabLeft = findbase["browserTabLeft"]
     browserTabRight = findbase["browserTabRight"]
+    browserTabClose = findbase["browserTabClose"]
 
+    youtubePlay = findbase["youtubePlay"]
     computerDisable = findbase["computerDisable"] 
 
     print(count)
     if fullScreen:
         print("full_screen")
         collection.update_one({"base":"kinomaniak"}, {"$set": {"youtubeFullScreen": False}})
-        pyautogui.doubleClick(600, 257)
+        pyautogui.press(['F'])
+    if youtubePlay:
+        collection.update_one({"base":"kinomaniak"}, {"$set": {"youtubePlay": False}})
+        pyautogui.press(['K'])
     if browserZoomPlus:
         print("zoom+")
         collection.update_one({"base":"kinomaniak"}, {"$set": {"browserZoomPlus": False}})
         with pyautogui.hold('ctrl'):
             pyautogui.press(['+'])
-        pyautogui.keyDown('ctrl')
+        pyautogui.keyUp('ctrl')
     if browserZoomMinus:
         print("zoom-")
         collection.update_one({"base":"kinomaniak"}, {"$set": {"browserZoomMinus": False}})
         with pyautogui.hold('ctrl'):
             pyautogui.press(['-'])
-        pyautogui.keyDown('ctrl')
+        pyautogui.keyUp('ctrl')
     if browserTabRight:
         print("tabRight")
         collection.update_one({"base":"kinomaniak"}, {"$set": {"browserTabRight": False}})
@@ -49,6 +54,14 @@ while count > -1:
                 pyautogui.press(['tab'])
         pyautogui.keyUp('ctrl')
         pyautogui.keyUp('shift')
+    if browserTabClose:
+        collection.update_one({"base":"kinomaniak"}, {"$set": {"browserTabClose": False}})
+        with pyautogui.hold('ctrl'):
+            pyautogui.press('W')
+        pyautogui.keyUp('W')
+        pyautogui.keyUp('ctrl')
+        print("close")
+        
     if computerDisable:
         collection.update_one({"base":"kinomaniak"}, {"$set": {"computerDisable": False}})
         os.system('shutdown -s')

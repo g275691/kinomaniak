@@ -1,7 +1,25 @@
+// const clickToServer = (query, command, value=true) => {
+//     document.querySelector(query).addEventListener("click", function() {
+//         console.log(`${command} : ${value}`);
+//         fetch(`http://192.168.0.103:80/commandbase/command?${command}=${value}`);
+//     })
+// }
+
+const updateCommandAPI = (command) => {
+    return fetch(`http://192.168.0.103:80/commandbase/command/`, {
+        method: "PUT",  
+        headers: { 
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },  
+        body: JSON.stringify(command) 
+    });
+}
+
 const clickToServer = (query, command, value=true) => {
     document.querySelector(query).addEventListener("click", function() {
         console.log(`${command} : ${value}`);
-        fetch(`http://192.168.0.103:80/commandbase/command?${command}=${value}`);
+        updateCommandAPI({[command]: value})
     })
 }
 
@@ -47,7 +65,7 @@ const timingValues = document.querySelectorAll(".list-value__time");
 timingButtons.forEach((button, index)=>{
     button.addEventListener("click", function() { 
         let timingValue = Number(timingValues[index].innerText.replace(/[см]/, "")) * 60;
-        fetch(`http://192.168.0.103:80/commandbase/command?youtubeScrollTiming=${timingValue}`);
+        updateCommandAPI({youtubeScrollTiming: timingValue})
     })
 })
 
@@ -74,27 +92,25 @@ openVideoByNumber.addEventListener("click", function() {
 
 const findLupa = document.querySelector(".find-video").querySelector(".find-video__lupa");
 findLupa.addEventListener("click", function() { 
-    
     if(/Искать другое видео/i.test(findVideoInput.placeholder)) {
-        fetch(`http://192.168.0.103:80/commandbase/command?youtubeOpenVideo=results?search_query=${findVideoInput.value}`);
+        updateCommandAPI({youtubeOpenVideo: `results?search_query=${findVideoInput.value}`})
         openVideoByNumber.click();
         findVideoInput.value = "";
     } else {
-        fetch(`http://192.168.0.103:80/commandbase/command?youtubeOpenVideoByNumber=${findVideoInput.value}`);
+        updateCommandAPI({youtubeOpenVideoByNumber: findVideoInput.value})
     }
 })
-
 
 const videoRect = document.querySelectorAll(".video-container__item");
 videoRect.forEach(rect=>{
     rect.addEventListener("click", function() { 
         const videoNumber = this.innerText;
         findVideoInput.value = videoNumber;
-        fetch(`http://192.168.0.103:80/commandbase/command?youtubeNumberVideo=${videoNumber}`);
+        updateCommandAPI({youtubeNumberVideo: videoNumber})
     })
 });
 
-//clickToServer(".play-control__play", "youtubePlay");
+clickToServer(".play-control__play", "youtubePlay");
 clickToServer(".volume-control__turn:nth-child(4)", "youtubeVolumeUp");
 clickToServer(".volume-control__turn:nth-child(2)", "youtubeVolumeDown");
 
@@ -115,9 +131,7 @@ clickToServer(".general-control__turn-off", "computerDisable");
 
 document.querySelectorAll(".popular-query__item").forEach(el=>{
     el.addEventListener("click", function() {
-        const youtubeVideo = `http://192.168.0.103:80/commandbase/command?youtubeOpenVideo=${el.dataset.url}`;
-        console.log(youtubeVideo)
-        fetch(youtubeVideo);
+        updateCommandAPI({youtubeOpenVideo: el.dataset.url})
         openVideoByNumber.click()
     })
 
