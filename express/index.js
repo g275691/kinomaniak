@@ -3,6 +3,7 @@ const app = express();
 
 const https = require('https');
 const http = require('http');
+
 const fs = require('fs');
 const options = {
     key: fs.readFileSync("../../server-ssl/domain.key", "utf-8"),
@@ -14,8 +15,9 @@ const { findAndResetDB } = require('./src/scripts/findAndResetDB');
 const { activateCommand } = require('./src/scripts/activateCommand');
 const { getBaseArray } = require('./src/scripts/getBaseArray');
 const { fullResetDB } = require('./src/scripts/fullResetDb');
-const { getMongoDB } = require('./src/scripts/getMongoDB');
-const { DB_NAME } = require('./constants/DB');
+
+
+
 
 app.get('/', async() => {
     console.log("user-enter")
@@ -27,18 +29,16 @@ app.get('/getbase', async (req, res) => {
 
 app.get('/commandbase/command', async (req, res) => {
     await activateCommand(req.query, res)
-    
+    // fs.appendFile('../interface/testFile.txt', ' This line is beyond the end.', (err) => {
+    //     if(err) throw err;
+    //     console.log('Data has been added!');
+    // });
 })
 
 app.get('/commandbase', async (req, res) => {
     await findAndResetDB(res);
-})
 
-app.use('/', async (req, res, next) => {
-    const collection = await getMongoDB('commands');
-    await collection.updateOne({base: DB_NAME}, {$set: {"focusClick":true}})
-    next()
-});
+})
 
 fullResetDB()
 http.createServer(app).listen(PORT_HTTP, ()=>console.log(`listen ${PORT_HTTP}`));

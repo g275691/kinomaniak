@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-import time, pyautogui, os
+import time, pyautogui, os, keyboard
 client = MongoClient('mongodb://localhost:27017/')
 
 db = client['kinomaniak']
@@ -17,10 +17,12 @@ while count > -1:
     browserTabRight = findbase["browserTabRight"]
     browserTabClose = findbase["browserTabClose"]
 
+    focusClick = findbase["focusClick"]
     youtubePlay = findbase["youtubePlay"]
+
     computerDisable = findbase["computerDisable"] 
 
-    print(count)
+    # print(count)
     if fullScreen:
         print("full_screen")
         collection.update_one({"base":"kinomaniak"}, {"$set": {"youtubeFullScreen": False}})
@@ -56,12 +58,14 @@ while count > -1:
         pyautogui.keyUp('shift')
     if browserTabClose:
         collection.update_one({"base":"kinomaniak"}, {"$set": {"browserTabClose": False}})
-        with pyautogui.hold('ctrl'):
-            pyautogui.press('W')
-        pyautogui.keyUp('W')
-        pyautogui.keyUp('ctrl')
+        keyboard.send("ctrl+w")
         print("close")
-        
+    if focusClick:
+        print('focus')
+        collection.update_one({"base":"kinomaniak"}, {"$set": {"focusClick": False}})
+        with pyautogui.hold('ctrl'):
+            pyautogui.press('F6')
+        pyautogui.keyUp('ctrl')
     if computerDisable:
         collection.update_one({"base":"kinomaniak"}, {"$set": {"computerDisable": False}})
         os.system('shutdown -s')

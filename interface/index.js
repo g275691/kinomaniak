@@ -24,9 +24,11 @@ const generalCommand = document.querySelector(".general-container");
 openGeneral.addEventListener("click", function() { 
     if(generalCommand.classList.contains('active')) {
         generalCommand.classList.remove('active');
+        setVideoByNumber(openVideoByNumber)
     } else {
         generalCommand.classList.add('active');
         youtubeQuery.classList.remove('active');
+        
     }
 })
 
@@ -36,9 +38,11 @@ const youtubeQuery = document.querySelector(".youtube-options-container");
 openYoutubeOptions.addEventListener("click", function() { 
     if(youtubeQuery.classList.contains('active')) {
         youtubeQuery.classList.remove('active');
+        setVideoByNumber(openVideoByNumber)
     } else {
         youtubeQuery.classList.add('active');
         generalCommand.classList.remove('active');
+        
     }
 })
 
@@ -56,33 +60,43 @@ const openVideoByNumber = document.querySelector(".video-by-time-container").que
 const videoContainer = document.querySelector(".video-container");
 const findVideoInput = document.querySelector(".find-video__input")
 
+const setVideoByNumber = (query) => {
+    videoByNumber.classList.remove('active');
+    videoContainer.classList.remove('active');
+    query.classList.remove('active');
+    query.innerText="ВИДЕО ПО НОМЕРАМ";
+    findVideoInput.placeholder = "Искать другое видео";
+}
+
+const hideVideoByNumber = (query) => {
+    videoByNumber.classList.add('active');
+    videoContainer.classList.add('active');
+    query.classList.add('active');
+    query.innerText="ЗАКРЫТЬ";
+    findVideoInput.placeholder = "Искать по номеру";
+}
+
 openVideoByNumber.addEventListener("click", function() {
-    if(videoByNumber.classList.contains('active')) {
-        videoByNumber.classList.remove('active');
-        videoContainer.classList.remove('active');
-        this.classList.remove('active');
-        this.innerText="ВИДЕО ПО НОМЕРАМ";
-        findVideoInput.placeholder = "Искать другое видео";
-    } else {
-        videoByNumber.classList.add('active');
-        videoContainer.classList.add('active');
-        this.classList.add('active');
-        this.innerText="ЗАКРЫТЬ";
-        findVideoInput.placeholder = "Искать по номеру";
-    }
+    videoByNumber.classList.contains('active')
+    ? setVideoByNumber(this)
+    : hideVideoByNumber(this)
 })
 
 const findLupa = document.querySelector(".find-video").querySelector(".find-video__lupa");
 findLupa.addEventListener("click", function() { 
-    
     if(/Искать другое видео/i.test(findVideoInput.placeholder)) {
         fetch(`http://192.168.0.103:80/commandbase/command?youtubeOpenVideo=results?search_query=${findVideoInput.value}`);
         openVideoByNumber.click();
         findVideoInput.value = "";
     } else {
         fetch(`http://192.168.0.103:80/commandbase/command?youtubeOpenVideoByNumber=${findVideoInput.value}`);
+        setVideoByNumber(openVideoByNumber)
+
     }
 })
+
+const volumeItems = document.querySelectorAll(".volume-scale__item");
+volumeItems.forEach((el,i)=>i<=3&&(el.style.opacity=1))
 
 
 const videoRect = document.querySelectorAll(".video-container__item");
@@ -94,7 +108,16 @@ videoRect.forEach(rect=>{
     })
 });
 
-//clickToServer(".play-control__play", "youtubePlay");
+document.querySelectorAll(".popular-query__item").forEach(el=>{
+    el.addEventListener("click", function() {
+        const youtubeVideo = `http://192.168.0.103:80/commandbase/command?youtubeOpenVideo=${el.dataset.url}`;
+        console.log(youtubeVideo)
+        fetch(youtubeVideo);
+        openVideoByNumber.click()
+    })
+})
+
+clickToServer(".play-control__play", "youtubePlay");
 clickToServer(".volume-control__turn:nth-child(4)", "youtubeVolumeUp");
 clickToServer(".volume-control__turn:nth-child(2)", "youtubeVolumeDown");
 
@@ -111,14 +134,3 @@ clickToServer(".tab-control__close", "browserTabClose");
 clickToServer(".tab-control__right", "browserTabRight");
 clickToServer(".tab-control__left", "browserTabLeft");
 clickToServer(".volume-control__full-screen", "youtubeFullScreen");
-clickToServer(".general-control__turn-off", "computerDisable");
-
-document.querySelectorAll(".popular-query__item").forEach(el=>{
-    el.addEventListener("click", function() {
-        const youtubeVideo = `http://192.168.0.103:80/commandbase/command?youtubeOpenVideo=${el.dataset.url}`;
-        console.log(youtubeVideo)
-        fetch(youtubeVideo);
-        openVideoByNumber.click()
-    })
-
-})
