@@ -17,7 +17,6 @@ while count > -1:
     browserTabRight = findbase["browserTabRight"]
     browserTabClose = findbase["browserTabClose"]
 
-    focusClick = findbase["focusClick"]
     youtubePlay = findbase["youtubePlay"]
 
     computerDisable = findbase["computerDisable"] 
@@ -60,12 +59,6 @@ while count > -1:
         collection.update_one({"base":"kinomaniak"}, {"$set": {"browserTabClose": False}})
         keyboard.send("ctrl+w")
         print("close")
-    if focusClick:
-        print('focus')
-        collection.update_one({"base":"kinomaniak"}, {"$set": {"focusClick": False}})
-        with pyautogui.hold('ctrl'):
-            pyautogui.press('F6')
-        pyautogui.keyUp('ctrl')
     if computerDisable:
         collection.update_one({"base":"kinomaniak"}, {"$set": {"computerDisable": False}})
         os.system('shutdown -s')

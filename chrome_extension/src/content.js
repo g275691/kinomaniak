@@ -29,7 +29,8 @@ const getFirstVideo = async (req) => {
 
 setInterval(async () => { 
     !document.querySelector(".volume-indicator") && (await setVolumeIndicator());
-    getCommandBase()
+    !document.hidden && getCommandBase()
+    
     .then(json=>{
         
         if(!json) return;
@@ -59,8 +60,8 @@ setInterval(async () => {
 
                     }
                     
-                    let videoVolume = document.querySelector("#movie_player").querySelector("video").volume.toFixed(1)*10;
-                    volumeItems.forEach((el,i)=>i < videoVolume ? el.style.opacity = 1 : el.style.opacity = 0)
+                    let videoVolume = (document.querySelector("#movie_player").querySelector("video").volume*10).toFixed(1);
+                    volumeItems.forEach((el,i)=>i <= videoVolume ? el.style.opacity = 1 : el.style.opacity = 0)
 
                     volumeIndicator.style.opacity = 1;
                     let timeout = setTimeout(() => {
@@ -79,8 +80,8 @@ setInterval(async () => {
                         video.volume-=0.1;
                     } catch (err) {}
                     
-                    let videoVolume = document.querySelector("#movie_player").querySelector("video").volume.toFixed(1)*10;
-                    volumeItems.forEach((el,i)=>i < videoVolume ? el.style.opacity = 1 : el.style.opacity = 0)
+                    let videoVolume = (document.querySelector("#movie_player").querySelector("video").volume*10).toFixed(1);
+                    volumeItems.forEach((el,i)=>i <= videoVolume ? el.style.opacity = 1 : el.style.opacity = 0)
                     volumeIndicator.style.opacity = 1;
                     let timeout = setTimeout(() => {
                         volumeIndicator.style.opacity = 0;
@@ -151,3 +152,7 @@ setInterval(async () => {
         youtubeSubcriptions && (window.open('https://www.youtube.com/feed/subscriptions'))
     })
 }, 100);
+
+setInterval(() => {
+    
+}, 1000);
