@@ -16,9 +16,6 @@ const { activateCommand } = require('./src/scripts/activateCommand');
 const { getBaseArray } = require('./src/scripts/getBaseArray');
 const { fullResetDB } = require('./src/scripts/fullResetDb');
 
-
-
-
 app.get('/', async() => {
     console.log("user-enter")
 })
@@ -37,9 +34,9 @@ app.get('/commandbase/command', async (req, res) => {
 
 app.get('/commandbase', async (req, res) => {
     await findAndResetDB(res);
-
 })
 
 fullResetDB()
 http.createServer(app).listen(PORT_HTTP, ()=>console.log(`listen ${PORT_HTTP}`));
-https.createServer(options, app).listen(PORT_HTTPS, ()=>console.log(`listen ${PORT_HTTPS}`));
+https.createServer(options, app)
+.listen(PORT_HTTPS, ()=>console.log(`listen ${PORT_HTTPS}`))

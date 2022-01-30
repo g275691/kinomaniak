@@ -120,15 +120,18 @@ main {
                 }
             }
         }
+        .popular-hint {
+
+        }
         .popular-query {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             margin-top: 10%;
-            padding: 0% 5%;
+            padding: 0% 12%;
             &__item {
                 font-size: 90%;
-                padding: 2%;
+                padding: 2.5%;
                 
                 margin: 1.5% 1%;
             }
@@ -136,7 +139,7 @@ main {
         }
         .popular-query:nth-child(2n) {
             margin-top: 0%;
-            padding: 0% 15%;
+            padding: 0% 12%;
         }
 
         .volume-container {

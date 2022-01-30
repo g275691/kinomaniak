@@ -29,8 +29,7 @@ const getFirstVideo = async (req) => {
 
 setInterval(async () => { 
     !document.querySelector(".volume-indicator") && (await setVolumeIndicator());
-    !document.hidden && getCommandBase()
-    
+    !document.hidden && getCommandBase() 
     .then(json=>{
         
         if(!json) return;
@@ -61,7 +60,7 @@ setInterval(async () => {
                     }
                     
                     let videoVolume = (document.querySelector("#movie_player").querySelector("video").volume*10).toFixed(1);
-                    volumeItems.forEach((el,i)=>i <= videoVolume ? el.style.opacity = 1 : el.style.opacity = 0)
+                    volumeItems.forEach((el,i)=>i <= videoVolume ? el.style.opacity = 1 : el.style.opacity = 0);
 
                     volumeIndicator.style.opacity = 1;
                     let timeout = setTimeout(() => {
@@ -81,7 +80,7 @@ setInterval(async () => {
                     } catch (err) {}
                     
                     let videoVolume = (document.querySelector("#movie_player").querySelector("video").volume*10).toFixed(1);
-                    volumeItems.forEach((el,i)=>i <= videoVolume ? el.style.opacity = 1 : el.style.opacity = 0)
+                    volumeItems.forEach((el,i)=>i <= videoVolume ? el.style.opacity = 1 : el.style.opacity = 0);
                     volumeIndicator.style.opacity = 1;
                     let timeout = setTimeout(() => {
                         volumeIndicator.style.opacity = 0;
@@ -105,18 +104,21 @@ setInterval(async () => {
             /** Universal Commands on youtube*/
 
             /**Open video by number */
-            const isSubscription = document.querySelector(".style-scope ytd-grid-renderer");
-            const isSearchPage = /https:..www.youtube.com.result/i.test(window.location.href);
+            const isSubscription = /^https:..www.youtube.com.feed.subscriptions/i.test(window.location.href);
+            const isSearchPage = /^https:..www.youtube.com.result/i.test(window.location.href);
+            const isMainPage = /^https:..www.youtube.com.$/.test(window.location.href);
             let youtubeNumberVideo = Number(json[0].youtubeNumberVideo);
             let youtubeOpenVideoByNumber = Number(json[0].youtubeOpenVideoByNumber);
             if(isSubscription) {
+                const contentId = document.querySelector("#contents");
+
                 if(youtubeNumberVideo) {
-                    isSubscription.querySelectorAll("img").forEach(el=>{el.style.marginTop="0px"; el.style.filter=""});
-                    isSubscription.querySelectorAll("img")[youtubeNumberVideo - 1].style.marginTop="30px";
-                    isSubscription.querySelectorAll("img")[youtubeNumberVideo - 1].style.filter="saturate(160)";
+                    contentId.querySelectorAll("img").forEach(el=>{el.style.marginTop="0px"; el.style.filter=""});
+                    contentId.querySelectorAll("img")[youtubeNumberVideo - 1].style.marginTop="30px";
+                    contentId.querySelectorAll("img")[youtubeNumberVideo - 1].style.filter="saturate(160)";
                 }
                 if(youtubeOpenVideoByNumber) {
-                    isSubscription.querySelectorAll("img")[youtubeOpenVideoByNumber - 1].click();
+                    contentId.querySelectorAll("img")[youtubeOpenVideoByNumber - 1].click();
                 }
             } 
             if(isSearchPage) {
@@ -128,6 +130,18 @@ setInterval(async () => {
                 }
                 if(youtubeOpenVideoByNumber) {
                     findQuery[youtubeOpenVideoByNumber - 1].querySelector("a").click();
+                }
+            }
+            if(isMainPage) {
+                console.log("ismain")
+                const mainContent = document.querySelectorAll("#content.style-scope ytd-rich-item-renderer");
+                if(youtubeNumberVideo) {
+                    mainContent.forEach(el=>{el.style.marginTop="0px"; el.style.filter=""});
+                    mainContent[youtubeNumberVideo - 1].style.marginTop="30px";
+                    mainContent[youtubeNumberVideo - 1].style.filter="saturate(160)";
+                }
+                if(youtubeOpenVideoByNumber) {
+                    mainContent[youtubeOpenVideoByNumber - 1].querySelector("a").click();
                 }
             }
         } 

@@ -178,18 +178,18 @@ main .youtube-player-container .popular-query {
       -ms-flex-pack: center;
           justify-content: center;
   margin-top: 10%;
-  padding: 0% 5%;
+  padding: 0% 12%;
 }
 
 main .youtube-player-container .popular-query__item {
   font-size: 90%;
-  padding: 2%;
+  padding: 2.5%;
   margin: 1.5% 1%;
 }
 
 main .youtube-player-container .popular-query:nth-child(2n) {
   margin-top: 0%;
-  padding: 0% 15%;
+  padding: 0% 12%;
 }
 
 main .youtube-player-container .volume-container {
