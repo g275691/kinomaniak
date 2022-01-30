@@ -100,39 +100,44 @@ setInterval(async () => {
                 const videoSkipLeft = json[0].youtubeTimeLeft;
                 videoSkipLeft && (video.currentTime-=youtubeScrollTiming);
 
+                /**Subscribe */
+                try {
+                    const subscribeButton = document.querySelector("#subscribe-button.ytd-video-secondary-info-renderer").querySelector("tp-yt-paper-button");
+                    const subscribeAuthor = json[0].youtubeSubscribe;
+                    subscribeAuthor && !subscribeButton.hasAttribute("subscribed") ? (subscribeButton.click()) : "";
+                } catch (err) {}
+
+
+                /**Subscribe author video */
+                
+                try {
+                    const youtubeOpenVideoByAuthor = json[0].youtubeOpenVideoByAuthor;
+                    const authorVideos = `${document.querySelector("#movie_player").closest("#primary").querySelector(".ytd-channel-name").querySelector("a").href}/videos`;
+                    youtubeOpenVideoByAuthor && (window.open(authorVideos))
+                } catch (err) {}
+
             }
             /** Universal Commands on youtube*/
 
             /**Open video by number */
-            const isSubscription = /^https:..www.youtube.com.feed.subscriptions/i.test(window.location.href);
             const isSearchPage = /^https:..www.youtube.com.result/i.test(window.location.href);
             const isMainPage = /^https:..www.youtube.com.$/.test(window.location.href);
             let youtubeNumberVideo = Number(json[0].youtubeNumberVideo);
             let youtubeOpenVideoByNumber = Number(json[0].youtubeOpenVideoByNumber);
-            if(isSubscription) {
-                const contentId = document.querySelector("#contents");
+            let prevVideoByNumber = json[0].prevVideoByNumber;
+            let nextVideoByNumber = json[0].nextVideoByNumber;
 
-                if(youtubeNumberVideo) {
-                    contentId.querySelectorAll("img").forEach(el=>{el.style.marginTop="0px"; el.style.filter=""});
-                    contentId.querySelectorAll("img")[youtubeNumberVideo - 1].style.marginTop="30px";
-                    contentId.querySelectorAll("img")[youtubeNumberVideo - 1].style.filter="saturate(160)";
-                }
-                if(youtubeOpenVideoByNumber) {
-                    contentId.querySelectorAll("img")[youtubeOpenVideoByNumber - 1].click();
-                }
-            } 
             if(isSearchPage) {
                 const findQuery = document.querySelector(".style-scope ytd-section-list-renderer").querySelectorAll(".style-scope ytd-thumbnail");
                 if(youtubeNumberVideo) {
                     findQuery.forEach(el=>{el.style.marginTop="0px"; el.style.filter=""});
                     findQuery[youtubeNumberVideo - 1].style.marginTop="30px";
                     findQuery[youtubeNumberVideo - 1].style.filter="saturate(160)";
-                }
+                } 
                 if(youtubeOpenVideoByNumber) {
                     findQuery[youtubeOpenVideoByNumber - 1].querySelector("a").click();
                 }
-            }
-            if(isMainPage) {
+            } else if (isMainPage) {
                 console.log("ismain")
                 const mainContent = document.querySelectorAll("#content.style-scope ytd-rich-item-renderer");
                 if(youtubeNumberVideo) {
@@ -143,12 +148,27 @@ setInterval(async () => {
                 if(youtubeOpenVideoByNumber) {
                     mainContent[youtubeOpenVideoByNumber - 1].querySelector("a").click();
                 }
+            } else {
+                const contentId = document.querySelector("#contents");
+
+                if(youtubeNumberVideo) {
+                    contentId.querySelectorAll("img").forEach(el=>{el.style.marginTop="0px"; el.style.filter=""});
+                    contentId.querySelectorAll("img")[youtubeNumberVideo - 1].style.marginTop="30px";
+                    contentId.querySelectorAll("img")[youtubeNumberVideo - 1].style.filter="saturate(160)";
+                }
+                if(youtubeOpenVideoByNumber) {
+                    contentId.querySelectorAll("img")[youtubeOpenVideoByNumber - 1].click();
+                }
             }
         } 
         /**Commands for entire browser */
+
+        const browserReload = json[0].browserReload;
+        browserReload && (document.location.reload());
+
         const openNewVideo = json[0].youtubeOpenVideo;
         if(openNewVideo) {
-            window.open(`https://www.youtube.com/${openNewVideo}`); 
+            window.open(openNewVideo); 
         }  
 
         const scrollUp = json[0].scrollUp;

@@ -61,4 +61,8 @@ while count > -1:
         print("close")
     if computerDisable:
         collection.update_one({"base":"kinomaniak"}, {"$set": {"computerDisable": False}})
-        os.system('shutdown -s')
+        pyautogui.click(20, 1059)
+        time.sleep(3)
+        pyautogui.click(131, 981)
+        time.sleep(3)
+        pyautogui.click(986, 493)

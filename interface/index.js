@@ -56,22 +56,18 @@ timingButtons.forEach((button, index)=>{
 })
 
 const videoByNumber = document.querySelector(".video-by-time-container");
-const openVideoByNumber = document.querySelector(".video-by-time-container").querySelector(".close");
+const openVideoByNumber = document.querySelector(".close-select-video");
 const videoContainer = document.querySelector(".video-container");
 const findVideoInput = document.querySelector(".find-video__input")
 
 const setVideoByNumber = (query) => {
     videoByNumber.classList.remove('active');
-    videoContainer.classList.remove('active');
-    query.classList.remove('active');
     query.innerText="ВИДЕО ПО НОМЕРАМ";
     findVideoInput.placeholder = "Искать другое видео";
 }
 
 const hideVideoByNumber = (query) => {
     videoByNumber.classList.add('active');
-    videoContainer.classList.add('active');
-    query.classList.add('active');
     query.innerText="ЗАКРЫТЬ";
     findVideoInput.placeholder = "Искать по номеру";
 }
@@ -108,24 +104,38 @@ videoRect.forEach(rect=>{
     })
 });
 
-document.querySelectorAll(".popular-query__item").forEach(el=>{
+document.querySelectorAll(".popular-query__item").forEach((el,i)=>{
+    el.innerText = popularQuery[i].title;
     el.addEventListener("click", function() {
-        const youtubeVideo = `http://192.168.0.103:80/commandbase/command?youtubeOpenVideo=${el.dataset.url}`;
+        const youtubeVideo = `http://192.168.0.103:80/commandbase/command?youtubeOpenVideo=${popularQuery[i].url}`;
         console.log(youtubeVideo)
         fetch(youtubeVideo);
         openVideoByNumber.click()
     })
 })
 
+/**Youtube */
+
 clickToServer(".play-control__play", "youtubePlay");
 clickToServer(".volume-control__turn:nth-child(4)", "youtubeVolumeUp");
 clickToServer(".volume-control__turn:nth-child(2)", "youtubeVolumeDown");
-
 clickToServer(".play-control__left", "youtubeTimeLeft");
 clickToServer(".play-control__right", "youtubeTimeRight");
+clickToServer(".play-control__right", "youtubeTimeRight");
+clickToServer(".subscribe__action", "youtubeSubscribe");
+clickToServer(".subscribe__author-video", "youtubeOpenVideoByAuthor");
+clickToServer(".subscribe__author-video", "nextVideoByNumber");
+clickToServer(".video-nav__right", "prevVideoByNumber");
+
+/**Universal - for Browser */
 
 clickToServer(".scroll-down", "scrollUp");
 clickToServer(".scroll-up", "scrollDown");
+clickToServer(".tab-control__refresh", "browserReload");
+
+/**Universal - for comp */
+
+clickToServer(".general-control__turn-off", "computerDisable")
 
 // /**python */
 clickToServer(".zoom-plus", "browserZoomPlus");

@@ -92,6 +92,10 @@ main .youtube-player-container .zoom-plus, main .youtube-player-container .zoom-
   font-size: 150%;
 }
 
+main .youtube-player-container .zoom-minus {
+  margin-top: 5%;
+}
+
 main .youtube-player-container .zoom-hint {
   position: fixed;
   font-size: 100%;
@@ -125,6 +129,10 @@ main .youtube-player-container .scroll-down, main .youtube-player-container .scr
 main .youtube-player-container .scroll-up {
   -webkit-transform: rotateZ(180deg);
           transform: rotateZ(180deg);
+}
+
+main .youtube-player-container .scroll-down {
+  margin-top: 2%;
 }
 
 main .youtube-player-container .play-control {
@@ -178,7 +186,7 @@ main .youtube-player-container .popular-query {
       -ms-flex-pack: center;
           justify-content: center;
   margin-top: 10%;
-  padding: 0% 12%;
+  padding: 0% 8%;
 }
 
 main .youtube-player-container .popular-query__item {
@@ -187,9 +195,15 @@ main .youtube-player-container .popular-query__item {
   margin: 1.5% 1%;
 }
 
+main .youtube-player-container .popular-query__edit {
+  padding: 3% 4%;
+  background: #bd1515;
+  margin: 1.5% 3%;
+}
+
 main .youtube-player-container .popular-query:nth-child(2n) {
   margin-top: 0%;
-  padding: 0% 12%;
+  padding: 0% 14%;
 }
 
 main .youtube-player-container .volume-container {
@@ -204,7 +218,8 @@ main .youtube-player-container .volume-container .volume-control {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background: black;
+  background-image: url("../img/scale_volume2.png");
+  background-size: contain;
   border-radius: 15%;
 }
 
@@ -282,17 +297,44 @@ main .general-container .general-control .tab-control {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  margin-top: 0%;
+  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 10%;
   font-size: 500%;
 }
 
+main .general-container .general-control .tab-control__left, main .general-container .general-control .tab-control__right {
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 50px;
+  background-image: url("../img/arrow.png");
+}
+
+main .general-container .general-control .tab-control__left {
+  -webkit-transform: rotateZ(180deg);
+          transform: rotateZ(180deg);
+}
+
 main .general-container .general-control .tab-control__close {
-  padding: 0% 2%;
-  font-weight: bold;
-  padding-top: 8%;
+  background-image: url("../img/cancel.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 50px;
+}
+
+main .general-container .general-control .tab-control__refresh {
+  background-image: url("../img/refresh-page.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 55px;
+  height: 55px;
 }
 
 main .general-container .general-control .tab-control * {
@@ -300,7 +342,7 @@ main .general-container .general-control .tab-control * {
 }
 
 main .general-container .general-control__turn-off {
-  background-image: url("../img/power.png");
+  background-image: url("../img/powerOFF.png");
   background-size: contain;
   background-repeat: no-repeat;
   width: 100px;
@@ -410,6 +452,7 @@ main .youtube-options-container .hr {
 }
 
 main .video-by-time-container {
+  position: fixed;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -422,13 +465,18 @@ main .video-by-time-container {
           align-items: center;
   width: 98%;
   height: 5%;
+  opacity: 0;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  pointer-events: none;
 }
 
 main .video-by-time-container.active {
-  position: fixed;
+  opacity: 1;
   top: 22%;
   background: white;
-  height: 90%;
+  height: 72%;
+  pointer-events: all;
 }
 
 main .video-by-time-container .video-container {
@@ -444,14 +492,6 @@ main .video-by-time-container .video-container {
       -ms-flex-pack: justify;
           justify-content: space-between;
   margin-top: 3%;
-  display: none;
-}
-
-main .video-by-time-container .video-container.active {
-  opacity: 1;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
 }
 
 main .video-by-time-container .video-container__item {
@@ -470,24 +510,66 @@ main .video-by-time-container .video-container__item:active {
   background: #303030;
 }
 
-main .video-by-time-container .close {
+main .video-by-time-container .video-nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 5%;
+  width: 100%;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+main .video-by-time-container .video-nav__left, main .video-by-time-container .video-nav__right {
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 50px;
+  background-image: url("../img/arrow2.png");
+}
+
+main .video-by-time-container .video-nav__left {
+  -webkit-transform: rotateZ(180deg);
+          transform: rotateZ(180deg);
+}
+
+main .video-by-time-container .subscribe {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 5%;
+  width: 100%;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+main .video-by-time-container .subscribe__action {
+  padding: 4%;
+  background: #bd1515;
+}
+
+main .video-by-time-container .subscribe__author-video {
+  padding: 4%;
+}
+
+main .close-select-video {
   font-size: 130%;
   background: black;
   border-top-left-radius: 10%;
   border-top-right-radius: 10%;
   color: white;
   padding-top: 3%;
-  padding-bottom: 10%;
+  padding-bottom: 4%;
   margin-bottom: 0%;
   margin-top: 3%;
   width: 100%;
   text-align: center;
+  z-index: 3;
 }
 
-main .video-by-time-container .close.active {
-  margin-top: 5%;
+main .close-select-video.active {
+  margin-top: auto;
   border-radius: 20%;
-  padding-bottom: 4%;
 }
 
 .volume-indicator {

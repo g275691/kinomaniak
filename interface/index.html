@@ -44,17 +44,18 @@
             </div>
             <!-- <div class="popular-hint">Избранные ссылки</div> -->
             <div class="popular-query">
-                <button data-url="feed/subscriptions" class="popular-query__item button-style">ПОДПИСКИ
-                <button data-url="c/tvrain/videos" class="popular-query__item button-style">ДОЖДЬ
-                <button data-url="c/StopGameRuGames/videos" class="popular-query__item button-style">STOPGAME
+                <button class="popular-query__item button-style">
+                <button class="popular-query__item button-style">
+                <button class="popular-query__item button-style">
             </div>
             <button class="button-style zoom-minus">⠀–⠀</button>
             <button class="button-style scroll-down">↓</button>
             <div class="popular-query">
-                <button data-url="feed/explore" class="popular-query__item button-style">ENGLISH
-                <button data-url="c/tvrain/videos" class="popular-query__item button-style">FITNESS
-                <button data-url="c/ШефповарВасилийЕмельяненко/videos" class="popular-query__item button-style">ПОВАР ЕМЕЛЬЯНЕНКО
-                <button data-url="user/wayofthechampion/videos" class="popular-query__item button-style">БУХАРОГ
+                <button class="popular-query__item button-style">
+                <button class="button-style popular-query__edit">EDIT
+                <button class="popular-query__item button-style">
+                <button class="popular-query__item button-style">
+                <button class="popular-query__item button-style">
             </div>
             <div class="volume-container">
                 <div class="volume-control">
@@ -88,14 +89,15 @@
                 <h2>БРАУЗЕР</h2>
                 <h3>Управление вкладками</h3>
                 <div class="tab-control">
-                    <div class="tab-control__left">◀</div>
-                    <div class="tab-control__close">×</div>
-                    <div class="tab-control__right">▶</div>
+                    <div class="tab-control__left"></div>
+                    <div class="tab-control__close"></div>
+                    <div class="tab-control__refresh"></div>
+                    <div class="tab-control__right"></div>
                 </div>
                 <div class="hr"></div>
-                <!-- <h2>КОМПЬЮТЕР</h2>
+                <h2>КОМПЬЮТЕР</h2>
                 <h3>Выкл</h3>
-                <div class="general-control__turn-off button-style"></div> -->
+                <div class="general-control__turn-off"></div>
             </div>
         </div>
         <div class="video-by-time-container">
@@ -116,11 +118,19 @@
                 <button class="video-container__item">14</button>
                 <button class="video-container__item">15</button>
             </div>
-            <button class="close">ВИДЕО ПО НОМЕРАМ</button>
+            <div class="video-nav">
+                <div class="video-nav__left"></div>
+                <div class="video-nav__right"></div>
+            </div>
+            <div class="subscribe">
+                <button class="subscribe__action button-style">ПОДПИСАТЬСЯ</button>
+                <button class="subscribe__author-video button-style">В ВИДЕО АВТОРА</button>
+            </div>
+            
         </div>
-
+        <button class="close-select-video">ВЫБОР ВИДЕО</button>
     </main>
-
+    <script src="src/data/popularQuery.js"></script>
     <script src="index.js"></script>
     <script src="draft/draft.js"></script>
 </body>

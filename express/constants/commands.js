@@ -14,12 +14,16 @@ const commands = [
         youtubeSubcriptions: false,
         youtubeNumberVideo: false,
         youtubeOpenVideoByNumber: false,
-    
+        youtubeSubscribe: false,
+        youtubeOpenVideoByAuthor: false,
+        nextVideoByNumber: false,
+        prevVideoByNumber: false,
         /**VK-commands*/
 
         /**Browser-commands */
         scrollUp: false,
         scrollDown: false,
+        browserReload: false,
         /**Computer-commands*/
         isCompUnlock: false
     }
