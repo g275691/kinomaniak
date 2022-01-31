@@ -48,7 +48,7 @@ main .button-style {
 }
 
 main .button-style:active {
-  background: red;
+  background: #bd1515;
 }
 
 main .youtube-player-container .find-video {
@@ -93,7 +93,7 @@ main .youtube-player-container .zoom-plus, main .youtube-player-container .zoom-
 }
 
 main .youtube-player-container .zoom-minus {
-  margin-top: 5%;
+  margin-top: 10%;
 }
 
 main .youtube-player-container .zoom-hint {
@@ -116,6 +116,7 @@ main .youtube-player-container .scroll-hint {
           transform: rotateZ(90deg);
   -webkit-transform-origin: right center;
           transform-origin: right center;
+  z-index: 2;
 }
 
 main .youtube-player-container .scroll-down, main .youtube-player-container .scroll-up {
@@ -124,6 +125,7 @@ main .youtube-player-container .scroll-down, main .youtube-player-container .scr
   font-size: 240%;
   right: 1%;
   padding: 2% 3%;
+  z-index: 2;
 }
 
 main .youtube-player-container .scroll-up {
@@ -132,7 +134,7 @@ main .youtube-player-container .scroll-up {
 }
 
 main .youtube-player-container .scroll-down {
-  margin-top: 2%;
+  margin-top: 6%;
 }
 
 main .youtube-player-container .play-control {
@@ -186,24 +188,29 @@ main .youtube-player-container .popular-query {
       -ms-flex-pack: center;
           justify-content: center;
   margin-top: 10%;
+  margin-bottom: 1%;
   padding: 0% 8%;
 }
 
 main .youtube-player-container .popular-query__item {
   font-size: 90%;
   padding: 2.5%;
-  margin: 1.5% 1%;
+  margin: 2% 1%;
 }
 
 main .youtube-player-container .popular-query__edit {
-  padding: 3% 4%;
+  padding: 4% 4%;
   background: #bd1515;
-  margin: 1.5% 3%;
+  margin-left: 5%;
+  margin-right: 5%;
+  border-radius: 30%;
 }
 
 main .youtube-player-container .popular-query:nth-child(2n) {
   margin-top: 0%;
-  padding: 0% 14%;
+  padding: 0% 15%;
+  overflow-y: scroll;
+  height: 120px;
 }
 
 main .youtube-player-container .volume-container {
@@ -218,7 +225,7 @@ main .youtube-player-container .volume-container .volume-control {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-image: url("../img/scale_volume2.png");
+  background-image: url("../img/scale_volume5.png");
   background-size: contain;
   border-radius: 15%;
 }
@@ -261,7 +268,7 @@ main .general-container {
   pointer-events: none;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-  border: 2px solid red;
+  border: 2px solid #bd1515;
   z-index: 99;
 }
 
@@ -367,7 +374,7 @@ main .youtube-options-container {
   pointer-events: none;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-  border: 2px solid red;
+  border: 2px solid #bd1515;
   z-index: 99;
 }
 
@@ -460,14 +467,11 @@ main .video-by-time-container {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 98%;
+  width: 100%;
   height: 5%;
   opacity: 0;
-  -webkit-transition: all 0.2s ease-in;
-  transition: all 0.2s ease-in;
+  -webkit-transition: opacity 0.2s ease-in;
+  transition: opacity 0.2s ease-in;
   pointer-events: none;
 }
 
@@ -492,6 +496,7 @@ main .video-by-time-container .video-container {
       -ms-flex-pack: justify;
           justify-content: space-between;
   margin-top: 3%;
+  width: 83%;
 }
 
 main .video-by-time-container .video-container__item {
@@ -499,11 +504,15 @@ main .video-by-time-container .video-container__item {
   font-size: 200%;
   -ms-flex-preferred-size: 18%;
       flex-basis: 18%;
-  padding: 3% 0%;
+  padding: 2% 0%;
   background: black;
   color: white;
   margin-top: 2%;
   opacity: 1;
+}
+
+main .video-by-time-container .video-container__item.active {
+  background: #bd1515;
 }
 
 main .video-by-time-container .video-container__item:active {
@@ -515,7 +524,7 @@ main .video-by-time-container .video-nav {
   display: -ms-flexbox;
   display: flex;
   margin-top: 5%;
-  width: 100%;
+  width: 83%;
   -ms-flex-pack: distribute;
       justify-content: space-around;
 }
@@ -528,6 +537,10 @@ main .video-by-time-container .video-nav__left, main .video-by-time-container .v
   background-image: url("../img/arrow2.png");
 }
 
+main .video-by-time-container .video-nav__left:active, main .video-by-time-container .video-nav__right:active {
+  opacity: 0.8;
+}
+
 main .video-by-time-container .video-nav__left {
   -webkit-transform: rotateZ(180deg);
           transform: rotateZ(180deg);
@@ -538,7 +551,7 @@ main .video-by-time-container .subscribe {
   display: -ms-flexbox;
   display: flex;
   margin-top: 5%;
-  width: 100%;
+  width: 83%;
   -ms-flex-pack: distribute;
       justify-content: space-around;
 }

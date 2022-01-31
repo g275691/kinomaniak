@@ -35,7 +35,7 @@ setInterval(async () => {
         if(!json) return;
         /**Youtube commands */
         const isYouTube = /^https:..www.youtube.com/.test(window.location.href);
-        if(isYouTube) {
+        // if(isYouTube) {
             /**Commands with open player */
             if(document.querySelector("#movie_player")) {
                 const video = document.querySelector("#movie_player").querySelector("video");
@@ -128,19 +128,19 @@ setInterval(async () => {
             let nextVideoByNumber = json[0].nextVideoByNumber;
 
             if(isSearchPage) {
-                const findQuery = document.querySelector(".style-scope ytd-section-list-renderer").querySelectorAll(".style-scope ytd-thumbnail");
-                if(youtubeNumberVideo) {
+                const findQuery = document.querySelector("#primary.ytd-two-column-search-results-renderer").querySelectorAll("#thumbnail");
+                if(youtubeNumberVideo || prevVideoByNumber || nextVideoByNumber) {
                     findQuery.forEach(el=>{el.style.marginTop="0px"; el.style.filter=""});
                     findQuery[youtubeNumberVideo - 1].style.marginTop="30px";
                     findQuery[youtubeNumberVideo - 1].style.filter="saturate(160)";
-                } 
+                }
                 if(youtubeOpenVideoByNumber) {
                     findQuery[youtubeOpenVideoByNumber - 1].querySelector("a").click();
                 }
+
             } else if (isMainPage) {
-                console.log("ismain")
                 const mainContent = document.querySelectorAll("#content.style-scope ytd-rich-item-renderer");
-                if(youtubeNumberVideo) {
+                if(youtubeNumberVideo || prevVideoByNumber || nextVideoByNumber) {
                     mainContent.forEach(el=>{el.style.marginTop="0px"; el.style.filter=""});
                     mainContent[youtubeNumberVideo - 1].style.marginTop="30px";
                     mainContent[youtubeNumberVideo - 1].style.filter="saturate(160)";
@@ -149,9 +149,9 @@ setInterval(async () => {
                     mainContent[youtubeOpenVideoByNumber - 1].querySelector("a").click();
                 }
             } else {
-                const contentId = document.querySelector("#contents");
+                const contentId = document.querySelector("#contents.ytd-section-list-renderer");
 
-                if(youtubeNumberVideo) {
+                if(youtubeNumberVideo || prevVideoByNumber || nextVideoByNumber) {
                     contentId.querySelectorAll("img").forEach(el=>{el.style.marginTop="0px"; el.style.filter=""});
                     contentId.querySelectorAll("img")[youtubeNumberVideo - 1].style.marginTop="30px";
                     contentId.querySelectorAll("img")[youtubeNumberVideo - 1].style.filter="saturate(160)";
@@ -160,7 +160,7 @@ setInterval(async () => {
                     contentId.querySelectorAll("img")[youtubeOpenVideoByNumber - 1].click();
                 }
             }
-        } 
+        // } 
         /**Commands for entire browser */
 
         const browserReload = json[0].browserReload;

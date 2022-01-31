@@ -94,6 +94,19 @@ findLupa.addEventListener("click", function() {
 const volumeItems = document.querySelectorAll(".volume-scale__item");
 volumeItems.forEach((el,i)=>i<=3&&(el.style.opacity=1))
 
+document.querySelectorAll(".popular-query__item").forEach((el,i)=>{
+    popularQuery[i] 
+    ? el.innerText = popularQuery[i].title
+    : el.innerText = "noname"
+    
+    el.addEventListener("click", function() {
+
+        const youtubeVideo = `http://192.168.0.103:80/commandbase/command?youtubeOpenVideo=${popularQuery[i].url}`;
+        console.log(youtubeVideo)
+        fetch(youtubeVideo);
+        openVideoByNumber.click()
+    })
+})
 
 const videoRect = document.querySelectorAll(".video-container__item");
 videoRect.forEach(rect=>{
@@ -101,17 +114,40 @@ videoRect.forEach(rect=>{
         const videoNumber = this.innerText;
         findVideoInput.value = videoNumber;
         fetch(`http://192.168.0.103:80/commandbase/command?youtubeNumberVideo=${videoNumber}`);
+        videoRect.forEach(el=>el.classList.remove('active'));
+        rect.classList.add('active');
     })
 });
 
-document.querySelectorAll(".popular-query__item").forEach((el,i)=>{
-    el.innerText = popularQuery[i].title;
-    el.addEventListener("click", function() {
-        const youtubeVideo = `http://192.168.0.103:80/commandbase/command?youtubeOpenVideo=${popularQuery[i].url}`;
-        console.log(youtubeVideo)
-        fetch(youtubeVideo);
-        openVideoByNumber.click()
+const nextVideoByNumber = document.querySelector(".video-nav__right");
+const prevVideoByNumber = document.querySelector(".video-nav__left");
+
+nextVideoByNumber.addEventListener("click", function() {
+    findVideoInput.value = Number(findVideoInput.value) + 1;
+    const videoNumber = findVideoInput.value;
+    videoRect.forEach((el, i)=>{
+        el.classList.remove('active');
+        videoRect[videoNumber - 1].classList.add('active')
     })
+    fetch(`http://192.168.0.103:80/commandbase/command?youtubeNumberVideo=${videoNumber}`);
+})
+
+prevVideoByNumber.addEventListener("click", function() {
+    findVideoInput.value = Number(findVideoInput.value) - 1;
+    const videoNumber = findVideoInput.value;
+    videoRect.forEach((el, i)=>{
+        el.classList.remove('active');
+        videoRect[videoNumber - 1].classList.add('active')
+    })
+    fetch(`http://192.168.0.103:80/commandbase/command?youtubeNumberVideo=${videoNumber}`);
+})
+
+findVideoInput.addEventListener("focus", function() {
+    document.querySelector(".video-by-time-container.active").style.top="40%"
+})
+
+findVideoInput.addEventListener("blur", function() {
+    document.querySelector(".video-by-time-container.active").style.top="22%"
 })
 
 /**Youtube */
@@ -124,8 +160,6 @@ clickToServer(".play-control__right", "youtubeTimeRight");
 clickToServer(".play-control__right", "youtubeTimeRight");
 clickToServer(".subscribe__action", "youtubeSubscribe");
 clickToServer(".subscribe__author-video", "youtubeOpenVideoByAuthor");
-clickToServer(".subscribe__author-video", "nextVideoByNumber");
-clickToServer(".video-nav__right", "prevVideoByNumber");
 
 /**Universal - for Browser */
 
