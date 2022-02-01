@@ -18,6 +18,7 @@ const commands = [
         youtubeOpenVideoByAuthor: false,
         nextVideoByNumber: false,
         prevVideoByNumber: false,
+        getUrl: false,
         /**VK-commands*/
 
         /**Browser-commands */

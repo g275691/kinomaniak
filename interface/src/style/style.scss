@@ -1,18 +1,12 @@
 @import 'font-rule.scss';
 
 * {
-    margin: 0px;
+    
 }
 
 main {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    margin: 1%;
     .navbar {
         display: flex;
-        justify-content: space-between;
-
         &__youtube-main {
             background-image: url("../img/youtube-logo-options.png");
             background-size: contain;
@@ -22,8 +16,43 @@ main {
                 filter:opacity(0.7)
             }
         }
+        &__player {
+            background-image: url("../img/nav-player.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 93%;
+            display: flex;
+            justify-content: center;
+        }
         &__main {
-            width: 50%;
+        }
+    }
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin: 1%;
+    .find-video {
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+        width: 100%;
+        margin-top: 10%;
+        input {
+            width: 100%;
+            padding: 3% 2%;
+            border-radius: 5%;
+            font-size: 130%;
+        }
+        &__lupa {
+            margin-top: 1%;
+            margin-left: 5%;
+            background-image: url("../img/lupa.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 10%;
+            &:active {
+                margin-top: 10px;
+            }
         }
     }
     .button-style {
@@ -36,7 +65,50 @@ main {
             background: $red;
         }
     }
+
+        .zoom-buttons, .scroll-buttons {
+            z-index: 99;
+            height: 55%;
+            position: fixed;
+            display: flex;
+            top: 25%;
+            flex-direction: column;
+        }
+        .zoom-buttons {
+            left: 1%;
+        }
+        .scroll-buttons {
+            left: 87%;
+            zoom: 1.8;
+            height: 57%;
+        }
+        .zoom-plus, .zoom-minus {
+            height: 12%;
+        }
+        .zoom-minus {
+            margin-top: auto;
+        }
+
+        .scroll-down, .scroll-up {
+            height: 19%;
+        }
+        .scroll-up {
+            transform: rotateZ(180deg);
+        }
+        .scroll-down {
+            margin-top: auto;
+        }
     .youtube-player-container {
+        height: 0;
+        opacity: 0;
+        transition: opacity ease-out 0.2s;
+        pointer-events: none;
+        &.active {
+            height: 100%;
+            opacity: 1;
+            margin-top: 15%;
+            pointer-events: all;
+        }
         .find-video {
             display: flex;
             justify-content: space-between;
@@ -63,53 +135,13 @@ main {
                 }
             }
         }
-        .zoom-plus, .zoom-minus {
-            position: fixed;
-            margin-top: 8%;
-            padding: 1% 0%;
-            font-size: 150%;
-        }
-        .zoom-minus {
-            margin-top: 10%;
-        }
-        .zoom-hint {
-            position: fixed;
-            font-size: 100%;
-            margin-top: 60%;
-            transform: rotateZ(-90deg);
-            transform-origin: left center;
-            margin-left: 2%;
-        }
-        .scroll-hint {
-            position: fixed;
-            right: 3%;
-            font-size: 100%;
-            margin-top: 56%;
-            transform: rotateZ(90deg);
-            transform-origin: right center;
-            z-index: 2;
-            
-        }
-        .scroll-down, .scroll-up {
-            position: fixed;
-            margin-top: 4%;
-            font-size: 240%;
-            right: 1%;
-            padding: 2% 3%;
-            z-index: 2;
-        }
-        .scroll-up {
-            transform: rotateZ(180deg);
-        }
-        .scroll-down {
-            margin-top: 6%;
-        }
+        
         .play-control {
             display: flex;
             justify-content: space-around;
             align-items: center;
             width: 100%;
-            margin-top: 25%;
+            margin-top: 15%;
             zoom: 0.45;
             &__left, &__right {
                 background-image: url("../img/peremotka.png");
@@ -138,7 +170,7 @@ main {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            margin-top: 10%;
+            margin-top: 7%;
             margin-bottom: 1%;
             padding: 0% 8%;
             &__item {
@@ -148,20 +180,18 @@ main {
                 margin: 2% 1%;
             }
             &__edit {
-                padding: 4% 4%;
+                padding: 4% 6%;
                 background: $red;
-                margin-left: 5%;
-                margin-right: 5%;
+                margin-left: 3%;
+                margin-right: 3%;
                 border-radius: 30%;
             }
-
-            
-        }
-        .popular-query:nth-child(2n) {
-            margin-top: 0%;
-            padding: 0% 15%;
-            overflow-y: scroll;
-            height: 120px;
+            &:nth-child(3) {
+                padding: 0% 16%;
+                margin-top: 0%;
+                height: 110px;
+                overflow-y: scroll;
+            } 
         }
 
         .volume-container {
@@ -202,17 +232,19 @@ main {
         }
     }
     .general-container {
-        position: fixed;
         background: white;
-        width: 97%;
-        height: 89%;
-        top: 10%;
+        width: 99%;
         opacity: 0;
         pointer-events: none;
         transition: all 0.3s ease-in-out;
-        border: 2px solid $red;
-        z-index: 99;
+        z-index: 2;
+        height: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         &.active {
+            height: 100%;
+
             opacity: 1;
             pointer-events: all;
         }
@@ -221,13 +253,13 @@ main {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 1%;
             
+            width: $widthOptions;
             h2 {
-                margin-top: 3%;
+                margin-top: 7%;
             }
             h3 {
-                margin-top: 1%;
+                margin-top: -2%;
                 margin-left: 1%;
             }
             .tab-control {
@@ -235,13 +267,12 @@ main {
                 width: 100%;
                 justify-content: space-between;
                 align-items: center;
-                margin-top: 10%;
-                font-size: 500%;
+                margin-top: 5%;
                 &__left, &__right {
                     background-size: contain;
                     background-repeat: no-repeat;
-                    width: 50px;
-                    height: 50px;
+                    width: 40px;
+                    height: 40px;
                     background-image: url("../img/arrow.png");
                 }
                 &__left {
@@ -251,15 +282,15 @@ main {
                     background-image: url("../img/cancel.png");
                     background-size: contain;
                     background-repeat: no-repeat;
-                    width: 50px;
-                    height: 50px;
+                    width: 40px;
+                    height: 40px;
                 }
                 &__refresh {
                     background-image: url("../img/refresh-page.png");
                     background-size: contain;
                     background-repeat: no-repeat;
-                    width: 55px;
-                    height: 55px;
+                    width: 50px;
+                    height: 50px;
                 }
                 & * {
                     cursor: pointer;
@@ -271,7 +302,7 @@ main {
                 background-repeat: no-repeat;
                 width: 100px;
                 height: 100px;
-                margin-top: 5%;
+                margin-top: 1%;
 
             }
         }
@@ -283,91 +314,85 @@ main {
         margin-top: 10%;
     }
     .youtube-options-container {
-        position: fixed;
         background: white;
-        width: 97%;
-        height: 89%;
-        top: 10%;
+        width: 99%;
+        height: 500px;
         opacity: 0;
         pointer-events: none;
         transition: all 0.3s ease-in-out;
-        border: 2px solid $red;
-        z-index: 99;
+        z-index: 2;
+        height: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         &.active {
+            height: 100%;
             opacity: 1;
             pointer-events: all;
         }
         .youtube-options-control {
+            width: $widthOptions;
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 3%;
+            margin-top: -1%;
             margin-left: 2%;
             margin-right: 2%;
             h3 {
-                margin-top: 4%;
+                margin-top:3%;
+                width: 120%;
+                text-align: center;
             }
             .list-value {
                 display: flex;
-                width: 100%;
-                margin-top: 3%;
-                font-size: 150%;
-                align-items: center;
-                
-                &__item {
-                    margin-right: 9%;
-                    margin-left: 1%;
-                }
-            }
-            .find-video {
-                display: flex;
                 justify-content: space-between;
-                align-content: center;
+                margin-top: 1%;
+                font-size: 150%;
                 width: 100%;
-                margin-top: 5%;
-                input {
-                    width: 100%;
-                    padding: 3% 2%;
-                    border-radius: 5%;
-                    font-size: 130%;
+                &__youtube, &__google {
+
                 }
-                &__lupa {
-                    margin-top: 1%;
-                    margin-left: 5%;
-                    background-image: url("../img/lupa.png");
-                    background-size: contain;
-                    background-repeat: no-repeat;
-                    width: 10%;
+                & * {
+                    font-size: 90%;
+                }
+                &__time {
+                    width: 40px;
+                    height: 40px;
+                   
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: black;
+                    color: white;
                     &:active {
-                        margin-top: 10px;
+                        background: $red;
                     }
                 }
             }
 
-
         }
         .hr {
-            margin-top: 5%;
+            margin-top: 6%;
             width: 100%;
         }
 
 
     }
     .video-by-time-container {
-        position: fixed;
         display: flex;
         flex-direction: column;
-        width: 100%;
-        height: 5%;
+      
+        height: 0;
         opacity: 0;
         transition: opacity 0.2s ease-in;
         pointer-events: none;
-
+        align-items: center;
         &.active {
             opacity: 1;
-            top: 22%;
             background: white;
-            height: 72%;
+            width: 100%;  
+            height: 90%;
             pointer-events: all;
         }
         .video-container {
@@ -376,11 +401,11 @@ main {
             align-items: center;
             justify-content: space-between;
             margin-top: 3%;
-            width: 83%;
+            width: 70%;
             &__item {
                 text-align: center;
                 font-size: 200%;
-                flex-basis: 18%;
+                flex-basis: 22%;
                 padding: 2% 0%;
                 background: black;
                 color: white;
@@ -398,7 +423,7 @@ main {
         .video-nav {
             display: flex;
             margin-top: 5%;
-            width: 83%;
+            width: 73%;
             justify-content: space-around;
             &__left, &__right {
                 background-size: contain;
@@ -416,36 +441,64 @@ main {
         }
         .subscribe {
             display: flex;
+            flex-direction: column;
             margin-top: 5%;
-            width: 83%;
+            width: 50%;
             justify-content: space-around;
+            
             &__action {
                 padding: 4%;
                 background: $red;
+                border-radius: 8px;
             }
             &__author-video {
+                margin-top: 4%;
                 padding: 4%;
+                border-radius: 5px;
             }
         }
 
     }
     .close-select-video {
+        position: fixed;
+        top: 96%;
+        height: 7%;
         font-size: 130%;
         background: black;
         border-top-left-radius: 10%;
         border-top-right-radius: 10%;
         color: white;
-        padding-top: 3%;
-        padding-bottom: 4%;
-        margin-bottom: 0%;
-        margin-top: 3%;
-        width: 100%;
+        
+        width: 93%;
         text-align: center;
         z-index: 3;
+        margin-top: -5%;
         &.active {
-            margin-top: auto;
+            z-index: initial;
             border-radius: 20%;
             
+        }
+    }
+}
+.popular-edit-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5%;
+    h3 {
+        margin-top: 1%;
+    }
+    .popular-address {
+        display: flex;
+        margin-left: 1.5%;
+        margin-bottom: 2.5%;
+        input {
+            font-size: 120%;
+            margin-right: 1%;
+            border-radius: 5%;
+        }        
+        .get-url {
+            padding: 0% 4%;
         }
     }
 }

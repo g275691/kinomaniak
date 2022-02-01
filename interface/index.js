@@ -10,6 +10,8 @@ const getBase = async () => {
     return json;
 }
 
+const selectedMenu = "youtube-player-container";
+
 // const playController = document.querySelector(".play-control__play");
 // playController.addEventListener("click", async function() { 
 //     const json = await getBase();
@@ -21,30 +23,30 @@ const getBase = async () => {
 
 const openGeneral = document.querySelector(".navbar__main");
 const generalCommand = document.querySelector(".general-container");
-openGeneral.addEventListener("click", function() { 
-    if(generalCommand.classList.contains('active')) {
-        generalCommand.classList.remove('active');
-        setVideoByNumber(openVideoByNumber)
-    } else {
-        generalCommand.classList.add('active');
-        youtubeQuery.classList.remove('active');
+// openGeneral.addEventListener("click", function() { 
+//     if(generalCommand.classList.contains('active')) {
+//         generalCommand.classList.remove('active');
+//         setVideoByNumber(openVideoByNumber)
+//     } else {
+//         generalCommand.classList.add('active');
+//         youtubeQuery.classList.remove('active');
         
-    }
-})
+//     }
+// })
 
 const openYoutubeOptions = document.querySelector(".navbar__youtube-main");
 const youtubeQuery = document.querySelector(".youtube-options-container");
 
-openYoutubeOptions.addEventListener("click", function() { 
-    if(youtubeQuery.classList.contains('active')) {
-        youtubeQuery.classList.remove('active');
-        setVideoByNumber(openVideoByNumber)
-    } else {
-        youtubeQuery.classList.add('active');
-        generalCommand.classList.remove('active');
+// openYoutubeOptions.addEventListener("click", function() { 
+//     if(youtubeQuery.classList.contains('active')) {
+//         youtubeQuery.classList.remove('active');
+//         setVideoByNumber(openVideoByNumber)
+//     } else {
+//         youtubeQuery.classList.add('active');
+//         generalCommand.classList.remove('active');
         
-    }
-})
+//     }
+// })
 
 const timingButtons = document.querySelectorAll(".list-value__item");
 const timingValues = document.querySelectorAll(".list-value__time");
@@ -60,23 +62,23 @@ const openVideoByNumber = document.querySelector(".close-select-video");
 const videoContainer = document.querySelector(".video-container");
 const findVideoInput = document.querySelector(".find-video__input")
 
-const setVideoByNumber = (query) => {
-    videoByNumber.classList.remove('active');
-    query.innerText="ВИДЕО ПО НОМЕРАМ";
-    findVideoInput.placeholder = "Искать другое видео";
-}
+// const setVideoByNumber = (query) => {
+//     videoByNumber.classList.remove('active');
+//     query.innerText="ВИДЕО ПО НОМЕРАМ";
+//     findVideoInput.placeholder = "Искать другое видео";
+// }
 
-const hideVideoByNumber = (query) => {
-    videoByNumber.classList.add('active');
-    query.innerText="ЗАКРЫТЬ";
-    findVideoInput.placeholder = "Искать по номеру";
-}
+// const hideVideoByNumber = (query) => {
+//     videoByNumber.classList.add('active');
+//     query.innerText="ЗАКРЫТЬ";
+//     findVideoInput.placeholder = "Искать по номеру";
+// }
 
-openVideoByNumber.addEventListener("click", function() {
-    videoByNumber.classList.contains('active')
-    ? setVideoByNumber(this)
-    : hideVideoByNumber(this)
-})
+// openVideoByNumber.addEventListener("click", function() {
+//     videoByNumber.classList.contains('active')
+//     ? setVideoByNumber(this)
+//     : hideVideoByNumber(this)
+// })
 
 const findLupa = document.querySelector(".find-video").querySelector(".find-video__lupa");
 findLupa.addEventListener("click", function() { 
@@ -142,12 +144,46 @@ prevVideoByNumber.addEventListener("click", function() {
     fetch(`http://192.168.0.103:80/commandbase/command?youtubeNumberVideo=${videoNumber}`);
 })
 
-findVideoInput.addEventListener("focus", function() {
-    document.querySelector(".video-by-time-container.active").style.top="40%"
-})
+const containers = [
+    ".youtube-options-container", 
+    ".youtube-player-container", 
+    ".general-container", 
+    ".popular-edit-container",
+    ".video-by-time-container" 
+]
 
-findVideoInput.addEventListener("blur", function() {
-    document.querySelector(".video-by-time-container.active").style.top="22%"
+const hideAllContainers = () => {
+    containers.forEach((el,i) => {
+        document.querySelectorAll(".activate-button")[i].addEventListener("click", function() {
+            if(document.querySelector(el).classList.contains('active')) {
+                containers.map(el=>document.querySelector(el).classList.remove('active'));
+                document.querySelector(el).classList.remove('active');
+                document.querySelector(".youtube-player-container").classList.add("active");
+            } else {
+                containers.map(el=>document.querySelector(el).classList.remove('active'));
+                document.querySelector(el).classList.add('active');
+            }
+        })
+    })
+}
+
+hideAllContainers()
+
+const popularAddresses = document.querySelectorAll(".popular-address");
+// const popularAddressesInput = popularAddresses.querySelectorAll("input");
+// const popularAddressesButton = popularAddresses.querySelectorAll("button");
+
+popularAddresses.forEach((el,i)=>{
+    const inputValue = (popularQuery[i+2] ? popularQuery[i+2].title : "")
+    el.querySelector("input").value = inputValue;
+    
+    const getUrl = el.querySelector("button");
+    getUrl.addEventListener("click", function() {
+        const currentInput = document.querySelectorAll(".popular-address")[i].querySelector("input").value
+        console.log(currentInput)
+        fetch(`http://192.168.0.103:80/commandbase/command?getUrl=${i}${currentInput}`)
+    })
+    
 })
 
 /**Youtube */

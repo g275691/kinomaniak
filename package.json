@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "express": "cd express & node index.js"
+    "express": "cd express & nodemon index.js"
   },
   "repository": {
     "type": "git",

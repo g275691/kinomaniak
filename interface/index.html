@@ -7,24 +7,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KinoManiak</title>
-    <link rel="stylesheet" href="./src/css/style.css">
+    <link rel="stylesheet" href="./src/style/style.css">
 </head>
 <body>
     <main>
-        <nav class="navbar">
-            <div class="navbar__youtube-main"></div>
-            <button class="navbar__main button-style">General COMMANDS</button>
-        </nav>
+        <header>
+            <nav class="navbar">
+                <div class="navbar__youtube-main activate-button"></div>
+                <div class="navbar__player activate-button activate-button"></div>
+                <button class="navbar__main button-style activate-button">General COMMANDS</button>
+            </nav>
+        </header>
 
-        <div class="youtube-player-container">
-            <div class="find-video">
-                <input class="find-video__input" placeholder="Искать другое видео">
-                <div class="find-video__lupa"></div>
-            </div>
+        <div class="find-video">
+            <input class="find-video__input" placeholder="Искать другое видео">
+            <div class="find-video__lupa"></div>
+        </div>
+        <div class="zoom-buttons">
             <button class="button-style zoom-plus">⠀+⠀</button>
-            <div class="zoom-hint">приближение</div>
-            <div class="scroll-hint">скроллинг</div>
+            <button class="button-style zoom-minus">⠀–⠀</button>
+            
+        </div>
+        <div class="scroll-buttons">
             <button class="button-style scroll-up">↓</button>
+            <button class="button-style scroll-down">↓</button>
+        </div>
+        <div class="youtube-player-container">
             <div class="play-control">
                 <div class="play-control__left"></div>
                 <img class="play-control__play" src="src/img/player-play.png">
@@ -33,14 +41,12 @@
             <!-- <div class="popular-hint">Избранные ссылки</div> -->
             <div class="popular-query">
                 <button class="popular-query__item button-style">
-                <button class="button-style popular-query__edit">EDIT
+                <button class="button-style popular-query__edit activate-button">EDIT
                 <button class="popular-query__item button-style">
                 
             </div>
-            <button class="button-style zoom-minus">⠀–⠀</button>
-            <button class="button-style scroll-down">↓</button>
             <div class="popular-query">
-                <button class="popular-query__item button-style"></button>
+                <button class="popular-query__item button-style">
                 <button class="popular-query__item button-style">
                 <button class="popular-query__item button-style">
                 <button class="popular-query__item button-style">
@@ -58,22 +64,56 @@
                 </div>
             </div>
         </div>
-        <div class="popular-edit-container">
-
+        <div class="popular-edit-container active">
+            <h3>РЕД. ИЗБРАННОЕ</h3>
+            <div class="popular-address">
+                <input size=10 maxlength="15">
+                <button class="button-style get-url">Обновить адрес</button>
+            </div>
+            <div class="popular-address">
+                <input size=10 maxlength="15">
+                <button class="button-style get-url">Обновить адрес</button>
+            </div>
+            <div class="popular-address">
+                <input size=10 maxlength="15">
+                <button class="button-style get-url">Обновить адрес</button>
+            </div>
+            <div class="popular-address">
+                <input size=10 maxlength="15">
+                <button class="button-style get-url">Обновить адрес</button>
+            </div>
+            <div class="popular-address">
+                <input size=10 maxlength="15">
+                <button class="button-style get-url">Обновить адрес</button>
+            </div>
+            <div class="popular-address">
+                <input size=10 maxlength="15">
+                <button class="button-style get-url">Обновить адрес</button>
+            </div>
+            <div class="popular-address">
+                <input size=10 maxlength="15">
+                <button class="button-style get-url">Обновить адрес</button>
+            </div>
+            <div class="popular-address">
+                <input size=10 maxlength="15">
+                <button class="button-style get-url">Обновить адрес</button>
+            </div>
         </div>
         <div class="youtube-options-container">
             <div class="youtube-options-control">
-                <h2>YOUTUBE ОПЦИИ</h2>
-                <h3 class="list-value__hint">Шаг перемотки видео</h3>
+                <h2>ВИДЕО ОПЦИИ</h2>
+                <h3 class="list-value__hint">РЕЖИМ ПОИСКА</h3>
                 <div class="list-value">
-                    <label class="list-value__time">0.5м</label>
-                    <input type="radio" class="list-value__item" name="timing"></input>
-                    <label class="list-value__time">1м</label>
-                    <input type="radio" class="list-value__item" name="timing"></input>
-                    <label class="list-value__time">5м</label>
-                    <input type="radio" class="list-value__item" name="timing"></input>
-                    <label class="list-value__time">10м</label>
-                    <input type="radio" class="list-value__item" name="timing"></input>
+                    <div class="list-value__youtube">YOUTUBE</div>
+                    <div class="list-value__google">GOOGLE</div>
+                </div>
+                <div class="hr"></div>
+                <h3 class="list-value__hint">ШАГ ПЕРЕМОТКИ (мин.)</h3>
+                <div class="list-value">
+                    <div class="list-value__time">0.5</div>
+                    <div class="list-value__time">1</div>
+                    <div class="list-value__time">5</div>
+                    <div class="list-value__time">10</div>
                 </div>
                 <div class="hr"></div>
             </div>
@@ -82,7 +122,7 @@
         <div class="general-container">
             <div class="general-control">
                 <h2>БРАУЗЕР</h2>
-                <h3>Управление вкладками</h3>
+                <h3>ВКЛАДКИ</h3>
                 <div class="tab-control">
                     <div class="tab-control__left"></div>
                     <div class="tab-control__close"></div>
@@ -112,6 +152,7 @@
                 <button class="video-container__item">13</button>
                 <button class="video-container__item">14</button>
                 <button class="video-container__item">15</button>
+                <button class="video-container__item">16</button>
             </div>
             <div class="video-nav">
                 <div class="video-nav__left"></div>
@@ -123,9 +164,9 @@
             </div>
             
         </div>
-        <button class="close-select-video">ВЫБОР ВИДЕО</button>
+        <button class="close-select-video activate-button">ВЫБОР ВИДЕО</button>
     </main>
-    <script src="src/data/popularQuery.js"></script>
+    <script src="./src/options/popularQuery.js"></script>
     <script src="index.js"></script>
     <script src="draft/draft.js"></script>
 </body>

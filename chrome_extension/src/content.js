@@ -160,6 +160,26 @@ setInterval(async () => {
                     contentId.querySelectorAll("img")[youtubeOpenVideoByNumber - 1].click();
                 }
             }
+
+            const getUrl = json[0].getUrl;
+            const favouriteNumber = Number(json[0].getUrl[0]);
+            const favouriteTitle = json[0].getUrl.slice(1);
+            const favouriteUrl = window.location.href;
+
+            if(getUrl) {
+                fetch(`${PORT}/popular-query`, {
+                    method: "POST",  
+                    headers: { 
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },  
+                    body: JSON.stringify({
+                        favouriteNumber,
+                        favouriteTitle,
+                        favouriteUrl
+                    }) 
+                })
+            }
         // } 
         /**Commands for entire browser */
 

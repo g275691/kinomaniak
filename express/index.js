@@ -1,8 +1,10 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 
 const https = require('https');
 const http = require('http');
+
 
 const fs = require('fs');
 const options = {
@@ -15,6 +17,7 @@ const { findAndResetDB } = require('./src/scripts/findAndResetDB');
 const { activateCommand } = require('./src/scripts/activateCommand');
 const { getBaseArray } = require('./src/scripts/getBaseArray');
 const { fullResetDB } = require('./src/scripts/fullResetDb');
+const { setNewPopularBase } = require('./src/scripts/setNewPopularBase');
 
 app.get('/', async() => {
     console.log("user-enter")
@@ -25,11 +28,16 @@ app.get('/getbase', async (req, res) => {
 })
 
 app.get('/commandbase/command', async (req, res) => {
+    console.log(req.query);
     await activateCommand(req.query, res)
-    // fs.appendFile('../interface/testFile.txt', ' This line is beyond the end.', (err) => {
-    //     if(err) throw err;
-    //     console.log('Data has been added!');
-    // });
+})
+
+app
+.use(bodyParser.urlencoded({ extended: false }))
+.use(bodyParser.json())
+.post('/popular-query', async (req, res) => {
+    await setNewPopularBase(req.body);
+    res.send("op")
 })
 
 app.get('/commandbase', async (req, res) => {
