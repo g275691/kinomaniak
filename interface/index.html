@@ -24,15 +24,15 @@
             <div class="find-video__lupa"></div>
         </div>
         <div class="zoom-buttons">
-            <button class="button-style zoom-plus">⠀+⠀</button>
-            <button class="button-style zoom-minus">⠀–⠀</button>
+            <button class="button-style zoom-plus"></button>
+            <button class="button-style zoom-minus"></button>
             
         </div>
         <div class="scroll-buttons">
-            <button class="button-style scroll-up">↓</button>
-            <button class="button-style scroll-down">↓</button>
+            <div class="scroll-up"></div>
+            <div class="scroll-down"></div>
         </div>
-        <div class="youtube-player-container">
+        <div class="youtube-player-container active">
             <div class="play-control">
                 <div class="play-control__left"></div>
                 <img class="play-control__play" src="src/img/player-play.png">
@@ -64,39 +64,39 @@
                 </div>
             </div>
         </div>
-        <div class="popular-edit-container active">
+        <div class="popular-edit-container">
             <h3>РЕД. ИЗБРАННОЕ</h3>
             <div class="popular-address">
                 <input size=10 maxlength="15">
-                <button class="button-style get-url">Обновить адрес</button>
+                <button class="button-style get-url">ОБНОВИТЬ URL</button>
             </div>
             <div class="popular-address">
                 <input size=10 maxlength="15">
-                <button class="button-style get-url">Обновить адрес</button>
+                <button class="button-style get-url">ОБНОВИТЬ URL</button>
             </div>
             <div class="popular-address">
                 <input size=10 maxlength="15">
-                <button class="button-style get-url">Обновить адрес</button>
+                <button class="button-style get-url">ОБНОВИТЬ URL</button>
             </div>
             <div class="popular-address">
                 <input size=10 maxlength="15">
-                <button class="button-style get-url">Обновить адрес</button>
+                <button class="button-style get-url">ОБНОВИТЬ URL</button>
             </div>
             <div class="popular-address">
                 <input size=10 maxlength="15">
-                <button class="button-style get-url">Обновить адрес</button>
+                <button class="button-style get-url">ОБНОВИТЬ URL</button>
             </div>
             <div class="popular-address">
                 <input size=10 maxlength="15">
-                <button class="button-style get-url">Обновить адрес</button>
+                <button class="button-style get-url">ОБНОВИТЬ URL</button>
             </div>
             <div class="popular-address">
                 <input size=10 maxlength="15">
-                <button class="button-style get-url">Обновить адрес</button>
+                <button class="button-style get-url">ОБНОВИТЬ URL</button>
             </div>
             <div class="popular-address">
                 <input size=10 maxlength="15">
-                <button class="button-style get-url">Обновить адрес</button>
+                <button class="button-style get-url">ОБНОВИТЬ URL</button>
             </div>
         </div>
         <div class="youtube-options-container">
@@ -105,7 +105,8 @@
                 <h3 class="list-value__hint">РЕЖИМ ПОИСКА</h3>
                 <div class="list-value">
                     <div class="list-value__youtube">YOUTUBE</div>
-                    <div class="list-value__google">GOOGLE</div>
+                    <div class="list-value__online-kino">ONLINE KINO</div>
+                    <div class="list-value__pot-player">POT PLAYER</div>
                 </div>
                 <div class="hr"></div>
                 <h3 class="list-value__hint">ШАГ ПЕРЕМОТКИ (мин.)</h3>
@@ -131,7 +132,7 @@
                 </div>
                 <div class="hr"></div>
                 <h2>КОМПЬЮТЕР</h2>
-                <h3>Выкл</h3>
+                </div>
                 <div class="general-control__turn-off"></div>
             </div>
         </div>
@@ -159,13 +160,14 @@
                 <div class="video-nav__right"></div>
             </div>
             <div class="subscribe">
-                <button class="subscribe__action button-style">ПОДПИСКА</button>
-                <button class="subscribe__author-video button-style">ВИДЕО АВТОРА</button>
+                <button class="subscribe__action button-style">ПОДПИСАТЬСЯ НА КАНАЛ</button>
+                <button class="subscribe__author-video button-style">ПЕРЕЙТИ В ВИДЕО АВТОРА</button>
             </div>
             
         </div>
         <button class="close-select-video activate-button">ВЫБОР ВИДЕО</button>
     </main>
+    <script src="./src/options/videoOptions.js"></script>
     <script src="./src/options/popularQuery.js"></script>
     <script src="index.js"></script>
     <script src="draft/draft.js"></script>

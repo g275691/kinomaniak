@@ -121,7 +121,8 @@ setInterval(async () => {
 
             /**Open video by number */
             const isSearchPage = /^https:..www.youtube.com.result/i.test(window.location.href);
-            const isMainPage = /^https:..www.youtube.com.$/.test(window.location.href);
+            const isMainPage = /^https:..www.youtube.com.$/i.test(window.location.href);
+            const isWatchPage = /https:..www.youtube.com.watch\?v/i.test(window.location.href)
             let youtubeNumberVideo = Number(json[0].youtubeNumberVideo);
             let youtubeOpenVideoByNumber = Number(json[0].youtubeOpenVideoByNumber);
             let prevVideoByNumber = json[0].prevVideoByNumber;
@@ -133,20 +134,38 @@ setInterval(async () => {
                     findQuery.forEach(el=>{el.style.marginTop="0px"; el.style.filter=""});
                     findQuery[youtubeNumberVideo - 1].style.marginTop="30px";
                     findQuery[youtubeNumberVideo - 1].style.filter="saturate(160)";
+                    findQuery[youtubeNumberVideo - 1].scrollIntoView({block: "center", behavior: "smooth"});
                 }
                 if(youtubeOpenVideoByNumber) {
                     findQuery[youtubeOpenVideoByNumber - 1].querySelector("a").click();
                 }
 
             } else if (isMainPage) {
-                const mainContent = document.querySelectorAll("#content.style-scope ytd-rich-item-renderer");
-                if(youtubeNumberVideo || prevVideoByNumber || nextVideoByNumber) {
+                let mainContent = document.querySelectorAll("#content.style-scope ytd-rich-item-renderer");
+                    if(mainContent[youtubeNumberVideo - 1]) {
+                        if(youtubeNumberVideo || prevVideoByNumber || nextVideoByNumber) {
+                            mainContent.forEach(el=>{el.style.marginTop="0px"; el.style.filter=""});
+                            mainContent[youtubeNumberVideo - 1].style.marginTop="30px";
+                            mainContent[youtubeNumberVideo - 1].style.filter="saturate(160)";
+                            mainContent[youtubeNumberVideo - 1].scrollIntoView({block: "center", behavior: "smooth"})
+                        }
+                    }
+                if(youtubeOpenVideoByNumber) {
+                    mainContent[youtubeOpenVideoByNumber - 1].querySelector("a").click();
+                    
+                }
+                
+            } else if(isWatchPage) {
+                let mainContent = document.querySelector("#secondary.style-scope.ytd-watch-flexy").querySelectorAll("a#thumbnail");
+                if(youtubeNumberVideo) {
                     mainContent.forEach(el=>{el.style.marginTop="0px"; el.style.filter=""});
                     mainContent[youtubeNumberVideo - 1].style.marginTop="30px";
                     mainContent[youtubeNumberVideo - 1].style.filter="saturate(160)";
+                    mainContent[youtubeNumberVideo - 1].scrollIntoView({block: "center", behavior: "smooth"})
                 }
                 if(youtubeOpenVideoByNumber) {
-                    mainContent[youtubeOpenVideoByNumber - 1].querySelector("a").click();
+                    mainContent[youtubeOpenVideoByNumber - 1].click();
+                    
                 }
             } else {
                 const contentId = document.querySelector("#contents.ytd-section-list-renderer");
@@ -155,6 +174,7 @@ setInterval(async () => {
                     contentId.querySelectorAll("img").forEach(el=>{el.style.marginTop="0px"; el.style.filter=""});
                     contentId.querySelectorAll("img")[youtubeNumberVideo - 1].style.marginTop="30px";
                     contentId.querySelectorAll("img")[youtubeNumberVideo - 1].style.filter="saturate(160)";
+                    contentId[youtubeOpenVideoByNumber - 1].scrollIntoView({block: "center", behavior: "smooth"});
                 }
                 if(youtubeOpenVideoByNumber) {
                     contentId.querySelectorAll("img")[youtubeOpenVideoByNumber - 1].click();
@@ -162,11 +182,12 @@ setInterval(async () => {
             }
 
             const getUrl = json[0].getUrl;
-            const favouriteNumber = Number(json[0].getUrl[0]);
-            const favouriteTitle = json[0].getUrl.slice(1);
-            const favouriteUrl = window.location.href;
+
 
             if(getUrl) {
+                const favouriteNumber = Number(json[0].getUrl[0]);
+                const favouriteTitle = json[0].getUrl.slice(1);
+                const favouriteUrl = window.location.href;
                 fetch(`${PORT}/popular-query`, {
                     method: "POST",  
                     headers: { 
@@ -195,11 +216,11 @@ setInterval(async () => {
         const scrollDown = json[0].scrollDown;
         if(scrollUp) {
             const newY = window.pageYOffset + 200;
-            window.scrollTo(0, newY);
+            window.scrollTo({top: newY, behavior: "smooth"});
         }
         if(scrollDown) {
             const newY = window.pageYOffset - 200;
-            window.scrollTo(0, newY);
+            window.scrollTo({top: newY, behavior: "smooth"});
         }
 
         const youtubeSubcriptions = json[0].youtubeSubcriptions

@@ -8,7 +8,6 @@ main {
     .navbar {
         display: flex;
         &__youtube-main {
-            background-image: url("../img/youtube-logo-options.png");
             background-size: contain;
             background-repeat: no-repeat;
             width: 100%;
@@ -68,7 +67,7 @@ main {
 
         .zoom-buttons, .scroll-buttons {
             z-index: 99;
-            height: 55%;
+            height: 50%;
             position: fixed;
             display: flex;
             top: 25%;
@@ -78,30 +77,51 @@ main {
             left: 1%;
         }
         .scroll-buttons {
-            left: 87%;
+            left: 84%;
             zoom: 1.8;
-            height: 57%;
+            height: 49%;
+
         }
         .zoom-plus, .zoom-minus {
-            height: 12%;
+            width: 50px;
+            height: 50px;
+        }
+        .zoom-plus {
+            background-image: url("../img/zvuk+_black.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+
         }
         .zoom-minus {
+            background-image: url("../img/zvuk-_black.png");
+            background-size: contain;
+            background-repeat: no-repeat;
             margin-top: auto;
         }
 
         .scroll-down, .scroll-up {
-            height: 19%;
+            background-image: url("../img/arrow3.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            border: 0;
+            width: 40px;
+            height: 20px;
+            &:active {
+                opacity: 0.4;
+            }
         }
         .scroll-up {
-            transform: rotateZ(180deg);
+            transform: rotateZ(90deg);
         }
         .scroll-down {
+            transform: rotateZ(-90deg);
             margin-top: auto;
         }
     .youtube-player-container {
         height: 0;
         opacity: 0;
-        transition: opacity ease-out 0.2s;
+        transition: all ease-out 0.2s;
         pointer-events: none;
         &.active {
             height: 100%;
@@ -191,6 +211,7 @@ main {
                 margin-top: 0%;
                 height: 110px;
                 overflow-y: scroll;
+                scrollbar-width: none;
             } 
         }
 
@@ -236,12 +257,13 @@ main {
         width: 99%;
         opacity: 0;
         pointer-events: none;
-        transition: all 0.3s ease-in-out;
+        
         z-index: 2;
         height: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
+        transition: opacity 0.5s ease-in;
         &.active {
             height: 100%;
 
@@ -295,7 +317,7 @@ main {
                 & * {
                     cursor: pointer;
                 }
-            }
+            } 
             &__turn-off {
                 background-image: url("../img/powerOFF.png");
                 background-size: contain;
@@ -319,12 +341,13 @@ main {
         height: 500px;
         opacity: 0;
         pointer-events: none;
-        transition: all 0.3s ease-in-out;
+        
         z-index: 2;
         height: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
+        transition: all 0.3s ease-out;
         &.active {
             height: 100%;
             opacity: 1;
@@ -349,11 +372,29 @@ main {
                 margin-top: 1%;
                 font-size: 150%;
                 width: 100%;
-                &__youtube, &__google {
+                align-items: center;
 
-                }
                 & * {
                     font-size: 90%;
+                }
+                &__youtube, &__online-kino, &__pot-player {
+                    font-family:'Courier New', Courier, monospace;
+                    font-size: 70%;
+                    text-align: center;
+                }
+                &__online-kino {
+                    padding-right: 3%;
+                    padding-left: 3%;
+                }
+                &__youtube {
+                    padding-right: 3%;
+                }
+                &__pot-player {
+                    padding-left: 3%;
+                }
+                &__online-kino {
+                    border-left: 1px solid black;
+                    border-right: 2px solid black;
                 }
                 &__time {
                     width: 40px;
@@ -366,6 +407,9 @@ main {
                     background: black;
                     color: white;
                     &:active {
+                        background: $red;
+                    }
+                    &.active {
                         background: $red;
                     }
                 }
@@ -385,9 +429,10 @@ main {
       
         height: 0;
         opacity: 0;
-        transition: opacity 0.2s ease-in;
+       
         pointer-events: none;
         align-items: center;
+        transition: all 0.2s ease-in;
         &.active {
             opacity: 1;
             background: white;
@@ -461,8 +506,8 @@ main {
     }
     .close-select-video {
         position: fixed;
-        top: 96%;
-        height: 7%;
+        top: 95%;
+        height: 8%;
         font-size: 130%;
         background: black;
         border-top-left-radius: 10%;
@@ -485,15 +530,24 @@ main {
     flex-direction: column;
     align-items: center;
     margin-top: 5%;
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease-out;
+    &.active {
+        pointer-events: all;
+        height: 100%;
+        opacity: 1;
+    }
     h3 {
         margin-top: 1%;
     }
     .popular-address {
         display: flex;
-        margin-left: 1.5%;
+        margin-left: 4%;
         margin-bottom: 2.5%;
         input {
-            font-size: 120%;
+            font-size: 100%;
             margin-right: 1%;
             border-radius: 5%;
         }        
