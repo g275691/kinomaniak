@@ -23,6 +23,8 @@ const openYoutubeOptions = document.querySelector(".navbar__youtube-main");
 const youtubeQuery = document.querySelector(".youtube-options-container");
 
 const changeFindModeNumber = document.querySelector(".change-find-mode__number");
+const nextFrameFocusBtn = document.querySelector(".next-frame__btn.next");
+const prevFrameFocusBtn = document.querySelector(".next-frame__btn.prev");
 
 /**Youtubeoptions */
 
@@ -34,11 +36,12 @@ switch (mode) {
     case "youtube":
         openYoutubeOptions.style.backgroundImage = 'url("src/img/youtube-logo-options.png")';
         youtubeQuery.querySelector(".list-value__youtube").classList.add('active');
+        document.querySelector(".next-frame").style.display = "none"
         break;
     case "google":
         openYoutubeOptions.style.backgroundImage = 'url("src/img/google-logo.png")';
         youtubeQuery.querySelector(".list-value__google").classList.add('active');
-        videoByNumber.querySelectorAll(".video-container, .subscribe").forEach(el=>el.style.display = "none");
+        videoByNumber.querySelectorAll(".subscribe").forEach(el=>el.style.display = "none");
         break;
 }
 
@@ -63,7 +66,7 @@ rewindStepValues.map((el, i)=>{
 
 timingValues.forEach((button, index)=>{
     button.addEventListener("click", function() { 
-        let timingValue = Number(timingValues[index].innerText.replace(/[см]/, "")) * 60;
+        let timingValue = Number(timingValues) * 60;
         fetch(`http://192.168.0.103:80/commandbase/command?youtubeScrollTiming=${timingValue}`);
     })
 })
@@ -80,34 +83,51 @@ const setVideoByNumber = () => {
     }
 }
 
+findVideoInput.addEventListener("focus", function() {
+    document.querySelectorAll(".zoom-buttons, .scroll-buttons").forEach(el=>el.classList.remove('active'));
+})
+
+findVideoInput.addEventListener("blur", function() {
+    document.querySelectorAll(".zoom-buttons, .scroll-buttons").forEach(el=>el.classList.add('active'));
+})
+
 setVideoByNumber();
 
 changeFindModeNumber.addEventListener("click", function() {
+    console.log(inputModeNameVideo);
     if(this.classList.contains("active")) {
+        this.innerText = "Открыть поиск по номеру";
         inputModeNameVideo = true;
         this.classList.remove('active');
+        findVideoInput.placeholder = "Искать другое видео";
         
     } else {
+        this.innerText = "Закрыть поиск по номеру";
         inputModeNameVideo = false;
-        
         this.classList.add('active');
+        findVideoInput.placeholder = "Искать видео по номеру";
     }
 })
 
 const findLupa = document.querySelector(".find-video").querySelector(".find-video__lupa");
 findLupa.addEventListener("click", function() { 
-    console.log(inputModeNameVideo)
+    console.log(inputModeNameVideo);
+    findVideoInput.value = findVideoInput.value.replace(/ {1,}/g, " ").trim();
     const videoUrl = (mode == "youtube"
     ? `https://www.youtube.com/results?search_query=${findVideoInput.value}`
     : `https://www.google.com/search?q=${findVideoInput.value}`)
     if(inputModeNameVideo) {
         fetch(`http://192.168.0.103:80/commandbase/command?youtubeOpenVideo=${videoUrl}`);
         changeFindModeNumber.click();
-        findVideoInput.value = "";
+        
     } else {
         fetch(`http://192.168.0.103:80/commandbase/command?youtubeOpenVideoByNumber=${findVideoInput.value}`);
         changeFindModeNumber.click();
     }
+})
+
+document.querySelector(".change-find-mode__reset-text").addEventListener("click", function() {
+    findVideoInput.value = ""
 })
 
 const volumeItems = document.querySelectorAll(".volume-scale__item");
@@ -122,21 +142,9 @@ document.querySelectorAll(".popular-query__item").forEach((el,i)=>{
         const youtubeVideo = `http://192.168.0.103:80/commandbase/command?youtubeOpenVideo=${popularQuery[i].url}`;
         console.log(youtubeVideo)
         fetch(youtubeVideo);
-        openVideoByNumber.click()
+        changeFindModeNumber.click()
     })
 })
-
-
-// findVideoInput.addEventListener("focus", function() {
-//     console.log("test")
-//     document.querySelector(".zoom-buttons").style.opacity=0;
-//     document.querySelector(".scroll-buttons").style.opacity=0;
-// })
-// findVideoInput.addEventListener("blur", function() {
-//     console.log("test")
-//     document.querySelector(".zoom-buttons").style.opacity=1;
-//     document.querySelector(".scroll-buttons").style.opacity=1;
-// })
 
 const videoRect = document.querySelectorAll(".video-container__item");
 videoRect.forEach(rect=>{
@@ -185,15 +193,28 @@ const hideAllContainers = () => {
         document.querySelectorAll(".activate-button")[i].addEventListener("click", function() {
             if(document.querySelector(el).classList.contains('active')) {
                 containers.map(el=>document.querySelector(el).classList.remove('active'));
+                
                 document.querySelector(el).classList.remove('active');
                 document.querySelector(".youtube-player-container").classList.add("active");
             } else {
                 containers.map(el=>document.querySelector(el).classList.remove('active'));
+                
                 document.querySelector(el).classList.add('active');
             }
         })
     })
 }
+
+document.querySelectorAll(".activate-button").forEach((el,i)=>{
+    if(i!=3) {
+        el.addEventListener("click", function() {
+            document.querySelector(".change-find-mode__number").classList.remove('active');
+            document.querySelector(".change-find-mode__number").innerText = "Открыть поиск по номеру";
+            inputModeNameVideo = true;
+            findVideoInput.placeholder = "Искать другое видео"
+        })
+    }
+})
 
 hideAllContainers()
 
@@ -208,10 +229,21 @@ popularAddresses.forEach((el,i)=>{
         const currentInput = document.querySelectorAll(".popular-address")[i].querySelector("input").value
         console.log(currentInput)
         fetch(`http://192.168.0.103:80/commandbase/command?getUrl=${i}${currentInput}`)
-        changeFindModeNumber.click();
+        
 
     })
     
+})
+
+let nextFrameFocus = -1;
+nextFrameFocusBtn.addEventListener("click", function() {
+    nextFrameFocus+=1;
+    fetch(`http://192.168.0.103:80/commandbase/command?nextFrameFocus=${nextFrameFocus}`)
+})
+
+prevFrameFocusBtn.addEventListener("click", function() {
+    nextFrameFocus-=1;
+    fetch(`http://192.168.0.103:80/commandbase/command?nextFrameFocus=${nextFrameFocus}`)
 })
 
 /**Youtube */
@@ -226,13 +258,16 @@ clickToServer(".subscribe__author-video", "youtubeOpenVideoByAuthor");
 
 /**Universal - for Browser */
 
+clickToServer(".next-frame__focus-video", "focusVideo");
 clickToServer(".scroll-down", "scrollUp");
 clickToServer(".scroll-up", "scrollDown");
 clickToServer(".tab-control__refresh", "browserReload");
+clickToServer(".subscribe__author-video", "youtubeOpenVideoByAuthor");
 
 /**Universal - for comp */
 
 clickToServer(".general-control__turn-off", "computerDisable")
+clickToServer(".open-browser", "openBrowser")
 
 // /**python */
 clickToServer(".zoom-plus", "browserZoomPlus");

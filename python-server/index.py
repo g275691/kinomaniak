@@ -16,8 +16,14 @@ while count > -1:
     browserTabLeft = findbase["browserTabLeft"]
     browserTabRight = findbase["browserTabRight"]
     browserTabClose = findbase["browserTabClose"]
-
+    focusVideo = findbase["focusVideo"]
+    videoMode = findbase["videoMode"]
     youtubePlay = findbase["youtubePlay"]
+    youtubeVolumeUp = findbase["youtubeVolumeUp"]
+    youtubeVolumeDown = findbase["youtubeVolumeDown"]
+    youtubeTimeLeft = findbase["youtubeTimeLeft"]
+    youtubeTimeRight = findbase["youtubeTimeRight"]
+    openBrowser = findbase["openBrowser"]
 
     computerDisable = findbase["computerDisable"] 
 
@@ -25,10 +31,14 @@ while count > -1:
     if fullScreen:
         print("full_screen")
         collection.update_one({"base":"kinomaniak"}, {"$set": {"youtubeFullScreen": False}})
-        pyautogui.press(['F'])
+        keyboard.send("f")
     if youtubePlay:
-        collection.update_one({"base":"kinomaniak"}, {"$set": {"youtubePlay": False}})
-        pyautogui.press(['K'])
+        if videoMode == "youtube":
+            collection.update_one({"base":"kinomaniak"}, {"$set": {"youtubePlay": False}})
+            pyautogui.press(['K'])
+        else:
+            collection.update_one({"base":"kinomaniak"}, {"$set": {"youtubePlay": False}})
+            pyautogui.press(['space'])
     if browserZoomPlus:
         print("zoom+")
         collection.update_one({"base":"kinomaniak"}, {"$set": {"browserZoomPlus": False}})
@@ -66,3 +76,23 @@ while count > -1:
         pyautogui.click(131, 981)
         time.sleep(3)
         pyautogui.click(986, 493)
+    if openBrowser:
+        print("openBrowser")
+        collection.update_one({"base":"kinomaniak"}, {"$set": {"openBrowser": False}})
+        keyboard.send('ctrl+alt+9')
+    if videoMode == "google":
+        if focusVideo:
+            collection.update_one({"base":"kinomaniak"}, {"$set": {"focusVideo": False}})
+            pyautogui.click(850,200)
+        if youtubeVolumeUp:
+            collection.update_one({"base":"kinomaniak"}, {"$set": {"youtubeVolumeUp": False}})
+            pyautogui.press(['up'])
+        if youtubeVolumeDown:
+            collection.update_one({"base":"kinomaniak"}, {"$set": {"youtubeVolumeDown": False}})
+            pyautogui.press(['down'])
+        if youtubeTimeLeft:
+            collection.update_one({"base":"kinomaniak"}, {"$set": {"youtubeTimeLeft": False}})
+            pyautogui.press(['left'])
+        if youtubeTimeRight:
+            collection.update_one({"base":"kinomaniak"}, {"$set": {"youtubeTimeRight": False}})
+            pyautogui.press(['right'])

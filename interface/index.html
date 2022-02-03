@@ -24,18 +24,21 @@
             <div class="find-video__lupa"></div>
         </div>
         <div class="change-find-mode">
-            <button class="change-find-mode__number button-style activate-button">Поиск по номеру</button>
+            <button class="change-find-mode__number button-style activate-button">Открыть поиск по номеру</button>
+            <div class="change-find-mode__reset-text"></div>
         </div>
-        <div class="zoom-buttons">
+
+        <div class="zoom-buttons active">
             <button class="button-style zoom-plus"></button>
             <button class="button-style zoom-minus"></button>
             
         </div>
-        <div class="scroll-buttons">
+        <div class="scroll-buttons active">
             <div class="scroll-up"></div>
             <div class="scroll-down"></div>
         </div>
-        <div class="youtube-player-container active">
+        <div class="youtube-player-container">
+
             <div class="play-control">
                 <div class="play-control__left"></div>
                 <img class="play-control__play" src="src/img/player-play.png">
@@ -103,12 +106,19 @@
             </div>
         </div>
         <div class="youtube-options-container">
+
             <div class="youtube-options-control">
                 <h2>ВИДЕО ОПЦИИ</h2>
                 <h3 class="list-value__hint">РЕЖИМ ПОИСКА</h3>
                 <div class="list-value">
                     <div class="list-value__youtube">YOUTUBE</div>
                     <div class="list-value__google">GOOGLE</div>
+                </div>
+                <div class="hr"></div>
+                <div class="next-frame">
+                    <div class="next-frame__btn prev">X</div>
+                    <div class="next-frame__focus-video"></div>
+                    <div class="next-frame__btn next">iF</div>
                 </div>
                 <div class="hr"></div>
                 <h3 class="list-value__hint">ШАГ ПЕРЕМОТКИ (мин.)</h3>
@@ -122,9 +132,10 @@
             </div>
 
         </div>
-        <div class="general-container">
+        <div class="general-container active">
             <div class="general-control">
                 <h2>БРАУЗЕР</h2>
+                <button class="open-browser button-style">Открыть браузер</button>
                 <h3>ВКЛАДКИ</h3>
                 <div class="tab-control">
                     <div class="tab-control__left"></div>
@@ -162,8 +173,8 @@
                 <div class="video-nav__right"></div>
             </div>
             <div class="subscribe">
-                <button class="subscribe__action button-style">ПОДПИСАТЬСЯ НА КАНАЛ</button>
                 <button class="subscribe__author-video button-style">ПЕРЕЙТИ В ВИДЕО АВТОРА</button>
+                <button class="subscribe__action button-style">ПОДПИСАТЬСЯ НА КАНАЛ</button>
             </div>
             
         </div>

@@ -25,6 +25,8 @@ const commands = [
         scrollUp: false,
         scrollDown: false,
         browserReload: false,
+        nextFrameFocus: false,
+        prevFrameFocus: false,
         /**Computer-commands*/
         isCompUnlock: false
     }

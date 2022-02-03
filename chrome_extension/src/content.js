@@ -121,7 +121,8 @@ setInterval(async () => {
             /**Open video by number */
             const isSearchPage = /^https:..www.youtube.com.result/i.test(window.location.href);
             const isMainPage = /^https:..www.youtube.com.$/i.test(window.location.href);
-            const isWatchPage = /https:..www.youtube.com.watch\?v/i.test(window.location.href)
+            const isWatchPage = /https:..www.youtube.com.watch\?v/i.test(window.location.href);
+            const isGoogle = /^https:..www.google.com/.test(window.location.href);
             let youtubeNumberVideo = Number(json[0].youtubeNumberVideo);
             let youtubeOpenVideoByNumber = Number(json[0].youtubeOpenVideoByNumber);
             let prevVideoByNumber = json[0].prevVideoByNumber;
@@ -168,23 +169,53 @@ setInterval(async () => {
                         
                     }
                 } else {
-                    const contentId = document.querySelector("#contents.ytd-section-list-renderer");
+                    const contentId = document.querySelectorAll("#video-title");
     
                     if(youtubeNumberVideo || prevVideoByNumber || nextVideoByNumber) {
-                        contentId.querySelectorAll("img").forEach(el=>{el.style.marginTop="0px"; el.style.filter=""});
-                        contentId.querySelectorAll("img")[youtubeNumberVideo - 1].style.marginTop="30px";
-                        contentId.querySelectorAll("img")[youtubeNumberVideo - 1].style.filter="saturate(160)";
-                        contentId.querySelectorAll("img")[youtubeNumberVideo - 1].scrollIntoView({block: "center", behavior: "smooth"});
+                        contentId.forEach(el=>{
+                            el.parentElement.parentElement.parentElement.parentElement.style.marginTop="0px"; 
+                            el.parentElement.parentElement.parentElement.parentElement.style.filter=""
+                        });
+                        contentId[youtubeNumberVideo - 1].parentElement.parentElement.parentElement.parentElement.style.marginTop="30px";
+                        contentId[youtubeNumberVideo - 1].parentElement.parentElement.parentElement.parentElement.style.filter="saturate(160)";
+                        contentId[youtubeNumberVideo - 1].parentElement.parentElement.parentElement.parentElement.scrollIntoView({block: "center", behavior: "smooth"});
                     }
                     if(youtubeOpenVideoByNumber) {
-                        contentId.querySelectorAll("img")[youtubeOpenVideoByNumber - 1].click();
+                        contentId[youtubeOpenVideoByNumber - 1].click();
                     }
                 }
             } else {
-                
+                if(isGoogle) {
+                    
+                    const titleUrl = document.querySelector("#search").querySelectorAll("h3");
+                    //const contentUrl = titleUrl.parentNode.parentNode.parentNode.parentNode;
+                    if(youtubeNumberVideo || prevVideoByNumber || nextVideoByNumber) {
+                        titleUrl.forEach(el=>{
+                            const contentUrl = el.parentNode.parentNode.parentNode.parentNode;
+                            contentUrl.style.zoom = "1";
+                            contentUrl.style.border = "";
+                        });
+                        titleUrl[youtubeNumberVideo - 1].parentNode.parentNode.parentNode.parentNode.style.zoom = "1.5";
+                        titleUrl[youtubeNumberVideo - 1].parentNode.parentNode.parentNode.parentNode.style.border = "2px solid red";
+                        titleUrl[youtubeNumberVideo - 1].scrollIntoView({block: "center", behavior: "smooth"});
+                    }
+                    if(youtubeOpenVideoByNumber) {
+                        titleUrl[youtubeOpenVideoByNumber - 1].click();
+                    }
+
+                }
+                let nextFrameFocus = Number(json[0].nextFrameFocus);
+                if(nextFrameFocus) {
+                    console.log(nextFrameFocus);
+
+                        document.querySelectorAll("iframe")[0].scrollIntoView();
+                        document.querySelectorAll("iframe")[0].focus();
+
+
+                }
             }
 
-
+            
             const getUrl = json[0].getUrl;
 
 

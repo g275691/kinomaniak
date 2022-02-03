@@ -1,6 +1,7 @@
 const fs = require('fs');
 
 const changeContent = (fileContent, req) => {
+    console.log(fileContent)
     let fileContentJSON = JSON.parse(fileContent.replace("const popularQuery = ", ""));
     fileContentJSON[req.favouriteNumber + 2].title = req.favouriteTitle;
     fileContentJSON[req.favouriteNumber + 2].url = req.favouriteUrl;
