@@ -10,30 +10,46 @@ const getBase = async () => {
     return json;
 }
 
+const playController = document.querySelector(".play-control__play");
+
+const videoByNumber = document.querySelector(".video-by-time-container");
+const videoContainer = document.querySelector(".video-container");
+const findVideoInput = document.querySelector(".find-video__input");
+
 const openGeneral = document.querySelector(".navbar__main");
 const generalCommand = document.querySelector(".general-container");
 
 const openYoutubeOptions = document.querySelector(".navbar__youtube-main");
 const youtubeQuery = document.querySelector(".youtube-options-container");
 
+const changeFindModeNumber = document.querySelector(".change-find-mode__number");
+
+/**Youtubeoptions */
+
+/**Mode */
+
 const mode = videoOptions[0].mode;
 
 switch (mode) {
     case "youtube":
         openYoutubeOptions.style.backgroundImage = 'url("src/img/youtube-logo-options.png")';
-        youtubeQuery.querySelector(".list-value > :nth-child(1)").style.background = "red"
-        break;
-    case "potPlayer":
-        openYoutubeOptions.style.backgroundImage = 'url("src/img/pot-player-logo.png")';
-        youtubeQuery.querySelector(".list-value > :nth-child(2)").style.background = "red"
+        youtubeQuery.querySelector(".list-value__youtube").classList.add('active');
         break;
     case "google":
         openYoutubeOptions.style.backgroundImage = 'url("src/img/google-logo.png")';
-        youtubeQuery.querySelector(".list-value > :nth-child(3)").style.background = "red"
+        youtubeQuery.querySelector(".list-value__google").classList.add('active');
+        videoByNumber.querySelectorAll(".video-container, .subscribe").forEach(el=>el.style.display = "none");
         break;
 }
 
-const timingButtons = document.querySelectorAll(".list-value__item");
+document.querySelectorAll(".list-value__youtube, .list-value__google").forEach(el=>{
+    el.addEventListener("click", function() {
+        fetch(`http://192.168.0.103:80/videomode/${el.innerText}`)
+    })
+})
+
+/**Timing */
+
 const timingValues = document.querySelectorAll(".list-value__time");
 const rewindStep = videoOptions[0].rewindStep;
 const rewindStepValues = [0.5, 1, 5, 10];
@@ -45,52 +61,58 @@ rewindStepValues.map((el, i)=>{
 })
 
 
-timingButtons.forEach((button, index)=>{
+timingValues.forEach((button, index)=>{
     button.addEventListener("click", function() { 
         let timingValue = Number(timingValues[index].innerText.replace(/[см]/, "")) * 60;
         fetch(`http://192.168.0.103:80/commandbase/command?youtubeScrollTiming=${timingValue}`);
     })
 })
 
-const playController = document.querySelector(".play-control__play");
+let inputModeNameVideo = true;
 
-const videoByNumber = document.querySelector(".video-by-time-container");
-const openVideoByNumber = document.querySelector(".close-select-video");
-const videoContainer = document.querySelector(".video-container");
-const findVideoInput = document.querySelector(".find-video__input")
-
-const setVideoByNumber = (query) => {
-    query.innerText="ВЫБОР ВИДЕО";
+const setVideoByNumber = () => {
+    inputModeNameVideo = true;
     findVideoInput.placeholder = "Искать другое видео";
+    if(mode == "youtube") {
+        findVideoInput.value = "";
+    } else {
+        findVideoInput.value = "   смотреть онлайн";
+    }
 }
 
-const hideVideoByNumber = (query) => {
-    query.innerText="ЗАКРЫТЬ";
-    findVideoInput.placeholder = "Искать по номеру";
-}
+setVideoByNumber();
 
-openVideoByNumber.addEventListener("click", function() {
-    videoByNumber.classList.contains('active')
-    ? setVideoByNumber(this)
-    : hideVideoByNumber(this)
+changeFindModeNumber.addEventListener("click", function() {
+    if(this.classList.contains("active")) {
+        inputModeNameVideo = true;
+        this.classList.remove('active');
+        
+    } else {
+        inputModeNameVideo = false;
+        
+        this.classList.add('active');
+    }
 })
 
 const findLupa = document.querySelector(".find-video").querySelector(".find-video__lupa");
 findLupa.addEventListener("click", function() { 
-    if(/Искать другое видео/i.test(findVideoInput.placeholder)) {
-        fetch(`http://192.168.0.103:80/commandbase/command?youtubeOpenVideo=results?search_query=${findVideoInput.value}`);
-        openVideoByNumber.click();
+    console.log(inputModeNameVideo)
+    const videoUrl = (mode == "youtube"
+    ? `https://www.youtube.com/results?search_query=${findVideoInput.value}`
+    : `https://www.google.com/search?q=${findVideoInput.value}`)
+    if(inputModeNameVideo) {
+        fetch(`http://192.168.0.103:80/commandbase/command?youtubeOpenVideo=${videoUrl}`);
+        changeFindModeNumber.click();
         findVideoInput.value = "";
     } else {
         fetch(`http://192.168.0.103:80/commandbase/command?youtubeOpenVideoByNumber=${findVideoInput.value}`);
-        setVideoByNumber(openVideoByNumber)
-
+        changeFindModeNumber.click();
     }
 })
 
 const volumeItems = document.querySelectorAll(".volume-scale__item");
 volumeItems.forEach((el,i)=>i<=3&&(el.style.opacity=1))
-
+ 
 document.querySelectorAll(".popular-query__item").forEach((el,i)=>{
     popularQuery[i] 
     ? el.innerText = popularQuery[i].title
@@ -131,7 +153,7 @@ const nextVideoByNumber = document.querySelector(".video-nav__right");
 const prevVideoByNumber = document.querySelector(".video-nav__left");
 
 nextVideoByNumber.addEventListener("click", function() {
-    findVideoInput.value = Number(findVideoInput.value) + 1;
+    findVideoInput.value = isNaN(findVideoInput.value) ? 0 : Number(findVideoInput.value) + 1;
     const videoNumber = findVideoInput.value;
     videoRect.forEach((el, i)=>{
         el.classList.remove('active');
@@ -154,8 +176,8 @@ const containers = [
     ".youtube-options-container", 
     ".youtube-player-container", 
     ".general-container", 
-    ".popular-edit-container",
-    ".video-by-time-container" 
+    ".video-by-time-container",
+    ".popular-edit-container"
 ]
 
 const hideAllContainers = () => {
@@ -186,6 +208,8 @@ popularAddresses.forEach((el,i)=>{
         const currentInput = document.querySelectorAll(".popular-address")[i].querySelector("input").value
         console.log(currentInput)
         fetch(`http://192.168.0.103:80/commandbase/command?getUrl=${i}${currentInput}`)
+        changeFindModeNumber.click();
+
     })
     
 })
@@ -196,7 +220,6 @@ clickToServer(".play-control__play", "youtubePlay");
 clickToServer(".volume-control__turn:nth-child(4)", "youtubeVolumeUp");
 clickToServer(".volume-control__turn:nth-child(2)", "youtubeVolumeDown");
 clickToServer(".play-control__left", "youtubeTimeLeft");
-clickToServer(".play-control__right", "youtubeTimeRight");
 clickToServer(".play-control__right", "youtubeTimeRight");
 clickToServer(".subscribe__action", "youtubeSubscribe");
 clickToServer(".subscribe__author-video", "youtubeOpenVideoByAuthor");

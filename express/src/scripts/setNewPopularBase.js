@@ -1,9 +1,3 @@
-// {
-//     favouriteNumber: 3,
-//     favouriteTitle: 'ЕМЕЛЬЯНЕНКО',
-//     favouriteUrl: 'https://www.youtube.com/watch?v=TnI7fcP_Pnk'
-//   }
-
 const fs = require('fs');
 
 const changeContent = (fileContent, req) => {

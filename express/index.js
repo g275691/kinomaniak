@@ -18,6 +18,7 @@ const { activateCommand } = require('./src/scripts/activateCommand');
 const { getBaseArray } = require('./src/scripts/getBaseArray');
 const { fullResetDB } = require('./src/scripts/fullResetDb');
 const { setNewPopularBase } = require('./src/scripts/setNewPopularBase');
+const { setNewVideomode } = require('./src/scripts/setNewVideoMode');
 
 app.get('/', async() => {
     console.log("user-enter")
@@ -37,11 +38,15 @@ app
 .use(bodyParser.json())
 .post('/popular-query', async (req, res) => {
     await setNewPopularBase(req.body);
-    res.send("op")
 })
 
 app.get('/commandbase', async (req, res) => {
     await findAndResetDB(res);
+})
+
+app.get('/videomode/:mode', async (req, res) => {
+    console.log(req.params.mode)
+    await setNewVideomode(req.params.mode.toLowerCase());   
 })
 
 fullResetDB()
