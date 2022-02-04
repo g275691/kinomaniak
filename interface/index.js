@@ -84,7 +84,6 @@ const setVideoByNumber = () => {
 }
 
 findVideoInput.addEventListener("focus", function() {
-    document.querySelectorAll(".zoom-buttons, .scroll-buttons").forEach(el=>el.classList.remove('active'));
 })
 
 findVideoInput.addEventListener("blur", function() {
@@ -216,7 +215,13 @@ document.querySelectorAll(".activate-button").forEach((el,i)=>{
     }
 })
 
-hideAllContainers()
+hideAllContainers();
+
+document.querySelector(".select-app__btn").addEventListener("click", function() {
+    document.querySelector(".general-container").classList.remove('active');
+    document.querySelector(".youtube-player-container").classList.add('active');
+})
+
 
 const popularAddresses = document.querySelectorAll(".popular-address");
 
@@ -229,10 +234,7 @@ popularAddresses.forEach((el,i)=>{
         const currentInput = document.querySelectorAll(".popular-address")[i].querySelector("input").value
         console.log(currentInput)
         fetch(`http://192.168.0.103:80/commandbase/command?getUrl=${i}${currentInput}`)
-        
-
     })
-    
 })
 
 let nextFrameFocus = -1;
@@ -266,10 +268,15 @@ clickToServer(".subscribe__author-video", "youtubeOpenVideoByAuthor");
 
 /**Universal - for comp */
 
-clickToServer(".general-control__turn-off", "computerDisable")
-clickToServer(".open-browser", "openBrowser")
+
 
 // /**python */
+clickToServer(".general-control__turn-off", "computerDisable")
+clickToServer(".open__browser", "openBrowser")
+clickToServer(".open__youtube", "selectYoutube")
+
+clickToServer(".select-app__btn", "selectApp")
+
 clickToServer(".zoom-plus", "browserZoomPlus");
 clickToServer(".zoom-minus", "browserZoomMinus");
 clickToServer(".tab-control__close", "browserTabClose");

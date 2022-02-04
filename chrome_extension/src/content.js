@@ -200,7 +200,7 @@ setInterval(async () => {
                         titleUrl[youtubeNumberVideo - 1].scrollIntoView({block: "center", behavior: "smooth"});
                     }
                     if(youtubeOpenVideoByNumber) {
-                        titleUrl[youtubeOpenVideoByNumber - 1].click();
+                        window.open(titleUrl[youtubeOpenVideoByNumber - 1].parentNode.href);
                     }
 
                 }

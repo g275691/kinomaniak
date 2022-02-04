@@ -24,6 +24,8 @@ while count > -1:
     youtubeTimeLeft = findbase["youtubeTimeLeft"]
     youtubeTimeRight = findbase["youtubeTimeRight"]
     openBrowser = findbase["openBrowser"]
+    selectApp = findbase["selectApp"]
+    selectYoutube = findbase["selectYoutube"]
 
     computerDisable = findbase["computerDisable"] 
 
@@ -80,6 +82,12 @@ while count > -1:
         print("openBrowser")
         collection.update_one({"base":"kinomaniak"}, {"$set": {"openBrowser": False}})
         keyboard.send('ctrl+alt+9')
+    if selectApp:
+        collection.update_one({"base":"kinomaniak"}, {"$set": {"selectApp": False}})
+        keyboard.send('ctrl+alt+tab')
+    if selectYoutube:
+        collection.update_one({"base":"kinomaniak"}, {"$set": {"selectYoutube": False}})
+        pyautogui.click(217,78)
     if videoMode == "google":
         if focusVideo:
             collection.update_one({"base":"kinomaniak"}, {"$set": {"focusVideo": False}})
