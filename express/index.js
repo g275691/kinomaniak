@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 
 const https = require('https');
 const http = require('http');
-
+const open = require('open');
 
 const fs = require('fs');
 const options = {
@@ -44,12 +44,20 @@ app.get('/commandbase', async (req, res) => {
     await findAndResetDB(res);
 })
 
-app.get('/videomode/:mode', async (req, res) => {
-    console.log(req.params.mode)
-    await setNewVideomode(req.params.mode.toLowerCase());   
+app.get('/videomode', async (req, res) => {
+    //console.log(req.query)
+    await setNewVideomode(req.query);   
+})
+
+app
+.get('/potplayer', async (req, res) => {
+    console.log(req.query);
+    req.query.video && (await open(req.query.video));
+
 })
 
 fullResetDB()
-http.createServer(app).listen(PORT_HTTP, ()=>console.log(`listen ${PORT_HTTP}`));
+http.createServer(app)
+.listen(PORT_HTTP, ()=>console.log(`listen ${PORT_HTTP}`));
 https.createServer(options, app)
 .listen(PORT_HTTPS, ()=>console.log(`listen ${PORT_HTTPS}`))
