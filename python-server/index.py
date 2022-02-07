@@ -26,7 +26,7 @@ while count > -1:
     openBrowser = findbase["openBrowser"]
     selectApp = findbase["selectApp"]
     selectYoutube = findbase["selectYoutube"]
-
+    closePotPlayer = findbase["closePotPlayer"]
     computerDisable = findbase["computerDisable"] 
 
     # print(count)
@@ -37,36 +37,28 @@ while count > -1:
     if youtubePlay:
         if videoMode == "youtube":
             collection.update_one({"base":"kinomaniak"}, {"$set": {"youtubePlay": False}})
-            pyautogui.press(['K'])
+            keyboard.send('K')
         else:
             collection.update_one({"base":"kinomaniak"}, {"$set": {"youtubePlay": False}})
-            pyautogui.press(['space'])
+            keyboard.send('space')
     if browserZoomPlus:
         print("zoom+")
         collection.update_one({"base":"kinomaniak"}, {"$set": {"browserZoomPlus": False}})
-        with pyautogui.hold('ctrl'):
-            pyautogui.press(['+'])
-        pyautogui.keyUp('ctrl')
+        keyboard.send("ctrl+plus")
     if browserZoomMinus:
         print("zoom-")
         collection.update_one({"base":"kinomaniak"}, {"$set": {"browserZoomMinus": False}})
         with pyautogui.hold('ctrl'):
-            pyautogui.press(['-'])
+            pyautogui.press('-')
         pyautogui.keyUp('ctrl')
     if browserTabRight:
         print("tabRight")
         collection.update_one({"base":"kinomaniak"}, {"$set": {"browserTabRight": False}})
-        with pyautogui.hold('ctrl'):
-            pyautogui.press(['tab'])
-        pyautogui.keyUp('ctrl')
+        keyboard.send('ctrl+tab')
     if browserTabLeft:
         print("tabLeft")
         collection.update_one({"base":"kinomaniak"}, {"$set": {"browserTabLeft": False}})
-        with pyautogui.hold('ctrl'):
-            with pyautogui.hold('shift'):
-                pyautogui.press(['tab'])
-        pyautogui.keyUp('ctrl')
-        pyautogui.keyUp('shift')
+        keyboard.send('ctrl+shift+tab')
     if browserTabClose:
         collection.update_one({"base":"kinomaniak"}, {"$set": {"browserTabClose": False}})
         keyboard.send("ctrl+w")
@@ -88,19 +80,22 @@ while count > -1:
     if selectYoutube:
         collection.update_one({"base":"kinomaniak"}, {"$set": {"selectYoutube": False}})
         pyautogui.click(217,78)
-    if videoMode == "google":
+    if closePotPlayer:
+        collection.update_one({"base":"kinomaniak"}, {"$set": {"closePotPlayer": False}})
+        keyboard.send('ctrl+shift+O')
+    if videoMode.lower() == "google":
         if focusVideo:
             collection.update_one({"base":"kinomaniak"}, {"$set": {"focusVideo": False}})
             pyautogui.click(850,200)
         if youtubeVolumeUp:
             collection.update_one({"base":"kinomaniak"}, {"$set": {"youtubeVolumeUp": False}})
-            pyautogui.press(['up'])
+            keyboard.send(['up'])
         if youtubeVolumeDown:
             collection.update_one({"base":"kinomaniak"}, {"$set": {"youtubeVolumeDown": False}})
-            pyautogui.press(['down'])
+            keyboard.press(['down'])
         if youtubeTimeLeft:
             collection.update_one({"base":"kinomaniak"}, {"$set": {"youtubeTimeLeft": False}})
-            pyautogui.press(['left'])
+            keyboard.press(['left'])
         if youtubeTimeRight:
             collection.update_one({"base":"kinomaniak"}, {"$set": {"youtubeTimeRight": False}})
-            pyautogui.press(['right'])
+            keyboard.press(['right'])

@@ -33,7 +33,7 @@ setInterval(async () => {
     .then(json=>{
         
         if(!json) return;
-        const videoMode = json[0].videoMode;
+        const videoMode = json[0].videoMode.toLowerCase();
         /**Youtube commands */
         const isYouTube = /^https:..www.youtube.com/.test(window.location.href);
         // if(isYouTube) {

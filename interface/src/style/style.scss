@@ -18,6 +18,7 @@
 }
 
 main {
+    height: 620px;
     .navbar {
         display: flex;
         &__youtube-main {
@@ -72,75 +73,29 @@ main {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 80%;
+        width: 100%;
         button {
+            width: 88%;
             padding: 2%;
+            font-size: 120%;
+            border-radius: 0;
+            border-bottom-left-radius: 15px;
             &.active {
                 background: $red;
             }
         }
-        &__reset-text {            
-            
-            background-image: url("../img/cancel.png");
-            background-size: contain;
-            background-repeat: no-repeat;
-            width: 20px;
-            height: 20px;
-            &:active {
-                background: $red;
-            }
-        }
+
     }
-    .next-frame {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 5%;
-
-        width: 100%;
-        height: 50px;
-        color: white;
-
-        &__btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            
-            width: 60px;
-            height: 60px;
-            background-image: url("../img/arrow2.png");
-            background-size: contain;
-            background-repeat: no-repeat;
-            &.prev {
-                transform: rotateZ(90deg);
-            }
-            &:active {
-                opacity: 0.6;
-            }
-        }
-        &__focus-video {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: black;
-            margin: 0% 4%;
-            &:active {
-                opacity: 0.6;
-            }
-        }
-    }
-
-
-        .zoom-buttons, .scroll-buttons {
+    .zoom-buttons, .scroll-buttons {
             z-index: 99;
-            height: 50%;
+            height: 45%;
             position: fixed;
             display: flex;
-            top: 28%;
+            top: 30%;
             flex-direction: column;
             opacity: 0;
             pointer-events: none;
-            transition: all ease-out 0.4s;
+            transition: all ease-out 0.1s;
             &.active {
                 pointer-events: all;
                 opacity: 1;
@@ -150,10 +105,10 @@ main {
             left: 1%;
         }
         .scroll-buttons {
-            left: 84%;
-            zoom: 1.8;
-            height: 49%;
-
+            left: 85%;
+            zoom: 1.6;
+            top: 31%;
+            height: 43%;
         }
         .zoom-plus, .zoom-minus {
             width: 50px;
@@ -191,17 +146,6 @@ main {
             transform: rotateZ(-90deg);
             margin-top: auto;
         }
-    .youtube-player-container {
-        height: 0;
-        opacity: 0;
-        transition: margin-top ease-out $transitionTime;
-        pointer-events: none;
-        &.active {
-            margin-top: 18%;
-            height: 100%;
-            opacity: 1;
-            pointer-events: all;
-        }
         .find-video {
             display: flex;
             justify-content: space-between;
@@ -212,6 +156,7 @@ main {
                 width: 100%;
                 padding: 3% 2%;
                 border-radius: 5%;
+                border-bottom-left-radius: 0px;
                 font-size: 130%;
 
             }
@@ -227,7 +172,32 @@ main {
                     margin-top: 10px;
                 }
             }
+            &__reset-text {            
+            
+                background-image: url("../img/cancel.png");
+                background-size: contain;
+                background-repeat: no-repeat;
+                position: fixed;
+                width: 20px;
+                height: 20px;
+                left: 75%;
+                &:active {
+                    background: $red;
+                }
+            }
         }
+    .youtube-player-container {
+        height: 0;
+        opacity: 0;
+        transition: margin-top ease-out $transitionTime;
+        pointer-events: none;
+        &.active {
+            margin-top: 12%;
+            height: 100%;
+            opacity: 1;
+            pointer-events: all;
+        }
+
         
         .play-control {
             display: flex;
@@ -265,15 +235,15 @@ main {
             justify-content: center;
             margin-top: 7%;
             margin-bottom: 1%;
-            padding: 0% 8%;
+            padding: 0% 5%;
             &__item {
                 font-size: 90%;
                 padding: 2.5%;
                 
-                margin: 2% 1%;
+                margin: 3% 2%;
             }
             &__edit {
-                padding: 4% 6%;
+                padding: 1% 5%;
                 background: $red;
                 margin-left: 3%;
                 margin-right: 3%;
@@ -282,14 +252,15 @@ main {
             &:nth-child(3) {
                 padding: 0% 16%;
                 margin-top: 0%;
-                
+                height: 70px;
+
                 overflow-y: scroll;
-                scrollbar-width: none;
+                
             } 
         }
 
         .volume-container {
-            margin-top: 8%;
+            margin-top: 9%;
             zoom: 0.4;
             .volume-control {
                 display: flex;
@@ -330,7 +301,7 @@ main {
         width: 99%;
         opacity: 0;
         pointer-events: none;
-        
+        margin-left: 3%;
         z-index: 2;
         height: 0;
         display: flex;
@@ -349,7 +320,8 @@ main {
             display: flex;
             flex-direction: column;
             align-items: center;
-            
+            overflow-y: scroll;
+            height: 400px;
             width: $widthOptions;
             h2 {
                 margin-top: 7%;
@@ -362,14 +334,16 @@ main {
             .open {
                 display: flex;
                 font-size: 140%;
+                
                 &__browser {
                     border-top-right-radius: 0%;
                     border-bottom-right-radius: 0%;
+                    border: 2px solid $red;
                 }
                 &__youtube {
                     border-top-left-radius: 0%;
                     border-bottom-left-radius: 0%;
-                    border: 2px solid red;
+                    border: 2px solid $red;
                 }
             }
             .open-browser {
@@ -378,7 +352,7 @@ main {
             }
             .tab-control {
                 display: flex;
-                width: 110%;
+                width: 100%;
                 justify-content: space-between;
                 align-items: center;
                 margin-top: 2%;
@@ -386,12 +360,19 @@ main {
                 &__left, &__right {
                     background-size: contain;
                     background-repeat: no-repeat;
+                    background-position: center;
                     width: 40px;
                     height: 40px;
+                    padding: 5% 9%;
                     background-image: url("../img/arrow.png");
+                    
                 }
                 &__left {
                     transform: rotateZ(180deg);
+                    padding-left: 0%;
+                }
+                &__right {
+                    padding-right: 0%;
                 }
                 &__close {
                     background-image: url("../img/cancel.png");
@@ -412,7 +393,9 @@ main {
                 }
             } 
             .select-app {
+                display: flex;
                 margin-top: 2%;
+                width: 70%;
                 &__btn {
                     font-size: 120%;
                     padding: 1%;
@@ -423,9 +406,9 @@ main {
                 background-image: url("../img/powerOFF.png");
                 background-size: contain;
                 background-repeat: no-repeat;
-                width: 80px;
-                height: 80px;
-                margin-top: 75%;
+                width: 100px;
+                height: 100px;
+                margin-top: 200%;
             }
         }
     }
@@ -441,7 +424,7 @@ main {
         height: 500px;
         opacity: 0;
         pointer-events: none;
-        
+        margin-left: 3%;
         z-index: 2;
         height: 0;
         display: flex;
@@ -467,52 +450,113 @@ main {
                 width: 120%;
                 text-align: center;
             }
-            .list-value {
+            .pot-player-options {
                 display: flex;
-                justify-content: space-between;
-                margin-top: 1%;
-                font-size: 150%;
-                width: 100%;
-                align-items: center;
-
-                & * {
-                    font-size: 90%;
-                }
-                &__youtube, &__google {
-                    font-size: 80%;
-                    text-align: center;
-                    &.active {
-                        background: $red;
-                    }
-                }
-                &__google {
-                    padding: 0% 0%;
-                    border-left: 1px solid #000;
+                margin-top: 3%;
+                &__pot-player, &__online-kino {
+                    border-radius: 0;
+                    padding: 2% 1%;
                     width: 50%;
-                }
-
-                &__time {
-                    width: 40px;
-                    height: 40px;
-                   
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    background: black;
-                    color: white;
-                    &:active {
-                        background: $red;
-                    }
                     &.active {
                         background: $red;
+                    }
+                }
+                &__pot-player {
+                    border-bottom-left-radius: 15px;
+                    border-top-left-radius: 15px;
+                }
+                &__online-kino {
+                    border-bottom-right-radius: 15px;
+                    border-top-right-radius: 15px;
+                }
+            }
+            .rewind-options {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .list-value {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-top: 1%;
+                    font-size: 150%;
+                    width: 100%;
+                    align-items: center;
+    
+                    & * {
+                        font-size: 90%;
+                    }
+    
+                    &__time {
+                        width: 40px;
+                        height: 40px;
+                       
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: black;
+                        color: white;
+                        &:active {
+                            background: $red;
+                        }
+                        &.active {
+                            background: $red;
+                        }
                     }
                 }
             }
 
+
+        }
+        .calibration-hint {
+            font-size: 100%;
+            text-align:justify;
+            width: 100%;
+        }
+        .next-frame {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 8%;
+    
+            width: 100%;
+            height: 50px;
+            color: $red;
+    
+            
+    
+            &__btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            
+                width: 50px;
+                height: 50px;
+                background-image: url("../img/arrow2.png");
+                background-size: contain;
+                background-repeat: no-repeat;
+                &.prev {
+                    background-image: url("../img/cancel.png");
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                }
+                &:active {
+                    opacity: 0.6;
+                }
+            }
+            &__focus-video {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: black;
+                margin: 0% 4%;
+                &:active {
+                    opacity: 0.6;
+                }
+            }
         }
         .hr {
-            margin-top: 6%;
+            margin-top: 9%;
             width: 100%;
         }
 
@@ -580,6 +624,39 @@ main {
                 transform: rotateZ(180deg);
             }
         }
+        .pot-player-container {
+            width: 73%;
+            margin-top: 6%;
+            margin-left: 5%;
+            .pot-player-turn {
+                display: flex;
+                &__close {
+                    background: $red;
+                    &:active {
+                        background: red;
+                    }
+                }
+            }
+
+            &__list {
+                display: flex;
+                flex-direction: column;
+                margin-top: 0%;
+                width: 100%;
+                height: 370px;
+                overflow-y: scroll;
+                .pot-player-video-item {
+                    text-align: left;
+                    font-size: 120%;
+                    margin-top: 8%;
+                    border-radius: 0;
+                    background: none;
+                    &:active {
+                        background: $red;
+                    }
+                }
+            }
+        }
         .subscribe {
             display: flex;
             flex-direction: column;
@@ -598,6 +675,7 @@ main {
                 border-radius: 5px;
             }
         }
+
 
     }
     .close-select-video {
@@ -620,39 +698,67 @@ main {
             
         }
     }
-}
-.popular-edit-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 5%;
-    height: 0;
-    opacity: 0;
-    pointer-events: none;
-    transition: margin-top $transitionTime ease-out;
-    &.active {
-        margin-top: 1%;
-        pointer-events: all;
-        height: 100%;
-        opacity: 1;
-    }
-    h3 {
-        margin-top: 1%;
-    }
-    .popular-address {
+    .popular-edit-container {
         display: flex;
-        margin-left: 4%;
-        margin-bottom: 2.5%;
-        input {
-            font-size: 100%;
-            margin-right: 1%;
-            border-radius: 5%;
-        }        
-        .get-url {
-            padding: 0% 4%;
+        flex-direction: column;
+        align-items: center;
+        height: 0;
+        opacity: 0;
+        pointer-events: none;
+        transition: margin-top $transitionTime ease-out;
+        &.active {
+            margin-top: 1%;
+            pointer-events: all;
+            height: 100%;
+            opacity: 1;
+        }
+        h3 {
+            margin-top: 1%;
+        }
+        .popular-address {
+            display: flex;
+            margin-left: 4%;
+            margin-bottom: 2.5%;
+            input {
+                font-size: 100%;
+                margin-right: 1%;
+                border-radius: 5%;
+            }        
+            .get-url {
+                padding: 0% 4%;
+            }
+        }
+
+    }
+    .select-videomode {
+        display: flex;
+        justify-content: space-between;
+        background: brown;
+        margin-bottom: 3%;
+        &__youtube, &__google {
+            padding: 5% 3%;
+            
+            position: fixed;
+            width: 41%;
+            background: black;
+            color: white;
+            font-size: 80%;
+            text-align: center;
+            &.active {
+                background: $red;
+            }
+        }
+        &__google {
+            left: 50%;
+            border-left: 1px solid #000;
+            border-top-right-radius: 15px;
+        }
+        &__youtube {
+            border-top-left-radius: 15px;
         }
     }
 }
+
 
 .volume-indicator {
     display: flex;

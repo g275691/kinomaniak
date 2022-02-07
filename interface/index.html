@@ -21,11 +21,12 @@
 
         <div class="find-video">
             <input class="find-video__input" placeholder="Искать другое видео">
+            <div class="find-video__reset-text"></div>
             <div class="find-video__lupa"></div>
         </div>
         <div class="change-find-mode">
             <button class="change-find-mode__number button-style activate-button">Открыть поиск по номеру</button>
-            <div class="change-find-mode__reset-text"></div>
+            
         </div>
 
         <div class="zoom-buttons active">
@@ -38,7 +39,6 @@
             <div class="scroll-down"></div>
         </div>
         <div class="youtube-player-container active">
-
             <div class="play-control">
                 <div class="play-control__left"></div>
                 <img class="play-control__play" src="src/img/player-play.png">
@@ -109,28 +109,32 @@
 
             <div class="youtube-options-control">
                 <h2>ВИДЕО ОПЦИИ</h2>
-                <h3 class="list-value__hint">РЕЖИМ ПОИСКА</h3>
-                <div class="list-value">
-                    <div class="list-value__youtube">YOUTUBE</div>
-                    <div class="list-value__google">GOOGLE</div>
+                <h3>ПОИСК ДЛЯ</h3>
+                <div class="pot-player-options">
+                    <button class="pot-player-options__pot-player button-style">POT PLAYER</button>
+                    <button class="pot-player-options__online-kino button-style">ONLINE KINO</button>
                 </div>
                 <div class="hr"></div>
+                <h3>КАЛИБРОВКА ПЛЕЙЕРА</h3>
+                <div class="calibration-hint">удалить, клик видео, фокус</div>
                 <div class="next-frame">
-                    <div class="next-frame__btn prev">X</div>
+                    
+                    <div class="next-frame__btn prev"></div>
                     <div class="next-frame__focus-video"></div>
-                    <div class="next-frame__btn next">iF</div>
+                    <div class="next-frame__btn next"></div>
                 </div>
                 <div class="hr"></div>
-                <h3 class="list-value__hint">ШАГ ПЕРЕМОТКИ (мин.)</h3>
-                <div class="list-value">
-                    <div class="list-value__time">0.5</div>
-                    <div class="list-value__time">1</div>
-                    <div class="list-value__time">5</div>
-                    <div class="list-value__time">10</div>
+                <div class="rewind-options">
+                    <h3 class="list-value__hint">ШАГ ПЕРЕМОТКИ <span style="font-size: 80%;">(мин.)</span></h3>
+                    <div class="list-value">
+                        <div class="list-value__time">0.5</div>
+                        <div class="list-value__time">1</div>
+                        <div class="list-value__time">5</div>
+                        <div class="list-value__time">10</div>
+                    </div>
+                    <div class="hr"></div>
                 </div>
-                <div class="hr"></div>
             </div>
-
         </div>
         <div class="general-container">
             <div class="general-control">
@@ -152,7 +156,10 @@
                 <div class="select-app">
                     <button class="select-app__btn button-style">ВЫБОР ПРОГРАММЫ</button>
                 </div>
-                <div class="general-control__turn-off"></div>
+                <div>
+                    <div class="general-control__turn-off"></div>
+                </div>
+                
             </div>
             </div>
         </div>
@@ -175,6 +182,16 @@
                 <button class="video-container__item">15</button>
                 <button class="video-container__item">16</button>
             </div>
+            <div class="pot-player-container">
+                <div class="pot-player-turn">
+                    <button class="pot-player-turn__refresh button-style">Обновить плейер</button>
+                    <button class="pot-player-turn__close button-style">Закрыть плейер</button>
+                </div>
+
+                <div class="pot-player-container__list">
+
+                </div>
+            </div>
             <div class="video-nav">
                 <div class="video-nav__left"></div>
                 <div class="video-nav__right"></div>
@@ -182,11 +199,14 @@
             <div class="subscribe">
                 <button class="subscribe__author-video button-style">ПЕРЕЙТИ В ВИДЕО АВТОРА</button>
                 <button class="subscribe__action button-style">ПОДПИСАТЬСЯ НА КАНАЛ</button>
-            </div>
-            
+            </div>            
         </div>
-        <!-- <button class="close-select-video">ВЫБОР ВИДЕО</button> -->
+        <div class="select-videomode">
+            <div class="select-videomode__youtube">YOUTUBE</div>
+            <div class="select-videomode__google">GOOGLE</div>
+        </div>
     </main>
+    <script src="./src/options/potplayerList.js"></script>
     <script src="./src/options/videoOptions.js"></script>
     <script src="./src/options/popularQuery.js"></script>
     <script src="index.js"></script>

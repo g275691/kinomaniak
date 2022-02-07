@@ -23,6 +23,7 @@ top: 85%;
 border-radius: 6px;
 font-size: 17px;
 padding: 0.6% 2%;
+pointer-events: none;
 opacity: 0;
 transition: all 0.1s ease-in
 `

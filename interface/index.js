@@ -26,30 +26,80 @@ const changeFindModeNumber = document.querySelector(".change-find-mode__number")
 const nextFrameFocusBtn = document.querySelector(".next-frame__btn.next");
 const prevFrameFocusBtn = document.querySelector(".next-frame__btn.prev");
 
+const closeVideoByTime = () => {
+    document.querySelector(".youtube-player-container").classList.add('active');
+    document.querySelector(".video-by-time-container").classList.remove('active');
+    changeFindModeNumber.classList.remove('active');
+    changeFindModeNumber.innerText = "Открыть поиск по номеру";
+}
+
+const potplayerArea = document.querySelector(".pot-player-container__list");
+potplayerList.map((video,i)=>{
+    const videoBtn = document.createElement("button");
+    videoBtn.className = "pot-player-video-item";
+    let videoName = video.name.length > 23 ? video.name.slice(0,23) : video.name;
+    videoBtn.innerText = `${videoName}`;
+    document.querySelector(".pot-player-container__list").appendChild(videoBtn);
+    const res = `video=${video["directory "]}`;
+    videoBtn.addEventListener("click", function() {
+        fetch(`http://192.168.0.103:80/potplayer?${res}`);
+        closeVideoByTime();
+    })
+    
+})
+
+document.querySelector(".pot-player-turn__close").addEventListener("click", function() {
+    fetch(`http://192.168.0.103:80/potplayer?close=true`)
+})
 /**Youtubeoptions */
 
 /**Mode */
 
-const mode = videoOptions[0].mode;
+const mode = videoOptions[0].videoMode.toLowerCase();
+const potPlayerMode = videoOptions[0].potplayer;
+
+if(potPlayerMode) {
+    document.querySelector(".pot-player-options__pot-player").classList.add('active');
+    if(mode == "google") {
+        document.querySelectorAll(".video-container, .video-nav, .subscribe")
+        .forEach(el=>el.style.display = 'none')
+    }
+
+} else {
+    document.querySelector(".pot-player-options__online-kino").classList.add('active');
+    document.querySelector(".pot-player-container").style.display = "none";
+}
+
+document.querySelectorAll(".pot-player-options__pot-player, .pot-player-turn__refresh")
+.forEach(el=>el.addEventListener("click", function () {
+    fetch(`http://192.168.0.103:80/videomode?potplayer=true`)
+}))
+
+document.querySelector(".pot-player-options__online-kino").addEventListener("click", function () {
+    fetch(`http://192.168.0.103:80/videomode?potplayer=false`)
+})
 
 switch (mode) {
     case "youtube":
-        openYoutubeOptions.style.backgroundImage = 'url("src/img/youtube-logo-options.png")';
-        youtubeQuery.querySelector(".list-value__youtube").classList.add('active');
-        document.querySelector(".next-frame").style.display = "none"
+        openYoutubeOptions.style.backgroundImage = 'url("./src/img/youtube-logo-options.png")';
+        document.querySelector(".select-videomode__youtube").classList.add('active');
+        document.querySelectorAll(".next-frame, .pot-player-container").forEach(el=>el.style.display = "none");
         break;
     case "google":
-        openYoutubeOptions.style.backgroundImage = 'url("src/img/google-logo.png")';
-        youtubeQuery.querySelector(".list-value__google").classList.add('active');
+        openYoutubeOptions.style.backgroundImage = 'url("./src/img/google-logo.png")';
+        document.querySelector(".select-videomode__google").classList.add('active');
         videoByNumber.querySelectorAll(".subscribe").forEach(el=>el.style.display = "none");
+        document.querySelector(".rewind-options").style.display = "none";
         break;
 }
 
-document.querySelectorAll(".list-value__youtube, .list-value__google").forEach(el=>{
+document.querySelectorAll(".select-videomode__youtube, .select-videomode__google").forEach(el=>{
     el.addEventListener("click", function() {
-        fetch(`http://192.168.0.103:80/videomode/${el.innerText}`)
+        fetch(`http://192.168.0.103:80/videomode?videoMode=${el.innerText}`)
     })
 })
+
+
 
 /**Timing */
 
@@ -62,7 +112,6 @@ rewindStepValues.map((el, i)=>{
     ? timingValues[i].classList.add("active")
     : timingValues[i].classList.remove("active")
 })
-
 
 timingValues.forEach((button, index)=>{
     button.addEventListener("click", function() { 
@@ -84,16 +133,19 @@ const setVideoByNumber = () => {
 }
 
 findVideoInput.addEventListener("focus", function() {
+    document.querySelectorAll(".zoom-buttons, .scroll-buttons").forEach(el=>el.classList.remove('active'));
 })
 
 findVideoInput.addEventListener("blur", function() {
-    document.querySelectorAll(".zoom-buttons, .scroll-buttons").forEach(el=>el.classList.add('active'));
+    setTimeout(() => {
+        document.querySelectorAll(".zoom-buttons, .scroll-buttons").forEach(el=>el.classList.add('active'));
+
+    }, 1000);
 })
 
 setVideoByNumber();
 
 changeFindModeNumber.addEventListener("click", function() {
-    console.log(inputModeNameVideo);
     if(this.classList.contains("active")) {
         this.innerText = "Открыть поиск по номеру";
         inputModeNameVideo = true;
@@ -110,7 +162,6 @@ changeFindModeNumber.addEventListener("click", function() {
 
 const findLupa = document.querySelector(".find-video").querySelector(".find-video__lupa");
 findLupa.addEventListener("click", function() { 
-    console.log(inputModeNameVideo);
     findVideoInput.value = findVideoInput.value.replace(/ {1,}/g, " ").trim();
     const videoUrl = (mode == "youtube"
     ? `https://www.youtube.com/results?search_query=${findVideoInput.value}`
@@ -125,7 +176,7 @@ findLupa.addEventListener("click", function() {
     }
 })
 
-document.querySelector(".change-find-mode__reset-text").addEventListener("click", function() {
+document.querySelector(".find-video__reset-text").addEventListener("click", function() {
     findVideoInput.value = ""
 })
 
@@ -240,7 +291,7 @@ popularAddresses.forEach((el,i)=>{
 let nextFrameFocus = -1;
 nextFrameFocusBtn.addEventListener("click", function() {
     nextFrameFocus+=1;
-    fetch(`http://192.168.0.103:80/commandbase/command?nextFrameFocus=${nextFrameFocus}`)
+    fetch(`http://192.168.0.103:80/commandbase/command?nextFrameFocus=true`)
 })
 
 prevFrameFocusBtn.addEventListener("click", function() {
@@ -283,3 +334,5 @@ clickToServer(".tab-control__close", "browserTabClose");
 clickToServer(".tab-control__right", "browserTabRight");
 clickToServer(".tab-control__left", "browserTabLeft");
 clickToServer(".volume-control__full-screen", "youtubeFullScreen");
+
+clickToServer(".pot-player-turn__close", "closePotPlayer")
