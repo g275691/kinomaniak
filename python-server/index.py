@@ -33,7 +33,7 @@ while count > -1:
     if fullScreen:
         print("full_screen")
         collection.update_one({"base":"kinomaniak"}, {"$set": {"youtubeFullScreen": False}})
-        keyboard.send("f")
+        pyautogui.press("F")
     if youtubePlay:
         if videoMode == "youtube":
             collection.update_one({"base":"kinomaniak"}, {"$set": {"youtubePlay": False}})

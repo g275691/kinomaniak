@@ -10,9 +10,9 @@ const changeContent = (fileContent, req) => {
 
 const setNewPopularBase = async (req) => {
 
-    let fileContent = await fs.readFileSync('../interface/src/options/popularQuery.js', "utf8");
+    let fileContent = await fs.readFileSync('../public/options/popularQuery.js', "utf8");
     const newFileContent = await changeContent(fileContent, req);
-    await fs.writeFileSync('../interface/src/options/popularQuery.js', "const popularQuery = " + JSON.stringify(newFileContent))
+    await fs.writeFileSync('../public/options/popularQuery.js', "const popularQuery = " + JSON.stringify(newFileContent))
 }
 
 module.exports.setNewPopularBase = setNewPopularBase;

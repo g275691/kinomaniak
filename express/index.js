@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
+const client = express();
 const bodyParser = require('body-parser');
+const path = require('path');
+const router = express.Router();
 
 const https = require('https');
 const http = require('http');
@@ -55,6 +58,16 @@ app
     req.query.video && (await open(req.query.video));
 
 })
+
+client
+.get('/', async (req, res) => {
+   
+    res.sendFile(path.join(__dirname + '/views/index.html'));
+})
+client.use(express.static(__dirname));
+
+http.createServer(client)
+.listen(9999, ()=>console.log(`listen 9999`));
 
 fullResetDB()
 http.createServer(app)
