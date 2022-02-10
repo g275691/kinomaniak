@@ -1,0 +1,11 @@
+[{
+  "_id": {
+    "$oid": "61eceb08ada42bc8cc3ce102"
+  },
+  "base": "kinomaniak",
+  "isYoutubeOpen": false,
+  "youtubeVolumeUp": false,
+  "youtubeVolumeDown": false,
+  "isCompUnlock": false,
+  "youtubePlay": false
+}]

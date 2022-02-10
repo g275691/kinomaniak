@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KinoManiak</title>
+    <link rel="stylesheet" href="./src/style/style.css">
+</head>
+<body>
+    <main>
+        <header>
+            <nav class="navbar">
+                <div class="navbar__youtube-main activate-button"></div>
+                <div class="navbar__player activate-button activate-button"></div>
+                <button class="navbar__main button-style activate-button">General COMMANDS</button>
+            </nav>
+        </header>
+
+        <div class="find-video">
+            <input class="find-video__input" placeholder="Искать другое видео">
+            <div class="find-video__reset-text"></div>
+            <div class="find-video__lupa"></div>
+        </div>
+        <div class="change-find-mode">
+            <button class="change-find-mode__number button-style activate-button">Открыть поиск по номеру</button>
+            
+        </div>
+
+        <div class="zoom-buttons active">
+            <button class="button-style zoom-plus"></button>
+            <button class="button-style zoom-minus"></button>
+            
+        </div>
+        <div class="scroll-buttons active">
+            <div class="scroll-up"></div>
+            <div class="scroll-down"></div>
+        </div>
+        <div class="youtube-player-container active">
+            <div class="play-control">
+                <div class="play-control__left"></div>
+                <img class="play-control__play" src="src/img/player-play.png">
+                <div class="play-control__right"></div>
+            </div>
+            <!-- <div class="popular-hint">Избранные ссылки</div> -->
+            <div class="popular-query">
+                <button class="popular-query__item button-style">
+                <button class="button-style popular-query__edit activate-button">EDIT
+                <button class="popular-query__item button-style">
+                
+            </div>
+            <div class="popular-query">
+                <button class="popular-query__item button-style">
+                <button class="popular-query__item button-style">
+                <button class="popular-query__item button-style">
+                <button class="popular-query__item button-style">
+                <button class="popular-query__item button-style">
+                <button class="popular-query__item button-style">
+                <button class="popular-query__item button-style">
+                <button class="popular-query__item button-style">
+            </div>
+            <div class="volume-container">
+                <div class="volume-control">
+                    <div class="volume-control__scale"></div>
+                    <img src="src/img/zvuk-.png" class="volume-control__turn"></img>
+                    <img src="src/img/full_screen.png" class="volume-control__full-screen"></img>
+                    <img src="src/img/zvuk+.png" class="volume-control__turn"></img>
+                </div>
+            </div>
+        </div>
+        <div class="popular-edit-container">
+            <h3>РЕД. ИЗБРАННОЕ</h3>
+            <div class="popular-address">
+                <input size=10 maxlength="15">
+                <button class="button-style get-url">ОБНОВИТЬ URL</button>
+            </div>
+            <div class="popular-address">
+                <input size=10 maxlength="15">
+                <button class="button-style get-url">ОБНОВИТЬ URL</button>
+            </div>
+            <div class="popular-address">
+                <input size=10 maxlength="15">
+                <button class="button-style get-url">ОБНОВИТЬ URL</button>
+            </div>
+            <div class="popular-address">
+                <input size=10 maxlength="15">
+                <button class="button-style get-url">ОБНОВИТЬ URL</button>
+            </div>
+            <div class="popular-address">
+                <input size=10 maxlength="15">
+                <button class="button-style get-url">ОБНОВИТЬ URL</button>
+            </div>
+            <div class="popular-address">
+                <input size=10 maxlength="15">
+                <button class="button-style get-url">ОБНОВИТЬ URL</button>
+            </div>
+            <div class="popular-address">
+                <input size=10 maxlength="15">
+                <button class="button-style get-url">ОБНОВИТЬ URL</button>
+            </div>
+            <div class="popular-address">
+                <input size=10 maxlength="15">
+                <button class="button-style get-url">ОБНОВИТЬ URL</button>
+            </div>
+        </div>
+        <div class="youtube-options-container">
+
+            <div class="youtube-options-control">
+                <h2>ВИДЕО ОПЦИИ</h2>
+                <h3>ПОИСК ДЛЯ</h3>
+                <div class="pot-player-options">
+                    <button class="pot-player-options__pot-player button-style">POT PLAYER</button>
+                    <button class="pot-player-options__online-kino button-style">ONLINE KINO</button>
+                </div>
+                <div class="hr"></div>
+                <h3>КАЛИБРОВКА ПЛЕЙЕРА</h3>
+                <div class="calibration-hint">удалить, клик видео, фокус</div>
+                <div class="next-frame">
+                    
+                    <div class="next-frame__btn prev"></div>
+                    <div class="next-frame__focus-video"></div>
+                    <div class="next-frame__btn next"></div>
+                </div>
+                <div class="hr"></div>
+                <div class="rewind-options">
+                    <h3 class="list-value__hint">ШАГ ПЕРЕМОТКИ <span style="font-size: 80%;">(мин.)</span></h3>
+                    <div class="list-value">
+                        <div class="list-value__time">0.5</div>
+                        <div class="list-value__time">1</div>
+                        <div class="list-value__time">5</div>
+                        <div class="list-value__time">10</div>
+                    </div>
+                    <div class="hr"></div>
+                </div>
+            </div>
+        </div>
+        <div class="general-container">
+            <div class="general-control">
+                <h2>MAIN CONTROL</h2>
+                <h3>ОТКРЫТЬ</h3>
+                <div class="open">
+                    <button class="open__browser button-style">БРАУЗЕР</button>
+                    <button class="open__youtube button-style">YOUTUBE</button>
+                </div>
+                <h3>ВКЛАДКИ</h3>
+                <div class="tab-control">
+                    <div class="tab-control__left"></div>
+                    <div class="tab-control__close"></div>
+                    <div class="tab-control__refresh"></div>
+                    <div class="tab-control__right"></div>
+                </div>
+                <div class="hr"></div>
+                <h3>КОМПЬЮТЕР</h3>
+                <div class="select-app">
+                    <button class="select-app__btn button-style">ВЫБОР ПРОГРАММЫ</button>
+                </div>
+                <div>
+                    <div class="general-control__turn-off"></div>
+                </div>
+                
+            </div>
+            </div>
+        </div>
+        <div class="video-by-time-container">
+            <div class="video-container">
+                <button class="video-container__item">1</button>
+                <button class="video-container__item">2</button>
+                <button class="video-container__item">3</button>
+                <button class="video-container__item">4</button>
+                <button class="video-container__item">5</button>
+                <button class="video-container__item">6</button>
+                <button class="video-container__item">7</button>
+                <button class="video-container__item">8</button>
+                <button class="video-container__item">9</button>
+                <button class="video-container__item">10</button>
+                <button class="video-container__item">11</button>
+                <button class="video-container__item">12</button>
+                <button class="video-container__item">13</button>
+                <button class="video-container__item">14</button>
+                <button class="video-container__item">15</button>
+                <button class="video-container__item">16</button>
+            </div>
+            <div class="pot-player-container">
+                <div class="pot-player-turn">
+                    <button class="pot-player-turn__refresh button-style">Обновить плейер</button>
+                    <button class="pot-player-turn__close button-style">Закрыть плейер</button>
+                </div>
+
+                <div class="pot-player-container__list">
+
+                </div>
+            </div>
+            <div class="video-nav">
+                <div class="video-nav__left"></div>
+                <div class="video-nav__right"></div>
+            </div>
+            <div class="subscribe">
+                <button class="subscribe__author-video button-style">ПЕРЕЙТИ В ВИДЕО АВТОРА</button>
+                <button class="subscribe__action button-style">ПОДПИСАТЬСЯ НА КАНАЛ</button>
+            </div>            
+        </div>
+        <div class="select-videomode">
+            <div class="select-videomode__youtube">YOUTUBE</div>
+            <div class="select-videomode__google">GOOGLE</div>
+        </div>
+    </main>
+    <script src="./src/options/potplayerList.js"></script>
+    <script src="./src/options/videoOptions.js"></script>
+    <script src="./src/options/popularQuery.js"></script>
+    <script src="index.js"></script>
+    <script src="draft/draft.js"></script>
+</body>
+</html>
