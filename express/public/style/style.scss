@@ -108,7 +108,7 @@ main {
             left: 85%;
             zoom: 1.6;
             top: 31%;
-            height: 43%;
+            height: 41%;
         }
         .zoom-plus, .zoom-minus {
             width: 50px;
@@ -252,7 +252,7 @@ main {
             &:nth-child(3) {
                 padding: 0% 16%;
                 margin-top: 0%;
-                height: 70px;
+                height: 40px;
 
                 overflow-y: scroll;
                 
@@ -260,7 +260,7 @@ main {
         }
 
         .volume-container {
-            margin-top: 9%;
+            margin-top: 17%;
             zoom: 0.4;
             .volume-control {
                 display: flex;

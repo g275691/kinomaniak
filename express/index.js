@@ -4,7 +4,6 @@ const client = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 const router = express.Router();
-
 const https = require('https');
 const http = require('http');
 const open = require('open');
@@ -23,51 +22,43 @@ const { fullResetDB } = require('./src/scripts/fullResetDb');
 const { setNewPopularBase } = require('./src/scripts/setNewPopularBase');
 const { setNewVideomode } = require('./src/scripts/setNewVideoMode');
 
-app.get('/', async() => {
-    console.log("user-enter")
-})
-
-app.get('/getbase', async (req, res) => {
-    await getBaseArray(res)
-})
-
-app.get('/commandbase/command', async (req, res) => {
-    console.log(req.query);
-    await activateCommand(req.query, res)
-})
-
 app
 .use(bodyParser.urlencoded({ extended: false }))
 .use(bodyParser.json())
 .post('/popular-query', async (req, res) => {
     await setNewPopularBase(req.body);
 })
-
-app.get('/commandbase', async (req, res) => {
-    await findAndResetDB(res);
+.get('/', async() => {
+    console.log("user-enter")
+})
+.get('/getbase', async (req, res) => {
+    await getBaseArray(res)
 })
 
-app.get('/videomode', async (req, res) => {
+.get('/commandbase', async (req, res) => {
+    await findAndResetDB(res);
+})
+.get('/commandbase/command', async (req, res) => {
+    console.log(req.query);
+    await activateCommand(req.query, res)
+})
+.get('/videomode', async (req, res) => {
     //console.log(req.query)
     await setNewVideomode(req.query);   
 })
-
-app
 .get('/potplayer', async (req, res) => {
     console.log(req.query);
     req.query.video && (await open(req.query.video));
-
 })
 
-client
-.get('/', async (req, res) => {
-   
-    res.sendFile(path.join(__dirname + '/views/index.html'));
-})
-client.use(express.static(__dirname));
+// client
+// .get('/', async (req, res) => {
+//     res.sendFile(path.join(__dirname + '/views/index.html'));
+// })
+// client.use(express.static(__dirname));
 
-http.createServer(client)
-.listen(9999, ()=>console.log(`listen 9999`));
+// http.createServer(client)
+// .listen(9999, ()=>console.log(`listen 9999`));
 
 fullResetDB()
 http.createServer(app)
