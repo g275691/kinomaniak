@@ -48,7 +48,7 @@ const getListForPotplayer = async (req) => {
 
     })
     console.log(newFilmsList);
-    await fs.writeFileSync('C:/!Yandex/kinomaniak-main/express/public/options/potplayerList.js', "const potplayerList = " + JSON.stringify(newFilmsList))
+    await fs.writeFileSync('C:/!Yandex/kinomaniak/express/public/options/potplayerList.js', "const potplayerList = " + JSON.stringify(newFilmsList))
 }
 
 const refreshbase = async (req) => {
@@ -60,11 +60,11 @@ const refreshbase = async (req) => {
 
 const setNewVideomode = async (req) => {
 
-    let fileContent = await fs.readFileSync('C:/!Yandex/kinomaniak-main/express/public/options/videoOptions.js', "utf8");
+    let fileContent = await fs.readFileSync('C:/!Yandex/kinomaniak/express/public/options/videoOptions.js', "utf8");
     await refreshbase(req);
     const newFileContent = await changeVideoMode(fileContent, req);
     
-    await fs.writeFileSync('C:/!Yandex/kinomaniak-main/express/public/options/videoOptions.js', "const videoOptions = " + JSON.stringify(newFileContent))
+    await fs.writeFileSync('C:/!Yandex/kinomaniak/express/public/options/videoOptions.js', "const videoOptions = " + JSON.stringify(newFileContent))
 }
 
 module.exports.setNewVideomode = setNewVideomode;

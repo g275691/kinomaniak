@@ -51,14 +51,14 @@ app
     req.query.video && (await open(req.query.video));
 })
 
-// client
-// .get('/', async (req, res) => {
-//     res.sendFile(path.join(__dirname + '/views/index.html'));
-// })
-// client.use(express.static(__dirname));
+client
+.get('/', async (req, res) => {
+    res.sendFile(path.join(__dirname + '/views/index.html'));
+})
+client.use(express.static(__dirname));
 
-// http.createServer(client)
-// .listen(9999, ()=>console.log(`listen 9999`));
+http.createServer(client)
+.listen(9999, ()=>console.log(`listen 9999`));
 
 fullResetDB()
 http.createServer(app)
