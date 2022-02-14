@@ -777,6 +777,8 @@ main .video-by-time-container .video-container {
           justify-content: space-between;
   margin-top: 3%;
   width: 70%;
+  overflow-y: scroll;
+  height: 225px;
 }
 
 main .video-by-time-container .video-container__item {
