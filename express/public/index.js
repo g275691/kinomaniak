@@ -170,7 +170,7 @@ changeFindModeNumber.addEventListener("click", function() {
 })
 
 const findLupa = document.querySelector(".find-video").querySelector(".find-video__lupa");
-findLupa.addEventListener("click", function() { 
+findLupa.addEventListener("click", function() {
     findVideoInput.value = findVideoInput.value.replace(/ {1,}/g, " ").trim();
     const videoUrl = (mode == "youtube"
     ? `https://www.youtube.com/results?search_query=${findVideoInput.value}`

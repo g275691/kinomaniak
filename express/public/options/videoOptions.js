@@ -1,1 +1,1 @@
-const videoOptions = [{"videoMode":"YOUTUBE","rewindStep":0.5,"potplayer":false}]
+const videoOptions = [{"videoMode":"YOUTUBE","rewindStep":0.5,"potplayer":true}]

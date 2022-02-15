@@ -32,9 +32,8 @@ while count > -1:
     # print(count)
     if fullScreen:
         print("full_screen")
-        keyboard.send('f')
         collection.update_one({"base":"kinomaniak"}, {"$set": {"youtubeFullScreen": False}})
-
+        keyboard.send('shift+f')
     if youtubePlay:
         if videoMode == "youtube":
             collection.update_one({"base":"kinomaniak"}, {"$set": {"youtubePlay": False}})

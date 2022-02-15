@@ -7,6 +7,7 @@ const router = express.Router();
 const https = require('https');
 const http = require('http');
 const open = require('open');
+var cors = require('cors')
 
 const fs = require('fs');
 const options = {
@@ -21,6 +22,8 @@ const { getBaseArray } = require('./src/scripts/getBaseArray');
 const { fullResetDB } = require('./src/scripts/fullResetDb');
 const { setNewPopularBase } = require('./src/scripts/setNewPopularBase');
 const { setNewVideomode } = require('./src/scripts/setNewVideoMode');
+
+app.use(cors())
 
 app
 .use(bodyParser.urlencoded({ extended: false }))
@@ -51,6 +54,7 @@ app
     req.query.video && (await open(req.query.video));
 })
 
+client.use(cors())
 client
 .get('/', async (req, res) => {
     res.sendFile(path.join(__dirname + '/views/index.html'));
